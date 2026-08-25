@@ -500,7 +500,7 @@ export const AdvertisePage: React.FC = () => {
                   </span>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                   {/* Tier 1 */}
                   <div style={{
                     display: 'grid',
@@ -508,7 +508,7 @@ export const AdvertisePage: React.FC = () => {
                     alignItems: 'center',
                     padding: '0.45rem 0.65rem',
                     borderRadius: 'var(--radius-sm)',
-                    background: 'rgba(201, 142, 214, 0.06)',
+                    background: 'var(--bg-card)',
                     border: '1px solid var(--border-subtle)',
                     fontSize: '0.8rem'
                   }}>
@@ -516,7 +516,7 @@ export const AdvertisePage: React.FC = () => {
                       <span>☕</span>
                       <span><strong>$1 – $5</strong></span>
                     </div>
-                    <div style={{ textAlign: 'right', fontWeight: 700, color: 'var(--text-secondary)' }}>
+                    <div style={{ textAlign: 'right', fontWeight: 600, color: 'var(--text-secondary)' }}>
                       1 Day Spotlight
                     </div>
                   </div>
@@ -528,7 +528,7 @@ export const AdvertisePage: React.FC = () => {
                     alignItems: 'center',
                     padding: '0.45rem 0.65rem',
                     borderRadius: 'var(--radius-sm)',
-                    background: 'rgba(201, 142, 214, 0.06)',
+                    background: 'var(--bg-card)',
                     border: '1px solid var(--border-subtle)',
                     fontSize: '0.8rem'
                   }}>
@@ -548,15 +548,15 @@ export const AdvertisePage: React.FC = () => {
                     alignItems: 'center',
                     padding: '0.45rem 0.65rem',
                     borderRadius: 'var(--radius-sm)',
-                    background: 'rgba(16, 185, 129, 0.1)',
-                    border: '1px solid rgba(16, 185, 129, 0.25)',
+                    background: 'var(--bg-card)',
+                    border: '1px solid var(--border-subtle)',
                     fontSize: '0.8rem'
                   }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: 'var(--text-primary)', fontWeight: 600 }}>
                       <span>👑</span>
                       <span><strong>$50+</strong></span>
                     </div>
-                    <div style={{ textAlign: 'right', fontWeight: 800, color: 'var(--accent-green)' }}>
+                    <div style={{ textAlign: 'right', fontWeight: 700, color: 'var(--accent-primary)' }}>
                       Permanent Forever (Lifetime)
                     </div>
                   </div>
@@ -566,19 +566,19 @@ export const AdvertisePage: React.FC = () => {
               {/* Inclusions */}
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 1.25rem 0', display: 'flex', flexDirection: 'column', gap: '0.65rem', fontSize: '0.825rem' }}>
                 <li style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                  <div style={{ width: '18px', height: '18px', borderRadius: '50%', background: 'rgba(16, 185, 129, 0.15)', color: 'var(--accent-green)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <div style={{ width: '18px', height: '18px', borderRadius: '50%', background: 'rgba(201, 142, 214, 0.2)', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                     <Check size={12} strokeWidth={3} />
                   </div>
                   <span><strong>Featured Spot</strong> on left sidebar of marketingdb.lol</span>
                 </li>
                 <li style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                  <div style={{ width: '18px', height: '18px', borderRadius: '50%', background: 'rgba(16, 185, 129, 0.15)', color: 'var(--accent-green)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <div style={{ width: '18px', height: '18px', borderRadius: '50%', background: 'rgba(201, 142, 214, 0.2)', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                     <Check size={12} strokeWidth={3} />
                   </div>
                   <span><strong>Direct Dofollow Link</strong> & verified sponsor badge (SEO Boost)</span>
                 </li>
                 <li style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                  <div style={{ width: '18px', height: '18px', borderRadius: '50%', background: 'rgba(16, 185, 129, 0.15)', color: 'var(--accent-green)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <div style={{ width: '18px', height: '18px', borderRadius: '50%', background: 'rgba(201, 142, 214, 0.2)', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                     <Server size={11} strokeWidth={2.5} />
                   </div>
                   <span><strong>100% Server Direct:</strong> Funds cloud hosting & database upkeep</span>
@@ -634,21 +634,43 @@ export const AdvertisePage: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isProcessing || !saasName || !saasDirectUrl}
-                  className="btn btn-primary"
                   style={{
                     width: '100%',
-                    padding: '0.85rem 1rem',
-                    fontSize: '0.925rem',
-                    fontWeight: 900,
+                    padding: '0.95rem 1.25rem',
+                    fontSize: '0.95rem',
+                    fontWeight: 800,
                     borderRadius: 'var(--radius-full)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    gap: '0.5rem'
+                    gap: '0.55rem',
+                    border: 'none',
+                    cursor: (!saasName || !saasDirectUrl || isProcessing) ? 'not-allowed' : 'pointer',
+                    background: (!saasName || !saasDirectUrl)
+                      ? 'rgba(255, 129, 63, 0.4)'
+                      : 'linear-gradient(135deg, #FF813F 0%, #FF5A1F 100%)',
+                    color: '#ffffff',
+                    boxShadow: (!saasName || !saasDirectUrl)
+                      ? 'none'
+                      : '0 6px 22px rgba(255, 129, 63, 0.45)',
+                    transition: 'all 0.2s ease',
+                    opacity: (!saasName || !saasDirectUrl) ? 0.65 : 1
+                  }}
+                  onMouseEnter={(e) => {
+                    if (saasName && saasDirectUrl && !isProcessing) {
+                      e.currentTarget.style.transform = 'translateY(-2px)';
+                      e.currentTarget.style.boxShadow = '0 8px 28px rgba(255, 129, 63, 0.6)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (saasName && saasDirectUrl && !isProcessing) {
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = '0 6px 22px rgba(255, 129, 63, 0.45)';
+                    }
                   }}
                 >
-                  <Coffee size={18} />
-                  <span>{isProcessing ? 'Processing...' : 'Support on Buy Me a Coffee & Activate'}</span>
+                  <Coffee size={20} fill="#ffffff" />
+                  <span>{isProcessing ? 'Saving & Opening...' : 'Support on Buy Me a Coffee & Activate'}</span>
                 </button>
               </form>
 
