@@ -232,7 +232,7 @@ export const Footer: React.FC = () => {
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', fontSize: '0.85rem' }}>
                 <a
-                  href="https://x.com/whataleast"
+                  href="https://x.com/tanm_io"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
@@ -247,7 +247,7 @@ export const Footer: React.FC = () => {
                   onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}
                 >
                   <ExternalLink size={14} color="var(--accent-primary)" />
-                  <span>@whataleast on X</span>
+                  <span>@tanm_io on X</span>
                 </a>
 
                 <a
@@ -326,17 +326,6 @@ export const Footer: React.FC = () => {
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
               <span>Built by</span>
-              <a
-                href="https://x.com/whataleast"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: 'var(--text-primary)', fontWeight: 600, textDecoration: 'none' }}
-                onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-primary)'}
-                onMouseLeave={e => e.currentTarget.style.color = 'var(--text-primary)'}
-              >
-                @whataleast
-              </a>
-              <span>/</span>
               <a
                 href="https://x.com/tanm_io"
                 target="_blank"

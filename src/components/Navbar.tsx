@@ -1,23 +1,23 @@
 import React from 'react';
 import { useProduct } from '../context/ProductContext';
 import { 
-  LayoutGrid,
-  List,
-  Sun,
-  Moon
+  LayoutGrid, 
+  List, 
+  Sun, 
+  Moon 
 } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const { 
-    viewMode,
-    setViewMode,
-    theme,
-    toggleTheme,
-    navigateTo
+    viewMode, 
+    setViewMode, 
+    theme, 
+    toggleTheme, 
+    navigateTo 
   } = useProduct();
 
   return (
-    <header style={{
+    <header className="site-header" style={{
       position: 'sticky',
       top: 0,
       zIndex: 50,
@@ -26,13 +26,7 @@ export const Navbar: React.FC = () => {
       WebkitBackdropFilter: 'blur(16px)',
       borderBottom: '1px solid var(--border-subtle)'
     }}>
-      <div className="app-container" style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        height: '4.8rem',
-        gap: '1.25rem'
-      }}>
+      <div className="app-container header-container">
         {/* Logo */}
         <a 
           href="#" 
@@ -41,93 +35,35 @@ export const Navbar: React.FC = () => {
             navigateTo('home'); 
             window.scrollTo({ top: 0, behavior: 'smooth' }); 
           }}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.85rem',
-            textDecoration: 'none',
-            color: 'inherit',
-            cursor: 'pointer'
-          }}
+          className="nav-logo"
         >
-          <div style={{
-            width: '2.85rem',
-            height: '2.85rem',
-            borderRadius: '0.9rem',
-            overflow: 'hidden',
-            background: 'linear-gradient(135deg, rgba(201, 142, 214, 0.25) 0%, rgba(26, 23, 20, 0.8) 100%)',
-            border: '1px solid rgba(201, 142, 214, 0.45)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxShadow: '0 4px 20px rgba(201, 142, 214, 0.35)',
-            transition: 'transform 0.2s ease, box-shadow 0.2s ease'
-          }}>
+          <div className="nav-logo-icon">
             <img 
               src="/logo.png" 
               alt="marketingdb" 
               style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
             />
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <div style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: '1.5rem',
-              fontWeight: 800,
-              letterSpacing: '-0.03em',
-              lineHeight: 1.1
-            }}>
-              marketingdb<span style={{ color: 'var(--accent-primary)' }}>.lol</span>
-            </div>
+          <div className="nav-logo-text">
+            marketingdb<span style={{ color: 'var(--accent-primary)' }}>.lol</span>
           </div>
         </a>
 
-        {/* Nav Links */}
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        {/* Right Controls: Pro link + View Mode + Theme Toggle */}
+        <div className="nav-actions">
+          {/* Nav Links */}
           <button
             onClick={() => { navigateTo('case-studies'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              color: 'var(--text-secondary)',
-              fontSize: '0.875rem',
-              fontWeight: 700,
-              padding: '0.45rem 0.85rem',
-              borderRadius: 'var(--radius-full)',
-              cursor: 'pointer',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.35rem',
-              transition: 'all 0.15s ease'
-            }}
-            onMouseEnter={e => { e.currentTarget.style.color = 'var(--accent-primary)'; e.currentTarget.style.background = 'rgba(201, 142, 214, 0.1)'; }}
-            onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-secondary)'; e.currentTarget.style.background = 'transparent'; }}
+            className="nav-pro-btn"
           >
             <span>Case Studies</span>
-            <span style={{
-              fontSize: '0.65rem',
-              fontWeight: 800,
-              padding: '0.1rem 0.4rem',
-              borderRadius: 'var(--radius-full)',
-              background: 'rgba(201, 142, 214, 0.2)',
-              color: 'var(--accent-primary)',
-              textTransform: 'uppercase'
-            }}>
+            <span className="nav-pro-badge">
               Pro
             </span>
           </button>
-        </nav>
 
-        {/* Actions */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           {/* View mode toggle */}
-          <div style={{
-            display: 'flex',
-            background: 'var(--bg-input)',
-            border: '1px solid var(--border-subtle)',
-            borderRadius: 'var(--radius-full)',
-            padding: '3px'
-          }}>
+          <div className="nav-view-mode-toggle">
             <button
               onClick={() => setViewMode('list')}
               title="List Leaderboard View"
@@ -136,14 +72,14 @@ export const Navbar: React.FC = () => {
                 background: viewMode === 'list' ? 'rgba(201, 142, 214, 0.2)' : 'transparent',
                 color: viewMode === 'list' ? 'var(--accent-primary)' : 'var(--text-muted)',
                 border: 'none',
-                padding: '0.4rem 0.65rem',
+                padding: '0.35rem 0.55rem',
                 borderRadius: 'var(--radius-full)',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center'
               }}
             >
-              <List size={16} />
+              <List size={15} />
             </button>
             <button
               onClick={() => setViewMode('grid')}
@@ -153,29 +89,28 @@ export const Navbar: React.FC = () => {
                 background: viewMode === 'grid' ? 'rgba(201, 142, 214, 0.2)' : 'transparent',
                 color: viewMode === 'grid' ? 'var(--accent-primary)' : 'var(--text-muted)',
                 border: 'none',
-                padding: '0.4rem 0.65rem',
+                padding: '0.35rem 0.55rem',
                 borderRadius: 'var(--radius-full)',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center'
               }}
             >
-              <LayoutGrid size={16} />
+              <LayoutGrid size={15} />
             </button>
           </div>
 
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
-            className="btn btn-secondary"
-            style={{ padding: '0.55rem', borderRadius: '50%' }}
+            className="btn btn-secondary nav-theme-toggle"
             aria-label={theme === 'dark' ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
             title={theme === 'dark' ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
           >
             {theme === 'dark' ? (
-              <Sun size={17} color="var(--accent-light)" />
+              <Sun size={16} color="var(--accent-light)" />
             ) : (
-              <Moon size={17} color="var(--accent-primary)" />
+              <Moon size={16} color="var(--accent-primary)" />
             )}
           </button>
         </div>

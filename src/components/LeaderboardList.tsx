@@ -268,7 +268,7 @@ export const LeaderboardList: React.FC = () => {
             </div>
 
             {/* Right side: BIG "View Visual" Button + Push Up Button */}
-            <div style={{
+            <div className="card-actions" style={{
               display: 'flex',
               alignItems: 'center',
               gap: '0.6rem',

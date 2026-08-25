@@ -404,6 +404,219 @@ body {
   }
 }
 
+/* Header & Navbar Responsive */
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4.8rem;
+  gap: 1.25rem;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.nav-logo-icon {
+  width: 2.85rem;
+  height: 2.85rem;
+  border-radius: 0.9rem;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(201, 142, 214, 0.25) 0%, rgba(26, 23, 20, 0.8) 100%);
+  border: 1px solid rgba(201, 142, 214, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(201, 142, 214, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  flex-shrink: 0;
+}
+
+.nav-logo-text {
+  font-family: var(--font-display);
+  fontSize: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  font-size: 1.5rem;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.nav-pro-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.15s ease;
+}
+.nav-pro-btn:hover {
+  color: var(--accent-primary);
+  background: rgba(201, 142, 214, 0.1);
+}
+
+.nav-pro-badge {
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 0.1rem 0.4rem;
+  border-radius: var(--radius-full);
+  background: rgba(201, 142, 214, 0.2);
+  color: var(--accent-primary);
+  text-transform: uppercase;
+}
+
+.nav-view-mode-toggle {
+  display: flex;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  padding: 3px;
+}
+
+.nav-theme-toggle {
+  padding: 0.55rem;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .header-container {
+    height: 3.85rem;
+    gap: 0.5rem;
+  }
+  .nav-logo-icon {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.65rem;
+  }
+  .nav-logo-text {
+    font-size: 1.2rem;
+  }
+  .nav-pro-btn {
+    padding: 0.35rem 0.55rem;
+    font-size: 0.8rem;
+  }
+  .nav-actions {
+    gap: 0.35rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .nav-logo {
+    gap: 0.5rem;
+  }
+  .nav-logo-text {
+    font-size: 1.05rem;
+  }
+  .nav-pro-btn span:first-child {
+    display: none;
+  }
+  .nav-pro-btn {
+    padding: 0.35rem 0.45rem;
+  }
+}
+
+/* Marketing Proof Zigzag Section Responsive */
+.marketing-proof-section {
+  padding: 5rem 0 8rem;
+}
+
+.proof-row {
+  display: flex;
+  width: 100%;
+}
+.proof-row-left {
+  justify-content: flex-start;
+  padding-left: 2rem;
+}
+.proof-row-right {
+  justify-content: flex-end;
+  padding-right: 2rem;
+}
+
+.proof-card-wrapper {
+  width: 100%;
+}
+.proof-card-x-wrap {
+  max-width: 540px;
+}
+.proof-card-media-wrap {
+  max-width: 360px;
+}
+.proof-card-youtube-wrap {
+  max-width: 380px;
+}
+
+.proof-badge {
+  font-family: 'Caveat', cursive;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+  margin-bottom: 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-shadow: 0 2px 16px rgba(201, 142, 214, 0.4);
+}
+
+.proof-connector {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem 0;
+}
+
+@media (max-width: 768px) {
+  .marketing-proof-section {
+    padding: 3rem 0 4.5rem;
+  }
+  .proof-row-left,
+  .proof-row-right {
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .proof-card-wrapper {
+    max-width: 100% !important;
+  }
+  .proof-card-media-wrap,
+  .proof-card-youtube-wrap {
+    max-width: 340px !important;
+    margin: 0 auto;
+  }
+  .proof-badge {
+    font-size: 2rem;
+    justify-content: center;
+  }
+  .proof-connector {
+    padding: 1rem 0;
+  }
+  .proof-connector svg {
+    height: 50px;
+    width: 160px;
+  }
+}
+
 /* Leaderboard List Row Responsive */
 .leaderboard-list-card {
   display: flex;
@@ -418,17 +631,19 @@ body {
   .leaderboard-list-card {
     flex-direction: column;
     align-items: stretch;
-    padding: 1.15rem 1rem;
-    gap: 1rem;
+    padding: 1rem 0.9rem;
+    gap: 0.85rem;
   }
   .leaderboard-list-card .card-actions {
     width: 100%;
     display: flex;
-    gap: 0.5rem;
+    gap: 0.45rem;
   }
   .leaderboard-list-card .card-actions button {
     flex: 1;
     justify-content: center;
+    padding: 0.55rem 0.8rem;
+    font-size: 0.825rem;
   }
 }
 
