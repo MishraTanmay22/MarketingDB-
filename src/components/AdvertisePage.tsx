@@ -385,7 +385,7 @@ export const AdvertisePage: React.FC = () => {
                 <span>Side Project • No Corporate Paywalls</span>
               </div>
               <p style={{ margin: 0 }}>
-                MarketingDB is an open-source, community side-project. We intentionally avoid complex commercial payment gateways and recurring corporate subscriptions. Sponsoring via Buy Me a Coffee directly funds our cloud database, media storage, and server uptime.
+                MarketingDB is an independent community side-project. We intentionally avoid complex commercial payment gateways and recurring corporate subscriptions. Sponsoring via Buy Me a Coffee directly funds our cloud database, media storage, and server uptime.
               </p>
             </div>
           </div>
