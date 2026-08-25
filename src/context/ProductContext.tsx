@@ -186,7 +186,18 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
     if (typeof window !== 'undefined') {
       const path = window.location.pathname.toLowerCase();
       const hash = window.location.hash.toLowerCase();
-      if (path.includes('/admin') || hash === '#admin') return 'admin';
+      const search = window.location.search.toLowerCase();
+      
+      // Secret Admin Access only for Tanmay
+      if (hash === '#tanm-control' || hash === '#admin-tanm-22' || search.includes('key=tanm22')) {
+        return 'admin';
+      }
+      // If someone types /admin directly without secret, redirect to home
+      if (path.includes('/admin')) {
+        try { window.history.replaceState(null, '', '/'); } catch {}
+        return 'home';
+      }
+
       if (path.includes('/case-studies') || hash === '#case-studies') return 'case-studies';
       if (path.includes('/submit') || hash === '#submit') return 'submit';
       if (path.includes('/advertise') || hash === '#advertise') return 'advertise';
@@ -195,24 +206,46 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
     return 'home';
   });
 
-  // Listen for browser URL changes / hash changes (e.g. /admin or #admin)
+  // Listen for browser URL changes & secret shortcut (Ctrl+Shift+A)
   useEffect(() => {
     const handleUrlChange = () => {
       const path = window.location.pathname.toLowerCase();
       const hash = window.location.hash.toLowerCase();
-      if (path.includes('/admin') || hash === '#admin') setCurrentRoute('admin');
-      else if (path.includes('/case-studies') || hash === '#case-studies') setCurrentRoute('case-studies');
-      else if (path.includes('/submit') || hash === '#submit') setCurrentRoute('submit');
-      else if (path.includes('/advertise') || hash === '#advertise') setCurrentRoute('advertise');
-      else if (path.includes('/success') || hash === '#success') setCurrentRoute('success');
-      else setCurrentRoute('home');
+      const search = window.location.search.toLowerCase();
+
+      if (hash === '#tanm-control' || hash === '#admin-tanm-22' || search.includes('key=tanm22')) {
+        setCurrentRoute('admin');
+      } else if (path.includes('/admin')) {
+        try { window.history.replaceState(null, '', '/'); } catch {}
+        setCurrentRoute('home');
+      } else if (path.includes('/case-studies') || hash === '#case-studies') {
+        setCurrentRoute('case-studies');
+      } else if (path.includes('/submit') || hash === '#submit') {
+        setCurrentRoute('submit');
+      } else if (path.includes('/advertise') || hash === '#advertise') {
+        setCurrentRoute('advertise');
+      } else if (path.includes('/success') || hash === '#success') {
+        setCurrentRoute('success');
+      } else {
+        setCurrentRoute('home');
+      }
+    };
+
+    // Secret Key Combination: Ctrl+Shift+A (or Cmd+Shift+A)
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+        e.preventDefault();
+        setCurrentRoute(prev => prev === 'admin' ? 'home' : 'admin');
+      }
     };
 
     window.addEventListener('popstate', handleUrlChange);
     window.addEventListener('hashchange', handleUrlChange);
+    window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('popstate', handleUrlChange);
       window.removeEventListener('hashchange', handleUrlChange);
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
 
@@ -233,9 +266,9 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [soundEnabled, setSoundEnabled] = useState<boolean>(() => {
     try {
       const val = localStorage.getItem(STORAGE_KEY_SOUND);
-      return val !== null ? JSON.parse(val) : true;
+      return val !== null ? JSON.parse(val) : false;
     } catch {
-      return true;
+      return false;
     }
   });
 
@@ -253,12 +286,10 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   const navigateTo = (route: PageRoute, prefill?: Partial<ProductItem> | null) => {
     setCurrentRoute(route);
-    if (prefill !== undefined) {
-      setPrefillData(prefill);
-    }
+    setPrefillData(prefill || null);
     try {
       if (route === 'home') window.history.pushState(null, '', '/');
-      else if (route === 'admin') window.history.pushState(null, '', '/admin');
+      else if (route === 'admin') window.history.pushState(null, '', '#tanm-control');
       else window.history.pushState(null, '', `/${route}`);
     } catch {}
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -268,25 +299,19 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY_PRODUCTS, JSON.stringify(products));
-    } catch (e) {
-      console.error(e);
-    }
+    } catch {}
   }, [products]);
 
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY_ACTIVITIES, JSON.stringify(activities));
-    } catch (e) {
-      console.error(e);
-    }
+    } catch {}
   }, [activities]);
 
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY_SOUND, JSON.stringify(soundEnabled));
-    } catch (e) {
-      console.error(e);
-    }
+    } catch {}
   }, [soundEnabled]);
 
   const toggleSound = () => {

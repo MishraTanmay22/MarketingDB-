@@ -46,9 +46,7 @@ export function playCoinSound(enabled = true) {
     osc2.start(now);
     osc1.stop(now + 0.35);
     osc2.stop(now + 0.35);
-  } catch (e) {
-    console.debug('Audio not available:', e);
-  }
+  } catch {}
 }
 
 export function playUpvoteSound(enabled = true) {
@@ -74,9 +72,7 @@ export function playUpvoteSound(enabled = true) {
 
     osc.start(now);
     osc.stop(now + 0.15);
-  } catch (e) {
-    console.debug('Audio not available:', e);
-  }
+  } catch {}
 }
 
 export function playCrownSound(enabled = true) {
@@ -105,9 +101,7 @@ export function playCrownSound(enabled = true) {
       osc.start(startTime);
       osc.stop(startTime + 0.4);
     });
-  } catch (e) {
-    console.debug('Audio not available:', e);
-  }
+  } catch {}
 }
 
 export function playClickSound(enabled = true) {
@@ -133,7 +127,5 @@ export function playClickSound(enabled = true) {
 
     osc.start(now);
     osc.stop(now + 0.04);
-  } catch (e) {
-    console.debug('Audio not available:', e);
-  }
+  } catch {}
 }

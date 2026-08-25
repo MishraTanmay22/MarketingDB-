@@ -84,39 +84,29 @@ export const HeroClaim: React.FC = () => {
         {/* Clean Input Bar Form */}
         <form
           onSubmit={handleQuickSubmit}
-          style={{
-            background: 'var(--bg-card)',
-            border: '1px solid var(--border-subtle)',
-            borderRadius: 'var(--radius-full)',
-            padding: '0.4rem 0.45rem 0.4rem 1.1rem',
-            boxShadow: 'var(--shadow-md)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.6rem',
-            maxWidth: '680px',
-            margin: '0 auto 1.25rem',
-            flexWrap: 'wrap'
-          }}
+          className="quick-submit-form"
         >
-          <Globe size={18} color="var(--accent-primary)" style={{ flexShrink: 0 }} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flex: 1, width: '100%' }}>
+            <Globe size={18} color="var(--accent-primary)" style={{ flexShrink: 0 }} />
 
-          {/* Text/URL Input */}
-          <div style={{ flex: '1', minWidth: '220px' }}>
-            <input
-              type="text"
-              placeholder="Paste a campaign URL or website"
-              value={campaignInput}
-              onChange={(e) => setCampaignInput(e.target.value)}
-              style={{
-                width: '100%',
-                background: 'transparent',
-                border: 'none',
-                color: 'var(--text-primary)',
-                fontSize: '0.95rem',
-                outline: 'none',
-                fontFamily: 'var(--font-sans)'
-              }}
-            />
+            {/* Text/URL Input */}
+            <div style={{ flex: '1', minWidth: '160px' }}>
+              <input
+                type="text"
+                placeholder="Paste a campaign URL or website"
+                value={campaignInput}
+                onChange={(e) => setCampaignInput(e.target.value)}
+                style={{
+                  width: '100%',
+                  background: 'transparent',
+                  border: 'none',
+                  color: 'var(--text-primary)',
+                  fontSize: '0.95rem',
+                  outline: 'none',
+                  fontFamily: 'var(--font-sans)'
+                }}
+              />
+            </div>
           </div>
 
           {/* Submit Action Button */}
@@ -138,17 +128,10 @@ export const HeroClaim: React.FC = () => {
 
         {/* Category Pills Filter */}
         <div 
-          className="no-scrollbar"
+          className="category-scroll-bar"
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexWrap: 'wrap',
-            gap: '0.35rem',
-            marginTop: '1.25rem',
             maxWidth: '960px',
-            margin: '1.25rem auto 0',
-            padding: '0 0.5rem'
+            margin: '1rem auto 0'
           }}
         >
           {categories.map((cat) => {
@@ -158,9 +141,9 @@ export const HeroClaim: React.FC = () => {
                 key={cat.key}
                 onClick={() => setActiveCategory(cat.key)}
                 style={{
-                  padding: '0.28rem 0.65rem',
+                  padding: '0.3rem 0.75rem',
                   borderRadius: 'var(--radius-full)',
-                  fontSize: '0.78rem',
+                  fontSize: '0.8rem',
                   fontWeight: isActive ? 700 : 500,
                   cursor: 'pointer',
                   border: isActive ? '1px solid var(--accent-primary)' : '1px solid var(--border-subtle)',
@@ -168,7 +151,8 @@ export const HeroClaim: React.FC = () => {
                   color: isActive ? 'var(--accent-primary)' : 'var(--text-secondary)',
                   transition: 'all 0.15s ease',
                   whiteSpace: 'nowrap',
-                  boxShadow: isActive ? '0 2px 8px rgba(201, 142, 214, 0.2)' : 'none'
+                  boxShadow: isActive ? '0 2px 8px rgba(201, 142, 214, 0.2)' : 'none',
+                  flexShrink: 0
                 }}
               >
                 {cat.label}

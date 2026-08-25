@@ -97,17 +97,11 @@ export const LeaderboardList: React.FC = () => {
         return (
           <div
             key={product.id}
-            className="glass-panel"
+            className="glass-panel leaderboard-list-card"
             style={{
               background: isRank1 ? 'var(--gradient-card-glow)' : 'var(--bg-card)',
               border: isRank1 ? '1px solid rgba(201, 142, 214, 0.45)' : '1px solid var(--border-subtle)',
               borderRadius: 'var(--radius-lg)',
-              padding: '1.35rem 1.5rem',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              gap: '1.25rem',
-              flexWrap: 'wrap',
               transition: 'all 0.2s ease',
               position: 'relative'
             }}
@@ -118,7 +112,7 @@ export const LeaderboardList: React.FC = () => {
               alignItems: 'flex-start',
               gap: '1.15rem',
               flex: '1',
-              minWidth: '280px'
+              width: '100%'
             }}>
               {/* Rank Badge Indicator */}
               <div style={{
@@ -291,20 +285,20 @@ export const LeaderboardList: React.FC = () => {
                   fontSize: '0.875rem',
                   fontWeight: 800,
                   borderRadius: 'var(--radius-full)',
-                  background: 'rgba(201, 142, 214, 0.16)',
-                  border: '1px solid rgba(201, 142, 214, 0.38)',
+                  background: 'rgba(99, 102, 241, 0.14)',
+                  border: '1px solid rgba(99, 102, 241, 0.35)',
                   color: 'var(--accent-primary)',
                   cursor: 'pointer',
-                  boxShadow: '0 2px 10px rgba(201, 142, 214, 0.15)',
+                  boxShadow: '0 2px 10px rgba(99, 102, 241, 0.15)',
                   transition: 'all 0.2s ease',
                   whiteSpace: 'nowrap'
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(201, 142, 214, 0.25)';
+                  e.currentTarget.style.background = 'rgba(99, 102, 241, 0.25)';
                   e.currentTarget.style.transform = 'translateY(-1px)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(201, 142, 214, 0.16)';
+                  e.currentTarget.style.background = 'rgba(99, 102, 241, 0.14)';
                   e.currentTarget.style.transform = 'translateY(0)';
                 }}
                 title={`Open marketing visual asset: ${product.assetLink || product.url}`}

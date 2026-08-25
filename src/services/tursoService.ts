@@ -150,11 +150,7 @@ export async function initTursoDatabases() {
         updatedAt INTEGER NOT NULL
       )
     `);
-
-    console.log('✅ Turso DB 1 and DB 2 initialized successfully!');
-  } catch (err) {
-    console.warn('Turso DB init warning:', err);
-  }
+  } catch {}
 }
 
 // Fetch all campaigns from DB 1
@@ -200,8 +196,7 @@ export async function fetchCampaignsFromTurso(): Promise<ProductItem[]> {
         submittedAt: row.submittedAt || 'Recently'
       };
     });
-  } catch (err) {
-    console.warn('Error fetching from Turso DB 1:', err);
+  } catch {
     return [];
   }
 }
@@ -221,8 +216,7 @@ export async function fetchActivitiesFromTurso(): Promise<ActivityLog[]> {
       productName: row.productName,
       rank: Number(row.rank) || undefined
     }));
-  } catch (err) {
-    console.warn('Error fetching activities from Turso:', err);
+  } catch {
     return [];
   }
 }
@@ -265,7 +259,6 @@ const TWENTY_FOUR_HOURS_MS = 24 * 60 * 60 * 1000;
 export async function recordVote24hInTurso(campaignId: string, voterId: string): Promise<{ success: boolean; alreadyVoted?: boolean; nextVoteAt?: number }> {
   try {
     const now = Date.now();
-    // Check existing vote
     const checkRes = await tursoDb1.execute({
       sql: `SELECT votedAt FROM campaign_votes WHERE campaignId = ? AND voterId = ?`,
       args: [campaignId, voterId]
@@ -278,7 +271,6 @@ export async function recordVote24hInTurso(campaignId: string, voterId: string):
       }
     }
 
-    // Insert or update vote timestamp
     await tursoDb1.execute({
       sql: `
         INSERT INTO campaign_votes (campaignId, voterId, votedAt) 
@@ -288,15 +280,13 @@ export async function recordVote24hInTurso(campaignId: string, voterId: string):
       args: [campaignId, voterId, now]
     });
 
-    // Increment votes count in campaigns table
     await tursoDb1.execute({
       sql: `UPDATE campaigns SET votes = votes + 1 WHERE id = ?`,
       args: [campaignId]
     });
 
     return { success: true };
-  } catch (err) {
-    console.warn('Error recording 24h vote in Turso:', err);
+  } catch {
     return { success: false };
   }
 }
@@ -328,7 +318,6 @@ export async function saveCampaignToTurso(
   try {
     const categoriesJson = JSON.stringify(campaign.categories || [campaign.category]);
     
-    // 1. Insert Campaign into DB 1
     await tursoDb1.execute({
       sql: `
         INSERT INTO campaigns (
@@ -363,7 +352,6 @@ export async function saveCampaignToTurso(
       ]
     });
 
-    // 2. Insert Media Blob into DB 2 if exists
     if (mediaData && mediaData.startsWith('data:')) {
       const fileSizeBytes = Math.round((mediaData.length * 3) / 4);
       await tursoDb2.execute({
@@ -382,13 +370,8 @@ export async function saveCampaignToTurso(
           Date.now()
         ]
       });
-      console.log(`✅ Saved creative asset to Turso DB 2 for campaign ${campaign.name}`);
     }
-
-    console.log(`✅ Saved campaign ${campaign.name} to Turso DB 1`);
-  } catch (err) {
-    console.error('Error saving to Turso databases:', err);
-  }
+  } catch {}
 }
 
 // Push Up vote in DB 1 (fallback direct increment)
@@ -398,9 +381,7 @@ export async function upvoteInTurso(campaignId: string, newVotes: number) {
       sql: `UPDATE campaigns SET votes = ? WHERE id = ?`,
       args: [newVotes, campaignId]
     });
-  } catch (err) {
-    console.warn('Error upvoting in Turso:', err);
-  }
+  } catch {}
 }
 
 // Record click view in DB 1
@@ -410,9 +391,7 @@ export async function recordClickInTurso(campaignId: string, newClicks: number) 
       sql: `UPDATE campaigns SET clicks = ? WHERE id = ?`,
       args: [newClicks, campaignId]
     });
-  } catch (err) {
-    console.warn('Error updating clicks in Turso:', err);
-  }
+  } catch {}
 }
 
 // Save activity to DB 1
@@ -434,9 +413,7 @@ export async function saveActivityToTurso(activity: ActivityLog) {
         Date.now()
       ]
     });
-  } catch (err) {
-    console.warn('Error saving activity to Turso:', err);
-  }
+  } catch {}
 }
 
 // Save Pro Waitlist Email to DB 2
@@ -451,10 +428,8 @@ export async function saveProWaitlistEmailToTurso(email: string): Promise<{ succ
       `,
       args: [id, email.trim().toLowerCase(), Date.now()]
     });
-    console.log(`✅ Saved Pro waitlist email to Turso DB 2: ${email}`);
     return { success: true };
-  } catch (err) {
-    console.warn('Error saving waitlist email to Turso DB 2:', err);
+  } catch {
     return { success: false };
   }
 }
@@ -471,7 +446,6 @@ export async function saveSponsorToTurso(sponsor: {
     const id = 'sponsor-' + Date.now() + '-' + Math.random().toString(36).substring(2, 7);
     const now = Date.now();
 
-    // 1. Save all details to DB 2 (Media & Storage Database)
     try {
       await tursoDb2.execute({
         sql: `
@@ -488,12 +462,8 @@ export async function saveSponsorToTurso(sponsor: {
           now
         ]
       });
-      console.log(`✅ Saved Sponsor details to Turso DB 2: ${sponsor.name}`);
-    } catch (err2) {
-      console.warn('Error saving sponsor to DB 2:', err2);
-    }
+    } catch {}
 
-    // 2. Also save to DB 1 (Primary Database)
     try {
       await tursoDb1.execute({
         sql: `
@@ -510,14 +480,10 @@ export async function saveSponsorToTurso(sponsor: {
           now
         ]
       });
-      console.log(`✅ Saved Sponsor details to Turso DB 1: ${sponsor.name}`);
-    } catch (err1) {
-      console.warn('Error saving sponsor to DB 1:', err1);
-    }
+    } catch {}
 
     return { success: true };
-  } catch (err) {
-    console.warn('Error saving sponsor to databases:', err);
+  } catch {
     return { success: false };
   }
 }
@@ -525,21 +491,16 @@ export async function saveSponsorToTurso(sponsor: {
 // Admin: Fetch all sponsor submissions from DB 2 (with DB 1 fallback)
 export async function fetchAllSponsorsForAdmin(): Promise<any[]> {
   try {
-    // Try fetching from DB 2 first
     try {
       const res2 = await tursoDb2.execute(`SELECT * FROM sponsors ORDER BY createdAt DESC`);
       if (res2 && res2.rows && res2.rows.length > 0) {
         return res2.rows;
       }
-    } catch (e2) {
-      console.warn('DB 2 sponsor fetch notice:', e2);
-    }
+    } catch {}
 
-    // Fallback to DB 1
     const res1 = await tursoDb1.execute(`SELECT * FROM sponsors ORDER BY createdAt DESC`);
     return res1.rows || [];
-  } catch (err) {
-    console.warn('Error fetching sponsors for admin:', err);
+  } catch {
     return [];
   }
 }
@@ -562,8 +523,7 @@ export async function updateSponsorStatusInTurso(id: string, newStatus: string):
     } catch {}
 
     return true;
-  } catch (err) {
-    console.warn('Error updating sponsor status:', err);
+  } catch {
     return false;
   }
 }
@@ -586,8 +546,7 @@ export async function deleteSponsorFromTurso(id: string): Promise<boolean> {
     } catch {}
 
     return true;
-  } catch (err) {
-    console.warn('Error deleting sponsor:', err);
+  } catch {
     return false;
   }
 }
@@ -597,8 +556,7 @@ export async function fetchAllWaitlistForAdmin(): Promise<any[]> {
   try {
     const res = await tursoDb2.execute(`SELECT * FROM pro_waitlist ORDER BY createdAt DESC`);
     return res.rows || [];
-  } catch (err) {
-    console.warn('Error fetching waitlist for admin:', err);
+  } catch {
     return [];
   }
 }
@@ -611,8 +569,7 @@ export async function deleteCampaignFromTurso(id: string): Promise<boolean> {
       args: [id]
     });
     return true;
-  } catch (err) {
-    console.warn('Error deleting campaign:', err);
+  } catch {
     return false;
   }
 }
@@ -627,8 +584,7 @@ export async function fetchPublishedArticlesFromTurso(): Promise<any[]> {
 
     const res1 = await tursoDb1.execute(`SELECT * FROM articles WHERE publishedStatus = 'published' ORDER BY createdAt DESC`);
     return res1.rows || [];
-  } catch (err) {
-    console.warn('Error fetching published articles:', err);
+  } catch {
     return [];
   }
 }
@@ -642,8 +598,7 @@ export async function fetchAllArticlesForAdmin(): Promise<any[]> {
 
     const res1 = await tursoDb1.execute(`SELECT * FROM articles ORDER BY createdAt DESC`);
     return res1.rows || [];
-  } catch (err) {
-    console.warn('Error fetching admin articles:', err);
+  } catch {
     return [];
   }
 }
@@ -703,12 +658,11 @@ export async function saveArticleToTurso(article: {
       now
     ];
 
-    try { await tursoDb2.execute({ sql, args }); } catch (e) { console.warn('DB 2 article write warning:', e); }
-    try { await tursoDb1.execute({ sql, args }); } catch (e) { console.warn('DB 1 article write warning:', e); }
+    try { await tursoDb2.execute({ sql, args }); } catch {}
+    try { await tursoDb1.execute({ sql, args }); } catch {}
 
     return { success: true, id };
-  } catch (err) {
-    console.warn('Error saving article to Turso:', err);
+  } catch {
     return { success: false, id: '' };
   }
 }
@@ -718,10 +672,7 @@ export async function deleteArticleFromTurso(id: string): Promise<boolean> {
     try { await tursoDb2.execute({ sql: `DELETE FROM articles WHERE id = ?`, args: [id] }); } catch {}
     try { await tursoDb1.execute({ sql: `DELETE FROM articles WHERE id = ?`, args: [id] }); } catch {}
     return true;
-  } catch (err) {
-    console.warn('Error deleting article:', err);
+  } catch {
     return false;
   }
 }
-
-
