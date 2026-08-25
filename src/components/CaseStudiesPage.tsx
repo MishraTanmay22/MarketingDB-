@@ -256,49 +256,7 @@ export const CaseStudiesPage: React.FC = () => {
           <span>Back to Leaderboard</span>
         </button>
 
-        {/* Hero Header */}
-        <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-          <div style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.4rem',
-            padding: '0.35rem 0.95rem',
-            borderRadius: 'var(--radius-full)',
-            background: 'rgba(201, 142, 214, 0.15)',
-            border: '1px solid rgba(201, 142, 214, 0.3)',
-            color: 'var(--accent-primary)',
-            fontSize: '0.825rem',
-            fontWeight: 800,
-            marginBottom: '1.25rem'
-          }}>
-            <BookOpen size={14} />
-            <span>Forensic Growth Vault</span>
-          </div>
-
-          <h1 style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(2.2rem, 4.5vw, 3.2rem)',
-            fontWeight: 900,
-            letterSpacing: '-0.03em',
-            color: 'var(--text-primary)',
-            marginBottom: '1rem',
-            lineHeight: 1.15
-          }}>
-            Inside High-Growth Marketing Playbooks.
-          </h1>
-
-          <p style={{
-            color: 'var(--text-secondary)',
-            fontSize: '1.1rem',
-            maxWidth: '640px',
-            margin: '0 auto',
-            lineHeight: 1.6
-          }}>
-            Forensic teardowns, real customer acquisition funnels, and creative strategies behind top-performing SaaS products.
-          </p>
-        </div>
-
-        {/* Live Articles List */}
+        {/* Live Articles / Empty State */}
         {isLoading ? (
           <div style={{ padding: '4rem', textAlign: 'center', color: 'var(--text-muted)' }}>
             Loading case studies...
