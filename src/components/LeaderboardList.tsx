@@ -1,6 +1,6 @@
 import React from 'react';
 import { useProduct } from '../context/ProductContext';
-import { ArrowUp, Crown, PlusCircle, ExternalLink, Eye, Play, CheckCircle } from 'lucide-react';
+import { ArrowUp, Crown, PlusCircle, ExternalLink, Eye, Play, CheckCircle, Share2 } from 'lucide-react';
 
 const normalizeUrl = (u: string) => {
   if (!u) return '';
@@ -317,6 +317,42 @@ export const LeaderboardList: React.FC = () => {
                 <ExternalLink size={13} />
               </button>
 
+              {/* Share on X Viral Link Button */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const shareText = `Check out "${product.name}" on marketingdb.lol — ranked #${rank} on the live directory leaderboard! 🚀\n\nDirect link 👇`;
+                  const url = `https://marketingdb.lol/?category=${product.category || 'all'}`;
+                  window.open(`https://x.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(url)}`, '_blank', 'noopener,noreferrer');
+                }}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.35rem',
+                  padding: '0.65rem 0.85rem',
+                  fontSize: '0.825rem',
+                  fontWeight: 700,
+                  borderRadius: 'var(--radius-full)',
+                  background: 'var(--bg-input)',
+                  border: '1px solid var(--border-subtle)',
+                  color: 'var(--text-secondary)',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--accent-primary)';
+                  e.currentTarget.style.color = 'var(--text-primary)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                  e.currentTarget.style.color = 'var(--text-secondary)';
+                }}
+                title="Share on X (Twitter)"
+              >
+                <Share2 size={13} />
+                <span>Share</span>
+              </button>
+
               {/* Push Up Action Button (24h rate limited per IP) */}
               {isVoted ? (
                 <button
@@ -368,7 +404,7 @@ export const LeaderboardList: React.FC = () => {
                   <ArrowUp size={15} />
                   <span>Push Up</span>
                   <span style={{
-                    background: 'rgba(255, 255, 255, 0.25)',
+                    background: 'rgba(255, 255, 255, 0.2)',
                     padding: '0.1rem 0.45rem',
                     borderRadius: 'var(--radius-full)',
                     fontSize: '0.775rem'

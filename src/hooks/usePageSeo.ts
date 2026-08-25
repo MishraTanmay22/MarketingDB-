@@ -134,5 +134,60 @@ export const usePageSeo = (currentRoute: PageRoute, activeCategory: Category = '
     // Update Canonical URL
     let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
     if (canonical) canonical.href = config.canonical;
+
+    // Dynamically Inject/Update BreadcrumbList JSON-LD Schema
+    const breadcrumbItems: { '@type': string; position: number; name: string; item: string }[] = [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://marketingdb.lol/'
+      }
+    ];
+
+    if (currentRoute === 'case-studies') {
+      breadcrumbItems.push({
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Articles & Teardowns',
+        item: 'https://marketingdb.lol/case-studies'
+      });
+    } else if (currentRoute === 'submit') {
+      breadcrumbItems.push({
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Submit to Directory',
+        item: 'https://marketingdb.lol/submit'
+      });
+    } else if (currentRoute === 'advertise') {
+      breadcrumbItems.push({
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Advertise & Sponsor',
+        item: 'https://marketingdb.lol/advertise'
+      });
+    } else if (currentRoute === 'home' && activeCategory && activeCategory !== 'all') {
+      breadcrumbItems.push({
+        '@type': 'ListItem',
+        position: 2,
+        name: config.title.split('—')[0].trim(),
+        item: config.canonical
+      });
+    }
+
+    const breadcrumbSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbItems
+    };
+
+    let breadcrumbScript = document.getElementById('breadcrumb-schema-jsonld') as HTMLScriptElement | null;
+    if (!breadcrumbScript) {
+      breadcrumbScript = document.createElement('script');
+      breadcrumbScript.id = 'breadcrumb-schema-jsonld';
+      breadcrumbScript.type = 'application/ld+json';
+      document.head.appendChild(breadcrumbScript);
+    }
+    breadcrumbScript.textContent = JSON.stringify(breadcrumbSchema);
   }, [currentRoute, activeCategory]);
 };
