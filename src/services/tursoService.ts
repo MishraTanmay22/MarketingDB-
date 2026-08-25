@@ -55,7 +55,7 @@ export async function initTursoDatabases() {
       )
     `);
 
-    // Init DB 2 (Media Storage & Pro Waitlist / Wishlist)
+    // Init DB 2 (Media Storage, Pro Waitlist & Sponsor Orders)
     await tursoDb2.execute(`
       CREATE TABLE IF NOT EXISTS creative_media (
         id TEXT PRIMARY KEY,
@@ -73,6 +73,19 @@ export async function initTursoDatabases() {
         id TEXT PRIMARY KEY,
         email TEXT NOT NULL UNIQUE,
         source TEXT DEFAULT 'pro_access_section',
+        createdAt INTEGER NOT NULL
+      )
+    `);
+
+    await tursoDb2.execute(`
+      CREATE TABLE IF NOT EXISTS sponsors (
+        id TEXT PRIMARY KEY,
+        name TEXT NOT NULL,
+        tagline TEXT,
+        url TEXT NOT NULL,
+        logo TEXT,
+        email TEXT,
+        paidStatus TEXT DEFAULT 'pending',
         createdAt INTEGER NOT NULL
       )
     `);
@@ -408,7 +421,7 @@ export async function saveProWaitlistEmailToTurso(email: string): Promise<{ succ
   }
 }
 
-// Save Sponsor submission to DB 1
+// Save Sponsor submission to DB 2 & DB 1
 export async function saveSponsorToTurso(sponsor: {
   name: string;
   tagline?: string;
@@ -418,25 +431,55 @@ export async function saveSponsorToTurso(sponsor: {
 }): Promise<{ success: boolean }> {
   try {
     const id = 'sponsor-' + Date.now() + '-' + Math.random().toString(36).substring(2, 7);
-    await tursoDb1.execute({
-      sql: `
-        INSERT INTO sponsors (id, name, tagline, url, logo, email, paidStatus, createdAt)
-        VALUES (?, ?, ?, ?, ?, ?, 'pending', ?)
-      `,
-      args: [
-        id,
-        sponsor.name,
-        sponsor.tagline || '',
-        sponsor.url,
-        sponsor.logo || '',
-        sponsor.email || '',
-        Date.now()
-      ]
-    });
-    console.log(`✅ Saved Sponsor to Turso DB 1: ${sponsor.name}`);
+    const now = Date.now();
+
+    // 1. Save all details to DB 2 (Media & Storage Database)
+    try {
+      await tursoDb2.execute({
+        sql: `
+          INSERT INTO sponsors (id, name, tagline, url, logo, email, paidStatus, createdAt)
+          VALUES (?, ?, ?, ?, ?, ?, 'pending', ?)
+        `,
+        args: [
+          id,
+          sponsor.name,
+          sponsor.tagline || '',
+          sponsor.url,
+          sponsor.logo || '',
+          sponsor.email || '',
+          now
+        ]
+      });
+      console.log(`✅ Saved Sponsor details to Turso DB 2: ${sponsor.name}`);
+    } catch (err2) {
+      console.warn('Error saving sponsor to DB 2:', err2);
+    }
+
+    // 2. Also save to DB 1 (Primary Database)
+    try {
+      await tursoDb1.execute({
+        sql: `
+          INSERT INTO sponsors (id, name, tagline, url, logo, email, paidStatus, createdAt)
+          VALUES (?, ?, ?, ?, ?, ?, 'pending', ?)
+        `,
+        args: [
+          id,
+          sponsor.name,
+          sponsor.tagline || '',
+          sponsor.url,
+          sponsor.logo || '',
+          sponsor.email || '',
+          now
+        ]
+      });
+      console.log(`✅ Saved Sponsor details to Turso DB 1: ${sponsor.name}`);
+    } catch (err1) {
+      console.warn('Error saving sponsor to DB 1:', err1);
+    }
+
     return { success: true };
   } catch (err) {
-    console.warn('Error saving sponsor to Turso DB 1:', err);
+    console.warn('Error saving sponsor to databases:', err);
     return { success: false };
   }
 }
