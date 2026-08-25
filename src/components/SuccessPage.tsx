@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import confetti from 'canvas-confetti';
-import { CheckCircle, ExternalLink, Trophy, ArrowLeft, Coffee, Share2, Sparkles, Star } from 'lucide-react';
+import { CheckCircle, ExternalLink, Trophy, ArrowLeft, Coffee, Share2, Sparkles, Star, Code } from 'lucide-react';
 import { useProduct } from '../context/ProductContext';
+import { EmbedBadgeModal } from './EmbedBadgeModal';
 
 const CATEGORY_LABELS: Record<string, string> = {
   'all': 'All',
@@ -17,6 +18,7 @@ const CATEGORY_LABELS: Record<string, string> = {
 
 export const SuccessPage: React.FC = () => {
   const { lastSubmittedProduct, lastSubmittedRank, navigateTo } = useProduct();
+  const [isBadgeModalOpen, setIsBadgeModalOpen] = useState(false);
   const hasRunConfetti = useRef(false);
 
   useEffect(() => {
@@ -254,37 +256,59 @@ export const SuccessPage: React.FC = () => {
             </div>
 
             {/* Action Buttons */}
-            <div style={{ display: 'flex', gap: '0.65rem' }}>
-              <button
-                onClick={() => navigateTo('home')}
-                style={{
-                  flex: 1.3,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.45rem',
-                  padding: '0.75rem 1rem', borderRadius: 'var(--radius-full)',
-                  background: 'var(--gradient-primary)', color: '#fff',
-                  border: 'none', cursor: 'pointer', fontWeight: 800, fontSize: '0.9rem',
-                  boxShadow: '0 4px 16px rgba(201,142,214,0.35)',
-                  transition: 'all 0.2s'
-                }}
-              >
-                <ExternalLink size={15} />
-                View on Leaderboard
-              </button>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+              <div style={{ display: 'flex', gap: '0.65rem' }}>
+                <button
+                  onClick={() => navigateTo('home')}
+                  style={{
+                    flex: 1.3,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.45rem',
+                    padding: '0.75rem 1rem', borderRadius: 'var(--radius-full)',
+                    background: 'var(--gradient-primary)', color: '#fff',
+                    border: 'none', cursor: 'pointer', fontWeight: 800, fontSize: '0.9rem',
+                    boxShadow: '0 4px 16px rgba(201,142,214,0.35)',
+                    transition: 'all 0.2s'
+                  }}
+                >
+                  <ExternalLink size={15} />
+                  View on Leaderboard
+                </button>
 
+                <button
+                  onClick={handleShare}
+                  style={{
+                    flex: 1,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.45rem',
+                    padding: '0.75rem 1rem', borderRadius: 'var(--radius-full)',
+                    background: 'transparent', color: 'var(--text-primary)',
+                    border: '1.5px solid var(--border-subtle)', cursor: 'pointer',
+                    fontWeight: 700, fontSize: '0.9rem',
+                    transition: 'all 0.2s'
+                  }}
+                >
+                  <Share2 size={15} />
+                  Share on X
+                </button>
+              </div>
+
+              {/* Get Embed Badge Button */}
               <button
-                onClick={handleShare}
+                onClick={() => setIsBadgeModalOpen(true)}
                 style={{
-                  flex: 1,
+                  width: '100%',
                   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.45rem',
-                  padding: '0.75rem 1rem', borderRadius: 'var(--radius-full)',
-                  background: 'transparent', color: 'var(--text-primary)',
-                  border: '1.5px solid var(--border-subtle)', cursor: 'pointer',
-                  fontWeight: 700, fontSize: '0.9rem',
+                  padding: '0.7rem 1rem', borderRadius: 'var(--radius-full)',
+                  background: 'rgba(201, 142, 214, 0.12)',
+                  border: '1px solid rgba(201, 142, 214, 0.35)',
+                  color: 'var(--accent-primary)',
+                  cursor: 'pointer',
+                  fontWeight: 800,
+                  fontSize: '0.875rem',
                   transition: 'all 0.2s'
                 }}
               >
-                <Share2 size={15} />
-                Share on X
+                <Code size={15} />
+                <span>Get Embed Backlink Badge (HTML/Markdown)</span>
               </button>
             </div>
           </div>
@@ -328,7 +352,7 @@ export const SuccessPage: React.FC = () => {
 
             <div>
               <a
-                href="https://buymeacoffee.com/tanm_io"
+                href="https://buymeacoffee.com/whataleast"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -356,6 +380,14 @@ export const SuccessPage: React.FC = () => {
         </div>
 
       </div>
+
+      {/* Embed Badge Modal */}
+      <EmbedBadgeModal
+        isOpen={isBadgeModalOpen}
+        onClose={() => setIsBadgeModalOpen(false)}
+        productName={p.name}
+        rank={lastSubmittedRank}
+      />
 
       <style>{`
         @keyframes pulseGlow {

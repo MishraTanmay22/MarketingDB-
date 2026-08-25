@@ -164,8 +164,8 @@ export const SubmissionPage: React.FC = () => {
             <span>Back to Leaderboard</span>
           </button>
 
-          <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-            100% Free • Stored permanently
+          <span style={{ fontSize: '0.9rem', color: 'var(--accent-primary)', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+            <span>✨ 100% Free • Direct Dofollow Backlink Included</span>
           </span>
         </div>
 
@@ -194,7 +194,7 @@ export const SubmissionPage: React.FC = () => {
             </h1>
           </div>
           <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', lineHeight: 1.5 }}>
-            Showcase your best marketing creatives, ads, and growth tactics. 100% Free forever.
+            Showcase your best marketing creatives, ads, and growth tactics. 100% Free forever with a <strong>direct Dofollow backlink</strong>.
           </p>
         </div>
 

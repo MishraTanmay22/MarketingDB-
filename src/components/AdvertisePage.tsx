@@ -87,7 +87,7 @@ export const AdvertisePage: React.FC = () => {
       });
 
       // Open Buy Me A Coffee checkout
-      const bmacUrl = `https://buymeacoffee.com/tanm_io?amount=10&note=Sponsor%20Spot%20for%20${encodeURIComponent(saasName)}`;
+      const bmacUrl = `https://buymeacoffee.com/whataleast?amount=10&note=Sponsor%20Spot%20for%20${encodeURIComponent(saasName)}`;
       window.open(bmacUrl, '_blank', 'noopener,noreferrer');
       
       setIsPaidSuccess(true);

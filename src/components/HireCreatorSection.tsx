@@ -47,7 +47,7 @@ export const HireCreatorSection: React.FC = () => {
             Hire Me for Your Next Build.
           </h2>
 
-          {/* Copy using tanmio */}
+          {/* Copy using whataleast */}
           <p style={{
             color: 'var(--text-secondary)',
             fontSize: '1.025rem',
@@ -55,13 +55,13 @@ export const HireCreatorSection: React.FC = () => {
             maxWidth: '600px',
             margin: '0 auto 2rem'
           }}>
-            I'm @tanm_io, the developer behind MarketingDB. I build full-stack web applications, landing pages, and interactive platforms for founders and brands looking for fast, high-quality execution.
+            I'm @whataleast, the developer behind MarketingDB. I build full-stack web applications, landing pages, and interactive platforms for founders and brands looking for fast, high-quality execution.
           </p>
 
           {/* Action buttons */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.85rem', flexWrap: 'wrap' }}>
             <a
-              href="mailto:tanmio0xx@proton.me?subject=Hiring%20/%20Project%20Inquiry&body=Hi%20tanmio,%0A%0AI'm%20interested%20in%20hiring%20you%20for%20a%20project:%0A%0A-%20Project%20Overview:%20%0A-%20Scope%20(Full-Stack%20App,%20Landing%20Page,%20UI/UX):%20%0A-%20Budget%20&%20Timeline:%20"
+              href="mailto:tanmio0xx@proton.me?subject=Hiring%20/%20Project%20Inquiry&body=Hi%20whataleast,%0A%0AI'm%20interested%20in%20hiring%20you%20for%20a%20project:%0A%0A-%20Project%20Overview:%20%0A-%20Scope%20(Full-Stack%20App,%20Landing%20Page,%20UI/UX):%20%0A-%20Budget%20&%20Timeline:%20"
               className="btn btn-primary"
               style={{
                 padding: '0.85rem 1.75rem',
@@ -80,7 +80,7 @@ export const HireCreatorSection: React.FC = () => {
             </a>
 
             <a
-              href="https://x.com/tanm_io"
+              href="https://x.com/whataleast"
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -100,7 +100,7 @@ export const HireCreatorSection: React.FC = () => {
               onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--accent-primary)'}
               onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border-subtle)'}
             >
-              <span>DM on X @tanm_io</span>
+              <span>DM on X @whataleast</span>
               <ExternalLink size={14} />
             </a>
           </div>

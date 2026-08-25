@@ -1,5 +1,6 @@
 import React from 'react';
 import { ProductProvider, useProduct } from './context/ProductContext';
+import { usePageSeo } from './hooks/usePageSeo';
 import { Navbar } from './components/Navbar';
 import { LiveStatsBar } from './components/LiveStatsBar';
 import { HeroClaim } from './components/HeroClaim';
@@ -11,6 +12,7 @@ import { AdvertisePage } from './components/AdvertisePage';
 import { AdminPage } from './components/AdminPage';
 import { CaseStudiesPage } from './components/CaseStudiesPage';
 import { MarketingProofSection } from './components/MarketingProofSection';
+import { FaqSection } from './components/FaqSection';
 import { HireCreatorSection } from './components/HireCreatorSection';
 import { AdvertiseSection } from './components/AdvertiseSection';
 import { ProductPreviewModal } from './components/ProductPreviewModal';
@@ -19,6 +21,7 @@ import { Footer } from './components/Footer';
 
 const MainContent: React.FC = () => {
   const { viewMode, currentRoute } = useProduct();
+  usePageSeo(currentRoute);
 
   if (currentRoute === 'admin') {
     return <AdminPage />;
@@ -93,6 +96,9 @@ const MainContent: React.FC = () => {
 
         {/* Social Proof Wall: From the people who took #1 */}
         <MarketingProofSection />
+
+        {/* SEO FAQ Section with Google FAQPage Schema */}
+        <FaqSection />
 
         {/* Hire Creator / Work Together Section */}
         <HireCreatorSection />

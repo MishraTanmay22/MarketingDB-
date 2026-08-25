@@ -77,13 +77,6 @@ export const LeaderboardList: React.FC = () => {
         const rank = index + 1;
         const isRank1 = rank === 1;
 
-        const handleWebsiteClick = (e: React.MouseEvent) => {
-          e.stopPropagation();
-          recordClick(product.id);
-          const target = normalizeUrl(product.url);
-          if (target) window.open(target, '_blank', 'noopener,noreferrer');
-        };
-
         const handleAssetClick = (e: React.MouseEvent) => {
           e.stopPropagation();
           recordClick(product.id);
@@ -134,9 +127,12 @@ export const LeaderboardList: React.FC = () => {
                 <span>#{rank}</span>
               </div>
 
-              {/* Brand Favicon / Logo */}
-              <div
-                onClick={handleWebsiteClick}
+              {/* Brand Favicon / Logo (Direct Dofollow Link) */}
+              <a
+                href={normalizeUrl(product.url)}
+                target="_blank"
+                rel="noopener"
+                onClick={() => recordClick(product.id)}
                 style={{
                   width: '48px',
                   height: '48px',
@@ -149,9 +145,10 @@ export const LeaderboardList: React.FC = () => {
                   justifyContent: 'center',
                   flexShrink: 0,
                   cursor: 'pointer',
-                  position: 'relative'
+                  position: 'relative',
+                  textDecoration: 'none'
                 }}
-                title={`Visit ${product.displayUrl}`}
+                title={`Visit ${product.displayUrl} (Direct Link)`}
               >
                 <img
                   src={product.logo}
@@ -161,40 +158,52 @@ export const LeaderboardList: React.FC = () => {
                     (e.currentTarget as HTMLElement).style.display = 'none';
                   }}
                 />
-              </div>
+              </a>
 
               {/* Marketing Tactic Details */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', flex: 1 }}>
-                {/* Brand name & website source */}
+                {/* Brand name & website source (Direct Dofollow Links) */}
                 <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
-                  <span
-                    onClick={handleWebsiteClick}
+                  <a
+                    href={normalizeUrl(product.url)}
+                    target="_blank"
+                    rel="noopener"
+                    onClick={() => recordClick(product.id)}
                     style={{
                       fontFamily: 'var(--font-display)',
                       fontSize: '1.15rem',
                       fontWeight: 900,
                       color: 'var(--text-primary)',
+                      textDecoration: 'none',
                       cursor: 'pointer',
-                      letterSpacing: '-0.01em'
+                      letterSpacing: '-0.01em',
+                      transition: 'color 0.15s ease'
                     }}
                     onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-primary)')}
                     onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
                   >
                     {product.name}
-                  </span>
+                  </a>
 
                   <span style={{ color: 'var(--text-muted)' }}>•</span>
 
-                  <span
-                    onClick={handleWebsiteClick}
+                  <a
+                    href={normalizeUrl(product.url)}
+                    target="_blank"
+                    rel="noopener"
+                    onClick={() => recordClick(product.id)}
                     style={{
                       fontSize: '0.825rem',
                       color: 'var(--text-muted)',
-                      cursor: 'pointer'
+                      textDecoration: 'none',
+                      cursor: 'pointer',
+                      transition: 'color 0.15s ease'
                     }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-primary)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
                   >
                     {product.displayUrl}
-                  </span>
+                  </a>
 
                   {product.creator?.handle && (
                     <span style={{

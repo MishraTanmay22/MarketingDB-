@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useProduct } from '../context/ProductContext';
 import { Mail, Shield, FileText, Cookie, AlertCircle, Coffee, ArrowUpRight, ExternalLink } from 'lucide-react';
 import { LegalModal, type LegalTab } from './LegalModal';
+import { EmbedBadgeModal } from './EmbedBadgeModal';
 
 export const Footer: React.FC = () => {
   const { setIsHowItWorksOpen, navigateTo } = useProduct();
   const [legalModalOpen, setLegalModalOpen] = useState(false);
   const [legalTab, setLegalTab] = useState<LegalTab>('terms');
+  const [isBadgeModalOpen, setIsBadgeModalOpen] = useState(false);
 
   const openLegal = (tab: LegalTab) => {
     setLegalTab(tab);
@@ -153,6 +155,17 @@ export const Footer: React.FC = () => {
                     How It Works
                   </a>
                 </li>
+                <li>
+                  <a
+                    href="#"
+                    onClick={(e) => { e.preventDefault(); setIsBadgeModalOpen(true); }}
+                    style={{ color: 'var(--accent-primary)', textDecoration: 'none', fontWeight: 700, transition: 'color 0.15s' }}
+                    onMouseEnter={e => e.currentTarget.style.color = 'var(--text-primary)'}
+                    onMouseLeave={e => e.currentTarget.style.color = 'var(--accent-primary)'}
+                  >
+                    Get Embed Badge
+                  </a>
+                </li>
               </ul>
             </div>
 
@@ -232,7 +245,7 @@ export const Footer: React.FC = () => {
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', fontSize: '0.85rem' }}>
                 <a
-                  href="https://x.com/tanm_io"
+                  href="https://x.com/whataleast"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
@@ -247,7 +260,7 @@ export const Footer: React.FC = () => {
                   onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}
                 >
                   <ExternalLink size={14} color="var(--accent-primary)" />
-                  <span>@tanm_io on X</span>
+                  <span>@whataleast on X</span>
                 </a>
 
                 <a
@@ -285,7 +298,7 @@ export const Footer: React.FC = () => {
                 </a>
 
                 <a
-                  href="https://buymeacoffee.com/tanm_io"
+                  href="https://buymeacoffee.com/whataleast"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
@@ -327,14 +340,14 @@ export const Footer: React.FC = () => {
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
               <span>Built by</span>
               <a
-                href="https://x.com/tanm_io"
+                href="https://x.com/whataleast"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ color: 'var(--text-primary)', fontWeight: 600, textDecoration: 'none' }}
                 onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-primary)'}
                 onMouseLeave={e => e.currentTarget.style.color = 'var(--text-primary)'}
               >
-                @tanm_io
+                @whataleast
               </a>
             </div>
           </div>
@@ -346,6 +359,12 @@ export const Footer: React.FC = () => {
         isOpen={legalModalOpen}
         initialTab={legalTab}
         onClose={() => setLegalModalOpen(false)}
+      />
+
+      {/* Embed Badge Backlink Modal */}
+      <EmbedBadgeModal
+        isOpen={isBadgeModalOpen}
+        onClose={() => setIsBadgeModalOpen(false)}
       />
     </>
   );

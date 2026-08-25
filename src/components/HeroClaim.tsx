@@ -47,18 +47,37 @@ export const HeroClaim: React.FC = () => {
       position: 'relative'
     }}>
       <div className="app-container" style={{ maxWidth: '1240px' }}>
+        {/* Directory Overline Pill */}
+        <div style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '0.45rem',
+          padding: '0.35rem 0.95rem',
+          borderRadius: 'var(--radius-full)',
+          background: 'rgba(201, 142, 214, 0.12)',
+          border: '1px solid rgba(201, 142, 214, 0.3)',
+          color: 'var(--accent-primary)',
+          fontSize: '0.8rem',
+          fontWeight: 800,
+          marginBottom: '1rem',
+          textTransform: 'uppercase',
+          letterSpacing: '0.04em'
+        }}>
+          <span>🚀 The #1 Marketing & SaaS Directory</span>
+        </div>
+
         {/* Main Headline */}
         <h1 style={{
           fontFamily: 'var(--font-display)',
-          fontSize: 'clamp(1.2rem, 2.2vw, 1.65rem)',
-          fontWeight: 800,
-          lineHeight: 1.35,
-          letterSpacing: '-0.015em',
+          fontSize: 'clamp(1.5rem, 3.2vw, 2.35rem)',
+          fontWeight: 900,
+          lineHeight: 1.25,
+          letterSpacing: '-0.02em',
           color: 'var(--text-primary)',
-          maxWidth: '860px',
-          margin: '0 auto 0.75rem'
+          maxWidth: '920px',
+          margin: '0 auto 0.85rem'
         }}>
-          Because the campaigns that change minds deserve a home that lasts longer than a bookmark.
+          The Live Internet Directory Where The Best Marketing & SaaS Tools Rank #1.
         </h1>
 
         {/* Subheadline */}
@@ -67,7 +86,7 @@ export const HeroClaim: React.FC = () => {
           flexDirection: 'column',
           gap: '0.35rem',
           marginBottom: '1.5rem',
-          maxWidth: '680px',
+          maxWidth: '720px',
           margin: '0 auto 1.5rem'
         }}>
           <p style={{
@@ -77,7 +96,7 @@ export const HeroClaim: React.FC = () => {
             textAlign: 'center',
             margin: 0
           }}>
-            Upload your best marketing work — X tweets, images, videos, ads, landing pages, website links — and rank on a live community leaderboard.
+            Submit your SaaS, landing page, or marketing campaign for free. Get a permanent <strong>Dofollow backlink</strong>, index on Google, and battle for the daily community crown.
           </p>
         </div>
 
@@ -93,7 +112,7 @@ export const HeroClaim: React.FC = () => {
             <div style={{ flex: '1', minWidth: '160px' }}>
               <input
                 type="text"
-                placeholder="Paste a campaign URL or website"
+                placeholder="Enter your website or campaign URL (e.g. getseoo.com)"
                 value={campaignInput}
                 onChange={(e) => setCampaignInput(e.target.value)}
                 style={{
@@ -121,10 +140,29 @@ export const HeroClaim: React.FC = () => {
               flexShrink: 0
             }}
           >
-            <span>Submit for Free</span>
+            <span>Submit to Directory — Free</span>
             <ArrowRight size={15} />
           </button>
         </form>
+
+        {/* Free Dofollow Perk Badge */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '0.5rem',
+          fontSize: '0.825rem',
+          color: 'var(--text-muted)',
+          marginTop: '0.85rem',
+          fontWeight: 600,
+          flexWrap: 'wrap'
+        }}>
+          <span>✨ 100% Free forever</span>
+          <span>•</span>
+          <span style={{ color: 'var(--accent-primary)', fontWeight: 700 }}>Direct Dofollow Backlink Included</span>
+          <span>•</span>
+          <span>Live Community Push Ups</span>
+        </div>
 
         {/* Category Pills Filter */}
         <div 

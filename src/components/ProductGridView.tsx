@@ -48,13 +48,6 @@ export const ProductGridView: React.FC = () => {
         const isVideoAsset = product.mediaType === 'video' || product.category === 'tiktok' || product.category === 'youtube';
         const isVoted = hasVotedToday(product.id);
 
-        const handleWebsiteClick = (e: React.MouseEvent) => {
-          e.stopPropagation();
-          recordClick(product.id);
-          const target = normalizeUrl(product.url);
-          if (target) window.open(target, '_blank', 'noopener,noreferrer');
-        };
-
         const handleAssetClick = (e: React.MouseEvent) => {
           e.stopPropagation();
           recordClick(product.id);
@@ -100,10 +93,13 @@ export const ProductGridView: React.FC = () => {
                 </span>
               </div>
 
-              {/* Logo + Title */}
+              {/* Logo + Title (Direct Dofollow Link) */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.6rem' }}>
-                <div 
-                  onClick={handleWebsiteClick}
+                <a 
+                  href={normalizeUrl(product.url)}
+                  target="_blank"
+                  rel="noopener"
+                  onClick={() => recordClick(product.id)}
                   style={{
                     width: '44px',
                     height: '44px',
@@ -115,21 +111,32 @@ export const ProductGridView: React.FC = () => {
                     justifyContent: 'center',
                     cursor: 'pointer',
                     flexShrink: 0,
-                    border: '1px solid var(--border-subtle)'
+                    border: '1px solid var(--border-subtle)',
+                    textDecoration: 'none'
                   }}
+                  title={`Visit ${product.displayUrl} (Direct Link)`}
                 >
                   <img src={product.logo} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                </div>
+                </a>
                 <div>
-                  <h4 
-                    onClick={handleWebsiteClick}
-                    style={{ fontSize: '1rem', fontWeight: 800, cursor: 'pointer', color: 'var(--text-primary)' }}
+                  <a 
+                    href={normalizeUrl(product.url)}
+                    target="_blank"
+                    rel="noopener"
+                    onClick={() => recordClick(product.id)}
+                    style={{ fontSize: '1rem', fontWeight: 800, cursor: 'pointer', color: 'var(--text-primary)', textDecoration: 'none', display: 'block' }}
                   >
                     {product.name}
-                  </h4>
-                  <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                  </a>
+                  <a 
+                    href={normalizeUrl(product.url)}
+                    target="_blank"
+                    rel="noopener"
+                    onClick={() => recordClick(product.id)}
+                    style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textDecoration: 'none', display: 'block' }}
+                  >
                     {product.displayUrl}
-                  </p>
+                  </a>
                 </div>
               </div>
 
