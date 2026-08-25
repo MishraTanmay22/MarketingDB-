@@ -270,23 +270,29 @@ export const CaseStudiesPage: React.FC = () => {
           }}>
             <BookOpen size={42} color="var(--accent-primary)" style={{ margin: '0 auto 1rem' }} />
             <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', fontWeight: 800, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
-              Case Studies Coming Soon
+              Get Custom Case Studies
             </h3>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.925rem', maxWidth: '520px', margin: '0 auto 1.5rem', lineHeight: 1.5 }}>
-              We are finalizing forensic acquisition teardowns and deep-dive marketing breakdowns for our featured campaigns. They will appear here soon.
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', maxWidth: '520px', margin: '0 auto 1.5rem', lineHeight: 1.5 }}>
+              Get custom teardowns and deep-dive marketing case studies breakdown for your brand and campaigns.
             </p>
-            <div style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.4rem',
-              padding: '0.4rem 1.1rem',
-              borderRadius: 'var(--radius-full)',
-              background: 'rgba(201, 142, 214, 0.15)',
-              color: 'var(--accent-primary)',
-              fontWeight: 800,
-              fontSize: '0.85rem'
-            }}>
-              <span>Coming Soon 🚀</span>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+              <a
+                href="mailto:tanmio0xx@proton.me?subject=Custom%20Case%20Study%20Inquiry&body=Hi%20Tanmay,%0A%0AI'm%20interested%20in%20a%20custom%20marketing%20case%20study%20for%20my%20product:%0A%0A-%20Product%20URL:%20%0A-%20Key%20Growth%20Goals:%20"
+                className="btn btn-primary"
+                style={{
+                  padding: '0.6rem 1.4rem',
+                  borderRadius: 'var(--radius-full)',
+                  fontSize: '0.875rem',
+                  fontWeight: 800,
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.45rem'
+                }}
+              >
+                <span>Get a Custom Case Study</span>
+                <ArrowRight size={14} />
+              </a>
             </div>
           </div>
         ) : (
