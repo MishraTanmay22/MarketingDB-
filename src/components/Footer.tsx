@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useProduct } from '../context/ProductContext';
-import { Mail, Shield, FileText, Cookie, AlertCircle, Coffee, ArrowUpRight } from 'lucide-react';
+import { Mail, Shield, FileText, Cookie, AlertCircle, Coffee, ArrowUpRight, ExternalLink } from 'lucide-react';
 import { LegalModal, type LegalTab } from './LegalModal';
 
 export const Footer: React.FC = () => {
@@ -231,6 +231,25 @@ export const Footer: React.FC = () => {
                 Support & Inquiries
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', fontSize: '0.85rem' }}>
+                <a
+                  href="https://x.com/whataleast"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.45rem',
+                    color: 'var(--text-secondary)',
+                    textDecoration: 'none',
+                    transition: 'color 0.15s ease'
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-primary)'}
+                  onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}
+                >
+                  <ExternalLink size={14} color="var(--accent-primary)" />
+                  <span>@whataleast on X</span>
+                </a>
+
                 <a
                   href="mailto:contact@marketingdb.lol"
                   style={{
