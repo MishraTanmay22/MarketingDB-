@@ -123,19 +123,19 @@ export const HeroClaim: React.FC = () => {
     });
   };
 
-  const categories: { key: Category; label: string }[] = [
-    { key: 'all', label: 'All' },
-    { key: 'meta-ads', label: 'Meta Ads' },
-    { key: 'landing-pages', label: 'Landing Pages' },
-    { key: 'ecom', label: 'Ecom Pages' },
-    { key: 'dropshipping', label: 'Dropshipping Pages' },
-    { key: 'twitter-x', label: 'X Pages' },
-    { key: 'fb-pages', label: 'FB Pages' },
-    { key: 'slideshow', label: 'Slideshow' },
-    { key: 'tiktok', label: 'TikTok' },
-    { key: 'youtube', label: 'YouTube' },
-    { key: 'email', label: 'Email' },
-    { key: 'copywriting', label: 'Copywriting' }
+  const categories: { key: Category; label: string; icon: string }[] = [
+    { key: 'all', label: 'All', icon: '🚀' },
+    { key: 'meta-ads', label: 'Meta Ads', icon: '📢' },
+    { key: 'landing-pages', label: 'Landing Pages', icon: '🌐' },
+    { key: 'ecom', label: 'Ecom Pages', icon: '🛍️' },
+    { key: 'dropshipping', label: 'Dropshipping Pages', icon: '📦' },
+    { key: 'twitter-x', label: 'X Pages', icon: '𝕏' },
+    { key: 'fb-pages', label: 'FB Pages', icon: '📘' },
+    { key: 'slideshow', label: 'Slideshow', icon: '🖼️' },
+    { key: 'tiktok', label: 'TikTok', icon: '📱' },
+    { key: 'youtube', label: 'YouTube', icon: '▶️' },
+    { key: 'email', label: 'Email', icon: '💌' },
+    { key: 'copywriting', label: 'Copywriting', icon: '✍️' }
   ];
 
   const handleCategorySelect = (key: Category) => {
@@ -272,10 +272,15 @@ export const HeroClaim: React.FC = () => {
 
         {/* Category Pills Filter */}
         <div 
-          className="category-scroll-bar"
           style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+            gap: '0.45rem',
             maxWidth: '1080px',
-            margin: '1.25rem auto 0'
+            margin: '1.35rem auto 0',
+            padding: '0 0.5rem'
           }}
         >
           {categories.map((cat) => {
@@ -284,9 +289,38 @@ export const HeroClaim: React.FC = () => {
               <button
                 key={cat.key}
                 onClick={() => handleCategorySelect(cat.key)}
-                className={`category-pill ${isActive ? 'active' : ''}`}
+                style={{
+                  padding: '0.38rem 0.85rem',
+                  borderRadius: 'var(--radius-full)',
+                  fontSize: '0.825rem',
+                  fontWeight: isActive ? 800 : 600,
+                  cursor: 'pointer',
+                  border: isActive ? '1px solid var(--accent-primary)' : '1px solid var(--border-subtle)',
+                  background: isActive ? 'rgba(201, 142, 214, 0.22)' : 'var(--bg-input)',
+                  color: isActive ? 'var(--accent-primary)' : 'var(--text-secondary)',
+                  transition: 'all 0.15s ease',
+                  whiteSpace: 'nowrap',
+                  boxShadow: isActive ? '0 2px 10px rgba(201, 142, 214, 0.28)' : 'none',
+                  flexShrink: 0,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.35rem'
+                }}
+                onMouseEnter={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.borderColor = 'rgba(201, 142, 214, 0.4)';
+                    e.currentTarget.style.color = 'var(--text-primary)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                    e.currentTarget.style.color = 'var(--text-secondary)';
+                  }
+                }}
               >
-                {cat.label}
+                <span>{cat.icon}</span>
+                <span>{cat.label}</span>
               </button>
             );
           })}
