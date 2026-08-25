@@ -42,33 +42,139 @@ export function parseProductUrl(inputUrl: string): { displayUrl: string; logo: s
   }
 }
 
-// Auto-fetch & smart metadata extractor when user enters domain
+// In-memory cache for live metadata
+const metadataCache = new Map<string, DomainMetadata>();
+
+// Live real-time metadata fetcher for any URL / domain
+export async function fetchLiveWebsiteMetadata(inputUrl: string): Promise<DomainMetadata> {
+  const parsed = parseProductUrl(inputUrl);
+  const cleanUrl = inputUrl.trim().startsWith('http') ? inputUrl.trim() : `https://${inputUrl.trim()}`;
+  
+  if (metadataCache.has(cleanUrl)) {
+    return metadataCache.get(cleanUrl)!;
+  }
+
+  // Fast fallback
+  const fallback = autoFetchDomainMetadata(inputUrl);
+
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 4000);
+
+    // Query Microlink for live real open graph, title, description, and publisher
+    const res = await fetch(`https://api.microlink.io/?url=${encodeURIComponent(cleanUrl)}`, {
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
+
+    if (res.ok) {
+      const json = await res.json();
+      if (json && json.status === 'success' && json.data) {
+        const data = json.data;
+
+        // Real live brand name
+        let brandName = data.publisher || '';
+        if (!brandName && data.title) {
+          const parts = data.title.split(/[-–—|:]/);
+          if (parts.length > 1) {
+            brandName = parts[0].trim();
+          }
+        }
+        if (!brandName || brandName.length > 35) {
+          brandName = parsed.name;
+        }
+
+        // Real live headline / title
+        let liveHeadline = data.title || '';
+        if (liveHeadline) {
+          // Clean up trailing branding if duplicate
+          liveHeadline = liveHeadline.replace(/ \| [^|]+$/, '').replace(/ - [^-]+$/, '').trim();
+        }
+        if (!liveHeadline) {
+          liveHeadline = fallback.headline;
+        }
+
+        // Real live description / pitch
+        let liveDescription = data.description || '';
+        if (!liveDescription) {
+          liveDescription = liveHeadline;
+        }
+
+        // Real live logo / favicon
+        const liveLogo = data.logo?.url || data.image?.url || parsed.logo;
+
+        // Categorize based on real title & description keywords
+        const combinedText = `${liveHeadline} ${liveDescription} ${parsed.displayUrl}`.toLowerCase();
+        let cat: Category = fallback.suggestedCategory;
+        if (combinedText.includes('seo') || combinedText.includes('search') || combinedText.includes('organic')) {
+          cat = 'organic';
+        } else if (combinedText.includes('ugc') || combinedText.includes('creator') || combinedText.includes('video')) {
+          cat = 'ugc';
+        } else if (combinedText.includes('ad') || combinedText.includes('meta') || combinedText.includes('facebook')) {
+          cat = 'meta-ads';
+        } else if (combinedText.includes('tiktok')) {
+          cat = 'tiktok';
+        } else if (combinedText.includes('email') || combinedText.includes('newsletter') || combinedText.includes('mail')) {
+          cat = 'email';
+        } else if (combinedText.includes('copywriting') || combinedText.includes('content')) {
+          cat = 'copywriting';
+        } else if (combinedText.includes('landing') || combinedText.includes('page') || combinedText.includes('website')) {
+          cat = 'landing-pages';
+        } else if (combinedText.includes('twitter') || combinedText.includes('tweet') || combinedText.includes(' x ')) {
+          cat = 'twitter-x';
+        }
+
+        const result: DomainMetadata = {
+          name: brandName,
+          displayUrl: parsed.displayUrl,
+          logo: liveLogo,
+          headline: liveHeadline,
+          description: liveDescription,
+          suggestedCategory: cat
+        };
+
+        metadataCache.set(cleanUrl, result);
+        return result;
+      }
+    }
+  } catch (err) {
+    // Network / abort error - gracefully fall back
+  }
+
+  return fallback;
+}
+
+// Auto-fetch & smart fallback metadata extractor when user enters domain
 export function autoFetchDomainMetadata(inputUrl: string): DomainMetadata {
   const parsed = parseProductUrl(inputUrl);
   const domain = parsed.displayUrl.toLowerCase();
   const name = parsed.name;
 
-  let headline = `High-converting ${name} marketing campaign breakdown`;
-  let description = `${name} is competing on marketingdb.lol to capture high-intent growth traffic and community recognition.`;
+  let headline = `High-converting ${name} growth & marketing breakdown`;
+  let description = `${name} is competing on marketingdb.lol to showcase creative marketing and capture high-intent users.`;
   let suggestedCategory: Category = 'ugc';
 
   if (domain.includes('focus') || domain.includes('insta') || domain.includes('social')) {
     headline = 'Turn Instagram Post Comments into Buyers with Automated DMs';
     description = `Create better content, turn comments into buyers, and deliver lead magnets on Instagram—all on autopilot.`;
     suggestedCategory = 'tiktok';
+  } else if (domain.includes('seo') || domain.includes('rank') || domain.includes('organic')) {
+    headline = 'AI-driven SEO & automated directory distribution system';
+    description = `Scale organic search traffic, backlink authority, and AI search visibility with automated indexing and growth workflows.`;
+    suggestedCategory = 'organic';
   } else if (domain.includes('ad') || domain.includes('meta') || domain.includes('roas')) {
     headline = '4.2x ROAS Meta direct-response ad creative & scaling funnel';
     description = `A comprehensive breakdown of top-performing video hooks, UGC angles, and retargeting workflows driving profitable customer acquisition.`;
     suggestedCategory = 'meta-ads';
-  } else if (domain.includes('lead') || domain.includes('mail') || domain.includes('cold')) {
+  } else if (domain.includes('lead') || domain.includes('mail') || domain.includes('cold') || domain.includes('email')) {
     headline = 'Cold email & inbound lead gen campaign engine';
     description = `High-response email sequences and automated lead enrichment workflows generating qualified pipeline on autopilot.`;
     suggestedCategory = 'email';
-  } else if (domain.includes('ugc') || domain.includes('video') || domain.includes('creator')) {
+  } else if (domain.includes('ugc') || domain.includes('video') || domain.includes('creator') || domain.includes('reel')) {
     headline = 'Viral direct-response UGC creator framework';
     description = `Authentic creator content framework engineered to stop scrolling, build instant trust, and maximize conversion rates.`;
     suggestedCategory = 'ugc';
-  } else if (domain.includes('page') || domain.includes('site') || domain.includes('funnel')) {
+  } else if (domain.includes('page') || domain.includes('site') || domain.includes('funnel') || domain.includes('landing')) {
     headline = 'High-converting landing page & checkout UX redesign';
     description = `Optimized value propositions, social proof hierarchy, and frictionless CTA placement engineered for maximum conversion velocity.`;
     suggestedCategory = 'landing-pages';
@@ -77,8 +183,8 @@ export function autoFetchDomainMetadata(inputUrl: string): DomainMetadata {
     description = `Strategic storytelling and engagement architecture that turned impressions into active inbound product users.`;
     suggestedCategory = 'twitter-x';
   } else {
-    headline = `Next-gen ${name} creative & customer acquisition campaign`;
-    description = `Deep dive into the messaging, creative assets, and distribution strategy driving rapid growth for ${name}.`;
+    headline = `Scale customer acquisition with ${name}`;
+    description = `Explore the high-converting marketing strategy, creative hooks, and customer conversion funnels powering ${name}.`;
     suggestedCategory = 'creative';
   }
 

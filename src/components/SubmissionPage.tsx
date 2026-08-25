@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useProduct } from '../context/ProductContext';
 import type { Category } from '../types';
-import { autoFetchDomainMetadata } from '../utils/productHelper';
+import { autoFetchDomainMetadata, fetchLiveWebsiteMetadata } from '../utils/productHelper';
 import { 
   ArrowLeft, 
   Globe, 
@@ -46,26 +46,44 @@ export const SubmissionPage: React.FC = () => {
 
   const [isProcessing, setIsProcessing] = useState(false);
 
-  // Auto-fetch metadata whenever domain is entered
+  // Auto-fetch metadata whenever domain is entered (instant fallback + real live metadata)
   const lastFetchedUrl = useRef('');
   useEffect(() => {
-    if (!websiteUrl || websiteUrl.trim().length < 4) return;
-    const clean = websiteUrl.trim().toLowerCase();
-    if (clean === lastFetchedUrl.current) return;
+    if (!websiteUrl || websiteUrl.trim().length < 3) return;
+    const clean = websiteUrl.trim();
+    if (clean.toLowerCase() === lastFetchedUrl.current.toLowerCase()) return;
 
-    const timer = setTimeout(() => {
+    // 1. Instant fallback
+    const fallback = autoFetchDomainMetadata(clean);
+    if (!brandName) setBrandName(fallback.name);
+    if (!headline) setHeadline(fallback.headline);
+    if (!description) setDescription(fallback.description);
+    setBrandLogo(fallback.logo);
+    if (selectedCategories.length === 0) {
+      setSelectedCategories([fallback.suggestedCategory]);
+    }
+
+    // 2. Real live metadata fetch
+    const timer = setTimeout(async () => {
       lastFetchedUrl.current = clean;
       setIsAutoFetching(true);
 
-      const meta = autoFetchDomainMetadata(clean);
-      if (!brandName) setBrandName(meta.name);
-      if (!headline) setHeadline(meta.headline);
-      if (!description) setDescription(meta.description);
-      setBrandLogo(meta.logo);
-
-      setIsAutoFetching(false);
-      setAutoFetchedSuccess(true);
-    }, 450);
+      try {
+        const liveMeta = await fetchLiveWebsiteMetadata(clean);
+        if (liveMeta.name) setBrandName(liveMeta.name);
+        if (liveMeta.headline) setHeadline(liveMeta.headline);
+        if (liveMeta.description) setDescription(liveMeta.description);
+        if (liveMeta.logo) setBrandLogo(liveMeta.logo);
+        if (liveMeta.suggestedCategory && selectedCategories.length === 0) {
+          setSelectedCategories([liveMeta.suggestedCategory]);
+        }
+        setAutoFetchedSuccess(true);
+      } catch (err) {
+        console.warn('Live fetch error:', err);
+      } finally {
+        setIsAutoFetching(false);
+      }
+    }, 400);
 
     return () => clearTimeout(timer);
   }, [websiteUrl]);

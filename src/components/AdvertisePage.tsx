@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useProduct } from '../context/ProductContext';
 import { 
   ArrowLeft, 
@@ -10,9 +10,10 @@ import {
   Coffee, 
   CheckCircle2,
   Heart,
-  Server
+  Server,
+  Zap
 } from 'lucide-react';
-import { autoFetchDomainMetadata } from '../utils/productHelper';
+import { autoFetchDomainMetadata, fetchLiveWebsiteMetadata } from '../utils/productHelper';
 import { saveSponsorToTurso } from '../services/tursoService';
 
 export const AdvertisePage: React.FC = () => {
@@ -27,19 +28,47 @@ export const AdvertisePage: React.FC = () => {
   const [contactEmail, setContactEmail] = useState('');
   const [isPaidSuccess, setIsPaidSuccess] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [isAutoFetching, setIsAutoFetching] = useState(false);
 
-  // Auto-fetch details when URL changes
+  // Auto-fetch real live details when URL changes (with debounced real title/meta fetch)
+  const lastFetchedUrl = useRef('');
+  useEffect(() => {
+    if (!urlInput || urlInput.trim().length < 3) return;
+    const clean = urlInput.trim();
+    if (clean.toLowerCase() === lastFetchedUrl.current.toLowerCase()) return;
+
+    // 1. Immediate instant fallback
+    const fallback = autoFetchDomainMetadata(clean);
+    const directUrl = clean.startsWith('http') ? clean : `https://${clean}`;
+    setSaasDirectUrl(directUrl);
+    if (!saasName) setSaasName(fallback.name);
+    if (!saasTagline) setSaasTagline(fallback.headline);
+    setSaasLogo(fallback.logo);
+
+    // 2. Real live metadata fetch
+    const timer = setTimeout(async () => {
+      lastFetchedUrl.current = clean;
+      setIsAutoFetching(true);
+      try {
+        const liveMeta = await fetchLiveWebsiteMetadata(clean);
+        if (liveMeta.name) setSaasName(liveMeta.name);
+        if (liveMeta.headline) setSaasTagline(liveMeta.headline);
+        if (liveMeta.logo) setSaasLogo(liveMeta.logo);
+        if (liveMeta.displayUrl) {
+          setSaasDirectUrl(clean.startsWith('http') ? clean : `https://${liveMeta.displayUrl}`);
+        }
+      } catch (err) {
+        console.warn('Live fetch error:', err);
+      } finally {
+        setIsAutoFetching(false);
+      }
+    }, 400);
+
+    return () => clearTimeout(timer);
+  }, [urlInput]);
+
   const handleUrlChange = (val: string) => {
     setUrlInput(val);
-    if (!val || val.trim().length < 3) return;
-
-    try {
-      const meta = autoFetchDomainMetadata(val.trim());
-      setSaasName(meta.name);
-      setSaasTagline(meta.headline || 'Next-gen growth tool for creators & marketers');
-      setSaasLogo(meta.logo);
-      setSaasDirectUrl(val.trim().startsWith('http') ? val.trim() : `https://${val.trim()}`);
-    } catch {}
   };
 
   const handlePayAndActivate = async (e: React.FormEvent) => {
@@ -165,9 +194,13 @@ export const AdvertisePage: React.FC = () => {
                   fontWeight: 700,
                   background: 'rgba(201, 142, 214, 0.12)',
                   padding: '0.2rem 0.55rem',
-                  borderRadius: 'var(--radius-full)'
+                  borderRadius: 'var(--radius-full)',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.3rem'
                 }}>
-                  Auto-Sync Enabled
+                  {isAutoFetching && <Sparkles size={11} className="animate-spin" />}
+                  <span>{isAutoFetching ? 'Syncing Live Metadata...' : 'Auto-Sync Enabled'}</span>
                 </span>
               </div>
 
@@ -449,7 +482,7 @@ export const AdvertisePage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Contribution Duration Rules Box */}
+              {/* Contribution Duration Rules Box (Symmetrical Grid & Balanced Badges) */}
               <div style={{
                 background: 'var(--bg-input)',
                 border: '1px solid rgba(201, 142, 214, 0.3)',
@@ -457,22 +490,75 @@ export const AdvertisePage: React.FC = () => {
                 padding: '0.85rem 1rem',
                 marginBottom: '1.25rem'
               }}>
-                <span style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--accent-primary)', display: 'block', marginBottom: '0.5rem' }}>
-                  ⚡ Spotlight Duration & Value
-                </span>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.55rem' }}>
+                  <span style={{ fontSize: '0.74rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--accent-primary)', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
+                    <Zap size={13} fill="var(--accent-primary)" />
+                    <span>Spotlight Duration & Value</span>
+                  </span>
+                  <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                    Auto-Applied
+                  </span>
+                </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem', fontSize: '0.8rem' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '0.3rem', borderBottom: '1px solid var(--border-subtle)' }}>
-                    <span style={{ color: 'var(--text-secondary)' }}>☕ <strong>$1 – $5</strong> Support</span>
-                    <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>1 Day Spotlight</span>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
+                  {/* Tier 1 */}
+                  <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: '120px 1fr',
+                    alignItems: 'center',
+                    padding: '0.45rem 0.65rem',
+                    borderRadius: 'var(--radius-sm)',
+                    background: 'rgba(201, 142, 214, 0.06)',
+                    border: '1px solid var(--border-subtle)',
+                    fontSize: '0.8rem'
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: 'var(--text-primary)', fontWeight: 600 }}>
+                      <span>☕</span>
+                      <span><strong>$1 – $5</strong></span>
+                    </div>
+                    <div style={{ textAlign: 'right', fontWeight: 700, color: 'var(--text-secondary)' }}>
+                      1 Day Spotlight
+                    </div>
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '0.3rem', borderBottom: '1px solid var(--border-subtle)' }}>
-                    <span style={{ color: 'var(--text-secondary)' }}>🚀 <strong>$6 – $49</strong> Support</span>
-                    <span style={{ fontWeight: 700, color: 'var(--accent-primary)' }}>Equal Days (e.g. $10 = 10 Days)</span>
+
+                  {/* Tier 2 */}
+                  <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: '120px 1fr',
+                    alignItems: 'center',
+                    padding: '0.45rem 0.65rem',
+                    borderRadius: 'var(--radius-sm)',
+                    background: 'rgba(201, 142, 214, 0.06)',
+                    border: '1px solid var(--border-subtle)',
+                    fontSize: '0.8rem'
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: 'var(--text-primary)', fontWeight: 600 }}>
+                      <span>🚀</span>
+                      <span><strong>$6 – $49</strong></span>
+                    </div>
+                    <div style={{ textAlign: 'right', fontWeight: 700, color: 'var(--accent-primary)' }}>
+                      Equal Days ($10 = 10 Days)
+                    </div>
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <span style={{ color: 'var(--text-secondary)' }}>👑 <strong>$50+</strong> Support</span>
-                    <span style={{ fontWeight: 800, color: 'var(--accent-green)' }}>Permanent Forever (Lifetime)</span>
+
+                  {/* Tier 3 */}
+                  <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: '120px 1fr',
+                    alignItems: 'center',
+                    padding: '0.45rem 0.65rem',
+                    borderRadius: 'var(--radius-sm)',
+                    background: 'rgba(16, 185, 129, 0.1)',
+                    border: '1px solid rgba(16, 185, 129, 0.25)',
+                    fontSize: '0.8rem'
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: 'var(--text-primary)', fontWeight: 600 }}>
+                      <span>👑</span>
+                      <span><strong>$50+</strong></span>
+                    </div>
+                    <div style={{ textAlign: 'right', fontWeight: 800, color: 'var(--accent-green)' }}>
+                      Permanent Forever (Lifetime)
+                    </div>
                   </div>
                 </div>
               </div>
