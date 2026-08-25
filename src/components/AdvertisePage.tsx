@@ -384,7 +384,7 @@ export const AdvertisePage: React.FC = () => {
                 <Heart size={14} fill="var(--accent-primary)" />
                 <span>Side Project • No Corporate Paywalls</span>
               </div>
-              <p style={{ margin: 0 }}>
+              <p style={{ margin: 0, textAlign: 'justify', lineHeight: 1.5 }}>
                 MarketingDB is an independent community side-project. We intentionally avoid complex commercial payment gateways and recurring corporate subscriptions. Sponsoring via Buy Me a Coffee directly funds our cloud database, media storage, and server uptime.
               </p>
             </div>
