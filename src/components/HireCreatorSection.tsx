@@ -56,7 +56,7 @@ export const HireCreatorSection: React.FC = () => {
             maxWidth: '600px',
             margin: '0 auto 2rem'
           }}>
-            I'm @tanmio, the developer behind MarketingDB. I build full-stack web applications, landing pages, and interactive platforms for founders and brands looking for fast, high-quality execution.
+            I'm @tanm_io, the developer behind MarketingDB. I build full-stack web applications, landing pages, and interactive platforms for founders and brands looking for fast, high-quality execution.
           </p>
 
           {/* Action buttons */}

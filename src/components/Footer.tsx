@@ -326,7 +326,7 @@ export const Footer: React.FC = () => {
                 onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-primary)'}
                 onMouseLeave={e => e.currentTarget.style.color = 'var(--text-primary)'}
               >
-                @tanmio
+                @tanm_io
               </a>
             </div>
           </div>
