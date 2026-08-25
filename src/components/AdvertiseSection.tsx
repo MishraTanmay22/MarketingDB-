@@ -100,7 +100,7 @@ export const AdvertiseSection: React.FC = () => {
                   textTransform: 'uppercase',
                   letterSpacing: '0.03em'
                 }}>
-                  <span>Sponsor</span>
+                  <span>Featured</span>
                 </div>
               </div>
 

@@ -51,7 +51,7 @@ export interface ProductItem {
 
 export type Timeframe = 'top' | 'trending' | 'newest';
 export type ViewMode = 'grid' | 'list';
-export type PageRoute = 'home' | 'submit' | 'success' | 'advertise';
+export type PageRoute = 'home' | 'submit' | 'success' | 'advertise' | 'admin';
 
 export interface ActivityLog {
   id: string;

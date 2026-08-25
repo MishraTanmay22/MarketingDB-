@@ -8,6 +8,7 @@ import { ProductGridView } from './components/ProductGridView';
 import { SubmissionPage } from './components/SubmissionPage';
 import { SuccessPage } from './components/SuccessPage';
 import { AdvertisePage } from './components/AdvertisePage';
+import { AdminPage } from './components/AdminPage';
 import { MarketingProofSection } from './components/MarketingProofSection';
 import { AdvertiseSection } from './components/AdvertiseSection';
 import { ProductPreviewModal } from './components/ProductPreviewModal';
@@ -16,6 +17,10 @@ import { Footer } from './components/Footer';
 
 const MainContent: React.FC = () => {
   const { viewMode, currentRoute } = useProduct();
+
+  if (currentRoute === 'admin') {
+    return <AdminPage />;
+  }
 
   if (currentRoute === 'submit') {
     return (

@@ -483,3 +483,99 @@ export async function saveSponsorToTurso(sponsor: {
     return { success: false };
   }
 }
+
+// Admin: Fetch all sponsor submissions from DB 2 (with DB 1 fallback)
+export async function fetchAllSponsorsForAdmin(): Promise<any[]> {
+  try {
+    // Try fetching from DB 2 first
+    try {
+      const res2 = await tursoDb2.execute(`SELECT * FROM sponsors ORDER BY createdAt DESC`);
+      if (res2 && res2.rows && res2.rows.length > 0) {
+        return res2.rows;
+      }
+    } catch (e2) {
+      console.warn('DB 2 sponsor fetch notice:', e2);
+    }
+
+    // Fallback to DB 1
+    const res1 = await tursoDb1.execute(`SELECT * FROM sponsors ORDER BY createdAt DESC`);
+    return res1.rows || [];
+  } catch (err) {
+    console.warn('Error fetching sponsors for admin:', err);
+    return [];
+  }
+}
+
+// Admin: Update sponsor approval status
+export async function updateSponsorStatusInTurso(id: string, newStatus: string): Promise<boolean> {
+  try {
+    try {
+      await tursoDb2.execute({
+        sql: `UPDATE sponsors SET paidStatus = ? WHERE id = ?`,
+        args: [newStatus, id]
+      });
+    } catch {}
+
+    try {
+      await tursoDb1.execute({
+        sql: `UPDATE sponsors SET paidStatus = ? WHERE id = ?`,
+        args: [newStatus, id]
+      });
+    } catch {}
+
+    return true;
+  } catch (err) {
+    console.warn('Error updating sponsor status:', err);
+    return false;
+  }
+}
+
+// Admin: Delete a sponsor
+export async function deleteSponsorFromTurso(id: string): Promise<boolean> {
+  try {
+    try {
+      await tursoDb2.execute({
+        sql: `DELETE FROM sponsors WHERE id = ?`,
+        args: [id]
+      });
+    } catch {}
+
+    try {
+      await tursoDb1.execute({
+        sql: `DELETE FROM sponsors WHERE id = ?`,
+        args: [id]
+      });
+    } catch {}
+
+    return true;
+  } catch (err) {
+    console.warn('Error deleting sponsor:', err);
+    return false;
+  }
+}
+
+// Admin: Fetch all Pro waitlist signups from DB 2
+export async function fetchAllWaitlistForAdmin(): Promise<any[]> {
+  try {
+    const res = await tursoDb2.execute(`SELECT * FROM pro_waitlist ORDER BY createdAt DESC`);
+    return res.rows || [];
+  } catch (err) {
+    console.warn('Error fetching waitlist for admin:', err);
+    return [];
+  }
+}
+
+// Admin: Delete a campaign from DB 1
+export async function deleteCampaignFromTurso(id: string): Promise<boolean> {
+  try {
+    await tursoDb1.execute({
+      sql: `DELETE FROM campaigns WHERE id = ?`,
+      args: [id]
+    });
+    return true;
+  } catch (err) {
+    console.warn('Error deleting campaign:', err);
+    return false;
+  }
+}
+

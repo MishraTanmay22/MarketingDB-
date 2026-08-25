@@ -182,7 +182,38 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
     return 'light';
   });
 
-  const [currentRoute, setCurrentRoute] = useState<PageRoute>('home');
+  const [currentRoute, setCurrentRoute] = useState<PageRoute>(() => {
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+      if (path.includes('/admin') || hash === '#admin') return 'admin';
+      if (path.includes('/submit') || hash === '#submit') return 'submit';
+      if (path.includes('/advertise') || hash === '#advertise') return 'advertise';
+      if (path.includes('/success') || hash === '#success') return 'success';
+    }
+    return 'home';
+  });
+
+  // Listen for browser URL changes / hash changes (e.g. /admin or #admin)
+  useEffect(() => {
+    const handleUrlChange = () => {
+      const path = window.location.pathname.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+      if (path.includes('/admin') || hash === '#admin') setCurrentRoute('admin');
+      else if (path.includes('/submit') || hash === '#submit') setCurrentRoute('submit');
+      else if (path.includes('/advertise') || hash === '#advertise') setCurrentRoute('advertise');
+      else if (path.includes('/success') || hash === '#success') setCurrentRoute('success');
+      else setCurrentRoute('home');
+    };
+
+    window.addEventListener('popstate', handleUrlChange);
+    window.addEventListener('hashchange', handleUrlChange);
+    return () => {
+      window.removeEventListener('popstate', handleUrlChange);
+      window.removeEventListener('hashchange', handleUrlChange);
+    };
+  }, []);
+
   const [prefillData, setPrefillData] = useState<Partial<ProductItem> | null>(null);
 
   const [activeCategory, setActiveCategory] = useState<Category>('all');
@@ -223,6 +254,11 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
     if (prefill !== undefined) {
       setPrefillData(prefill);
     }
+    try {
+      if (route === 'home') window.history.pushState(null, '', '/');
+      else if (route === 'admin') window.history.pushState(null, '', '/admin');
+      else window.history.pushState(null, '', `/${route}`);
+    } catch {}
     window.scrollTo({ top: 0, behavior: 'smooth' });
     playClickSound(soundEnabled);
   };
