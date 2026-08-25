@@ -10,8 +10,8 @@ import {
   Coffee, 
   CheckCircle2,
   Heart,
-  Server,
-  Zap
+  Zap,
+  Clock
 } from 'lucide-react';
 import { autoFetchDomainMetadata, fetchLiveWebsiteMetadata } from '../utils/productHelper';
 import { saveSponsorToTurso } from '../services/tursoService';
@@ -437,13 +437,17 @@ export const AdvertisePage: React.FC = () => {
             <div>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
                 <span style={{
-                  fontSize: '0.785rem',
+                  fontSize: '0.75rem',
                   fontWeight: 800,
                   textTransform: 'uppercase',
-                  letterSpacing: '0.05em',
-                  color: 'var(--accent-primary)'
+                  letterSpacing: '0.04em',
+                  color: 'var(--accent-primary)',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.35rem'
                 }}>
-                  Instant Activation
+                  <Clock size={13} />
+                  <span>Approved in ≤ 4 Hours</span>
                 </span>
                 <span style={{
                   fontSize: '0.72rem',
@@ -477,7 +481,7 @@ export const AdvertisePage: React.FC = () => {
                     Buy Me a Coffee Sponsor
                   </h3>
                   <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                    Support server hosting to activate your featured slot
+                    Approved within 4 hours to keep the directory clean & spam-free
                   </span>
                 </div>
               </div>
@@ -579,9 +583,9 @@ export const AdvertisePage: React.FC = () => {
                 </li>
                 <li style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
                   <div style={{ width: '18px', height: '18px', borderRadius: '50%', background: 'rgba(201, 142, 214, 0.2)', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <Server size={11} strokeWidth={2.5} />
+                    <ShieldCheck size={12} strokeWidth={2.5} />
                   </div>
-                  <span><strong>100% Server Direct:</strong> Funds cloud hosting & database upkeep</span>
+                  <span><strong>Clean Quality Guarantee:</strong> Reviewed in ≤ 4h to filter out abusive / obscene spam</span>
                 </li>
               </ul>
             </div>
@@ -619,15 +623,16 @@ export const AdvertisePage: React.FC = () => {
                     padding: '0.85rem',
                     borderRadius: 'var(--radius-md)',
                     display: 'flex',
-                    alignItems: 'center',
+                    alignItems: 'flex-start',
                     gap: '0.6rem',
                     color: 'var(--accent-green)',
                     fontWeight: 700,
                     fontSize: '0.825rem',
-                    marginBottom: '1rem'
+                    marginBottom: '1rem',
+                    lineHeight: 1.45
                   }}>
-                    <CheckCircle2 size={18} />
-                    <span>Sponsor details saved! Complete support on Buy Me a Coffee to activate live.</span>
+                    <CheckCircle2 size={18} style={{ flexShrink: 0, marginTop: '2px' }} />
+                    <span>Sponsor details recorded! Complete support on Buy Me a Coffee — our team reviews & activates your spot live within 4 hours (to avoid abusive or obscene content).</span>
                   </div>
                 ) : null}
 
@@ -681,10 +686,11 @@ export const AdvertisePage: React.FC = () => {
                 gap: '0.4rem',
                 marginTop: '0.85rem',
                 fontSize: '0.725rem',
-                color: 'var(--text-muted)'
+                color: 'var(--text-muted)',
+                textAlign: 'center'
               }}>
                 <ShieldCheck size={13} color="var(--accent-green)" />
-                <span>Zero bloated subscriptions • Direct server funding • Instant activation</span>
+                <span>Reviewed & live in ≤ 4 hours • Obscene & spam content filtered • contact@marketingdb.lol</span>
               </div>
             </div>
           </div>
