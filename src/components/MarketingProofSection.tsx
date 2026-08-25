@@ -37,7 +37,7 @@ export const MarketingProofSection: React.FC = () => {
           </h2>
 
           <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', maxWidth: '680px', margin: '0 auto', lineHeight: 1.5 }}>
-            A viral X post, an Instagram Reel, a YouTube breakdown, or a viral Slideshow — rank #1 in your format. Free forever.
+            A viral X post, an Instagram Reel, a YouTube breakdown, or a viral Slideshow — showcase and rank #1 in your format.
           </p>
 
           <span style={{ display: 'inline-block', fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.45rem', opacity: 0.8 }}>
