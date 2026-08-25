@@ -13,6 +13,7 @@ export const LeaderboardList: React.FC = () => {
   const { 
     sortedProducts, 
     openSubmitModal, 
+    openProductPreview,
     upvoteProduct, 
     hasVotedToday,
     recordClick
@@ -315,6 +316,39 @@ export const LeaderboardList: React.FC = () => {
                 {isVideoAsset ? <Play size={14} fill="currentColor" /> : <Eye size={14} />}
                 <span>View Visual</span>
                 <ExternalLink size={13} />
+              </button>
+
+              {/* Details & Permalink Modal Trigger */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  openProductPreview(product);
+                }}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.35rem',
+                  padding: '0.65rem 0.85rem',
+                  fontSize: '0.825rem',
+                  fontWeight: 700,
+                  borderRadius: 'var(--radius-full)',
+                  background: 'rgba(201, 142, 214, 0.12)',
+                  border: '1px solid rgba(201, 142, 214, 0.3)',
+                  color: 'var(--accent-primary)',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'rgba(201, 142, 214, 0.22)';
+                  e.currentTarget.style.borderColor = 'var(--accent-primary)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'rgba(201, 142, 214, 0.12)';
+                  e.currentTarget.style.borderColor = 'rgba(201, 142, 214, 0.3)';
+                }}
+                title="View Campaign Details & Permalink"
+              >
+                <span>Details</span>
               </button>
 
               {/* Share on X Viral Link Button */}

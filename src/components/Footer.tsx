@@ -5,7 +5,7 @@ import { LegalModal, type LegalTab } from './LegalModal';
 import { EmbedBadgeModal } from './EmbedBadgeModal';
 
 export const Footer: React.FC = () => {
-  const { setIsHowItWorksOpen, navigateTo } = useProduct();
+  const { setIsHowItWorksOpen, navigateTo, setActiveCategory } = useProduct();
   const [legalModalOpen, setLegalModalOpen] = useState(false);
   const [legalTab, setLegalTab] = useState<LegalTab>('terms');
   const [isBadgeModalOpen, setIsBadgeModalOpen] = useState(false);
@@ -316,6 +316,88 @@ export const Footer: React.FC = () => {
                   <ArrowUpRight size={13} />
                 </a>
               </div>
+            </div>
+          </div>
+
+          {/* Programmatic SEO Directory Categories Sitelinks Mesh */}
+          <div style={{
+            padding: '1.75rem 0 0.5rem',
+            borderTop: '1px solid var(--border-subtle)'
+          }}>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginBottom: '1rem',
+              flexWrap: 'wrap',
+              gap: '0.5rem'
+            }}>
+              <span style={{
+                fontSize: '0.8rem',
+                fontWeight: 800,
+                color: 'var(--text-primary)',
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em'
+              }}>
+                Directory Categories &amp; Verticals
+              </span>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                100% Free Dofollow Submissions • Live Community Rankings
+              </span>
+            </div>
+
+            <div style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '0.45rem 0.85rem',
+              fontSize: '0.8rem'
+            }}>
+              {[
+                { label: 'Promote All Work', href: '/?category=all' },
+                { label: 'Promote Meta & IG Ads', href: '/?category=meta-ads' },
+                { label: 'Promote Landing Pages & CRO', href: '/?category=landing-pages' },
+                { label: 'Promote E-Commerce & Shopify', href: '/?category=ecom' },
+                { label: 'Promote Dropshipping Winners', href: '/?category=dropshipping' },
+                { label: 'Promote Twitter / X Threads', href: '/?category=twitter-x' },
+                { label: 'Promote Facebook Pages', href: '/?category=fb-pages' },
+                { label: 'Marketing Slideshows & Decks', href: '/?category=slideshow' },
+                { label: 'TikTok Ads & Viral UGC', href: '/?category=tiktok' },
+                { label: 'YouTube Teardowns & VSLs', href: '/?category=youtube' },
+                { label: 'Email Marketing Sequences', href: '/?category=email' },
+                { label: 'Copywriting & Headline Hooks', href: '/?category=copywriting' }
+              ].map((cat, idx) => (
+                <a
+                  key={idx}
+                  href={cat.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const catKey = cat.href.replace('/?category=', '') as any;
+                    setActiveCategory(catKey);
+                    navigateTo('home');
+                    window.history.pushState(null, '', cat.href);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  style={{
+                    color: 'var(--text-secondary)',
+                    textDecoration: 'none',
+                    padding: '0.25rem 0.6rem',
+                    borderRadius: 'var(--radius-sm)',
+                    background: 'rgba(255, 255, 255, 0.03)',
+                    border: '1px solid var(--border-subtle)',
+                    transition: 'all 0.15s ease'
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.color = 'var(--accent-primary)';
+                    e.currentTarget.style.borderColor = 'rgba(201, 142, 214, 0.4)';
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.color = 'var(--text-secondary)';
+                    e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                  }}
+                >
+                  {cat.label}
+                </a>
+              ))}
             </div>
           </div>
 

@@ -10,7 +10,14 @@ const normalizeUrl = (u: string) => {
 };
 
 export const ProductGridView: React.FC = () => {
-  const { sortedProducts, openSubmitModal, upvoteProduct, hasVotedToday, recordClick } = useProduct();
+  const { 
+    sortedProducts, 
+    openSubmitModal, 
+    openProductPreview,
+    upvoteProduct, 
+    hasVotedToday, 
+    recordClick 
+  } = useProduct();
 
   if (sortedProducts.length === 0) {
     return (
@@ -149,28 +156,49 @@ export const ProductGridView: React.FC = () => {
               </p>
             </div>
 
-            {/* Bottom Actions: Big View Visual Button + Push Up */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem', paddingTop: '0.75rem', borderTop: '1px solid var(--border-subtle)', flexWrap: 'wrap' }}>
-              <button
-                onClick={handleAssetClick}
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.35rem',
-                  padding: '0.45rem 0.85rem',
-                  borderRadius: 'var(--radius-full)',
-                  background: 'rgba(201, 142, 214, 0.15)',
-                  border: '1px solid rgba(201, 142, 214, 0.35)',
-                  color: 'var(--accent-primary)',
-                  fontSize: '0.775rem',
-                  fontWeight: 800,
-                  cursor: 'pointer'
-                }}
-              >
-                {isVideoAsset ? <Play size={12} fill="currentColor" /> : <Eye size={12} />}
-                <span>View Visual</span>
-                <ExternalLink size={11} />
-              </button>
+            {/* Bottom Actions: Big View Visual Button + Details + Push Up */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.4rem', paddingTop: '0.75rem', borderTop: '1px solid var(--border-subtle)', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', gap: '0.35rem' }}>
+                <button
+                  onClick={handleAssetClick}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.3rem',
+                    padding: '0.42rem 0.75rem',
+                    borderRadius: 'var(--radius-full)',
+                    background: 'rgba(201, 142, 214, 0.15)',
+                    border: '1px solid rgba(201, 142, 214, 0.35)',
+                    color: 'var(--accent-primary)',
+                    fontSize: '0.75rem',
+                    fontWeight: 800,
+                    cursor: 'pointer'
+                  }}
+                >
+                  {isVideoAsset ? <Play size={11} fill="currentColor" /> : <Eye size={11} />}
+                  <span>Visual</span>
+                  <ExternalLink size={10} />
+                </button>
+
+                <button
+                  onClick={() => openProductPreview(product)}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    padding: '0.42rem 0.65rem',
+                    borderRadius: 'var(--radius-full)',
+                    background: 'var(--bg-input)',
+                    border: '1px solid var(--border-subtle)',
+                    color: 'var(--text-secondary)',
+                    fontSize: '0.75rem',
+                    fontWeight: 700,
+                    cursor: 'pointer'
+                  }}
+                  title="View Details & Permalink"
+                >
+                  <span>Details</span>
+                </button>
+              </div>
 
               {isVoted ? (
                 <button
