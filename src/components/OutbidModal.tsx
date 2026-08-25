@@ -211,7 +211,7 @@ export const OutbidModal: React.FC = () => {
               </label>
               <input
                 type="text"
-                placeholder="e.g. Acme Launch Campaign"
+                placeholder="e.g. GetSeoo Organic Growth"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 style={{

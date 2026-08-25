@@ -188,7 +188,7 @@ export const AdvertisePage: React.FC = () => {
                   <Globe size={16} color="var(--accent-primary)" />
                   <input
                     type="text"
-                    placeholder="e.g. https://mytool.ai or myagency.com"
+                    placeholder="e.g. getseoo.com or https://yourproduct.io"
                     value={urlInput}
                     onChange={(e) => handleUrlChange(e.target.value)}
                     style={{
@@ -211,7 +211,7 @@ export const AdvertisePage: React.FC = () => {
                   </label>
                   <input
                     type="text"
-                    placeholder="e.g. Acme SaaS"
+                    placeholder="e.g. GetSeoo"
                     value={saasName}
                     onChange={(e) => setSaasName(e.target.value)}
                     style={{
@@ -233,7 +233,7 @@ export const AdvertisePage: React.FC = () => {
                   </label>
                   <input
                     type="text"
-                    placeholder="e.g. The fastest way to turn comments into customers"
+                    placeholder="e.g. Turn organic search into recurring paying customers"
                     value={saasTagline}
                     onChange={(e) => setSaasTagline(e.target.value)}
                     style={{
@@ -255,7 +255,7 @@ export const AdvertisePage: React.FC = () => {
                   </label>
                   <input
                     type="text"
-                    placeholder="https://mytool.ai"
+                    placeholder="https://getseoo.com"
                     value={saasDirectUrl}
                     onChange={(e) => setSaasDirectUrl(e.target.value)}
                     style={{
