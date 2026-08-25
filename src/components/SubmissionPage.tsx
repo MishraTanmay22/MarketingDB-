@@ -89,12 +89,15 @@ export const SubmissionPage: React.FC = () => {
   }, [websiteUrl]);
 
   const availableCategories: { key: Category; label: string; icon: string }[] = [
-    { key: 'slideshow', label: 'Slideshow', icon: '🖼️' },
     { key: 'meta-ads', label: 'Meta Ads', icon: '📢' },
-    { key: 'tiktok', label: 'TikTok', icon: '📱' },
-    { key: 'twitter-x', label: 'Tweet / X', icon: '𝕏' },
-    { key: 'youtube', label: 'YouTube', icon: '▶️' },
     { key: 'landing-pages', label: 'Landing Pages', icon: '🌐' },
+    { key: 'ecom', label: 'Ecom Pages', icon: '🛍️' },
+    { key: 'dropshipping', label: 'Dropshipping Pages', icon: '📦' },
+    { key: 'twitter-x', label: 'X Pages', icon: '𝕏' },
+    { key: 'fb-pages', label: 'FB Pages', icon: '📘' },
+    { key: 'slideshow', label: 'Slideshow', icon: '🖼️' },
+    { key: 'tiktok', label: 'TikTok', icon: '📱' },
+    { key: 'youtube', label: 'YouTube', icon: '▶️' },
     { key: 'email', label: 'Email', icon: '💌' },
     { key: 'copywriting', label: 'Copywriting', icon: '✍️' }
   ];

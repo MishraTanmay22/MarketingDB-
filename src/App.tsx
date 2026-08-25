@@ -20,8 +20,8 @@ import { HowItWorksModal } from './components/HowItWorksModal';
 import { Footer } from './components/Footer';
 
 const MainContent: React.FC = () => {
-  const { viewMode, currentRoute } = useProduct();
-  usePageSeo(currentRoute);
+  const { viewMode, currentRoute, activeCategory } = useProduct();
+  usePageSeo(currentRoute, activeCategory);
 
   if (currentRoute === 'admin') {
     return <AdminPage />;

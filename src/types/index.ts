@@ -1,11 +1,14 @@
 export type Category = 
   | 'all' 
-  | 'slideshow'
   | 'meta-ads' 
-  | 'tiktok' 
-  | 'twitter-x' 
-  | 'youtube' 
   | 'landing-pages' 
+  | 'ecom' 
+  | 'dropshipping' 
+  | 'twitter-x' 
+  | 'fb-pages' 
+  | 'slideshow'
+  | 'tiktok' 
+  | 'youtube' 
   | 'email' 
   | 'copywriting';
 

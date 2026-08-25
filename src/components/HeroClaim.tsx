@@ -3,6 +3,99 @@ import { useProduct } from '../context/ProductContext';
 import { ArrowRight, Globe } from 'lucide-react';
 import type { Category } from '../types';
 
+const CATEGORY_DIRECTORY_DATA: Record<Category, {
+  overline: string;
+  h1: string;
+  subheading: string;
+  placeholder: string;
+  badge: string;
+}> = {
+  'all': {
+    overline: '🚀 The #1 Marketing & SaaS Directory',
+    h1: 'Promote & Rank Your Marketing Campaigns & SaaS Tools (100% Free Directory)',
+    subheading: 'Promote your website, SaaS tool, or creative campaigns for free. Earn a permanent high-authority Dofollow backlink, drive organic referral traffic, and compete for the daily #1 crown.',
+    placeholder: 'Enter your website or campaign URL (e.g. yourproduct.com)',
+    badge: 'All'
+  },
+  'meta-ads': {
+    overline: '📣 Promote Meta & Instagram Ad Campaigns',
+    h1: 'Promote & Discover Top-Performing Meta & Instagram Ad Creatives',
+    subheading: 'Promote your best-performing Meta ad creatives and swipe high-ROAS video hooks, carousel designs, and UGC ad frameworks ranked daily by media buyers.',
+    placeholder: 'Enter your Meta ad link or campaign URL',
+    badge: 'Meta Ads'
+  },
+  'landing-pages': {
+    overline: '🌐 Promote SaaS Landing Pages & CRO',
+    h1: 'Promote Your Landing Pages & Discover High-Converting SaaS Homepages',
+    subheading: 'Promote your landing page to thousands of founders and marketers. Get a direct Dofollow backlink while exploring top-converting CRO layouts, hero hooks, and pricing matrices.',
+    placeholder: 'Enter your landing page URL (e.g. yourbrand.com/landing)',
+    badge: 'Landing Pages'
+  },
+  'ecom': {
+    overline: '🛍️ Promote E-Commerce & Shopify Stores',
+    h1: 'Promote Your E-Commerce Store & High-Converting Product Pages',
+    subheading: 'Promote your Shopify store, DTC brand campaigns, and e-commerce product pages. Gain instant SEO backlinks, buyer traffic, and rank your store against top brands.',
+    placeholder: 'Enter your Shopify store or product page URL',
+    badge: 'Ecom Pages'
+  },
+  'dropshipping': {
+    overline: '📦 Promote Dropshipping Winning Products',
+    h1: 'Promote Your Dropshipping Store & Winning Product Creatives',
+    subheading: 'Promote your dropshipping winning products, single-item landing pages, and viral video ads. Get permanent backlink power and showcase your highest-converting funnels.',
+    placeholder: 'Enter your dropshipping product or store URL',
+    badge: 'Dropshipping Pages'
+  },
+  'twitter-x': {
+    overline: '𝕏 Promote X Posts & Growth Playbooks',
+    h1: 'Promote Your X Posts, Viral Launch Threads & Build-in-Public Tactics',
+    subheading: 'Promote your Twitter/X launch threads, viral breakdown tweets, and build-in-public milestones. Drive organic impressions, followers, and permanent backlinks to your profile.',
+    placeholder: 'Enter your X tweet or thread URL (e.g. x.com/user/status/...)',
+    badge: 'X Pages'
+  },
+  'fb-pages': {
+    overline: '📘 Promote Facebook Pages & Posts',
+    h1: 'Promote Your Facebook Pages, Viral Posts & Brand Campaigns',
+    subheading: 'Promote your Facebook business pages, viral post creatives, and community campaigns. Index your brand on our live directory with direct Dofollow backlinks.',
+    placeholder: 'Enter your Facebook page or video post URL',
+    badge: 'FB Pages'
+  },
+  'slideshow': {
+    overline: '🖼️ Promote Marketing Slideshows & Decks',
+    h1: 'Promote & Swipe Viral Marketing Slideshows & Carousel Decks',
+    subheading: 'Promote your PDF slide decks, LinkedIn carousels, and visual breakdowns ranked by community saves and shares with a permanent backlink.',
+    placeholder: 'Enter your slideshow or carousel deck URL',
+    badge: 'Slideshow'
+  },
+  'tiktok': {
+    overline: '📱 Promote TikTok Ads & Viral UGC',
+    h1: 'Promote Viral TikTok Ads & UGC Creative Playbooks',
+    subheading: 'Promote your organic-looking TikTok ad creatives, sound frameworks, and high-retention UGC ads that drove millions in views and sales.',
+    placeholder: 'Enter your TikTok video or ad creative URL',
+    badge: 'TikTok'
+  },
+  'youtube': {
+    overline: '▶️ Promote YouTube Marketing & Video Teardowns',
+    h1: 'Promote & Discover Top YouTube Video Marketing & Creative Teardowns',
+    subheading: 'Promote your long-form YouTube video breakdowns, sponsor integrations, and video sales letter (VSL) playbooks to thousands of marketers.',
+    placeholder: 'Enter your YouTube video or channel URL',
+    badge: 'YouTube'
+  },
+  'email': {
+    overline: '💌 Promote Email Sequences & Newsletters',
+    h1: 'Promote & Swipe High-Converting Email Marketing Sequences',
+    subheading: 'Promote your SaaS welcome flows, retention newsletters, and cold email templates. Earn high-authority backlinks and subscriber traffic.',
+    placeholder: 'Enter your email campaign or newsletter URL',
+    badge: 'Email'
+  },
+  'copywriting': {
+    overline: '✍️ Promote Copywriting & Value Propositions',
+    h1: 'Promote & Swipe High-Converting Copywriting & Headline Hooks',
+    subheading: 'Promote your magnetic headline hooks, benefit-driven value propositions, and objection-handling copy to growth copywriters worldwide.',
+    placeholder: 'Enter your copywriting asset or sales page URL',
+    badge: 'Copywriting'
+  }
+};
+
 export const HeroClaim: React.FC = () => {
   const { 
     openSubmitModal, 
@@ -11,6 +104,8 @@ export const HeroClaim: React.FC = () => {
   } = useProduct();
 
   const [campaignInput, setCampaignInput] = useState('');
+
+  const currentData = CATEGORY_DIRECTORY_DATA[activeCategory] || CATEGORY_DIRECTORY_DATA['all'];
 
   const handleQuickSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,15 +125,26 @@ export const HeroClaim: React.FC = () => {
 
   const categories: { key: Category; label: string }[] = [
     { key: 'all', label: 'All' },
-    { key: 'slideshow', label: 'Slideshow' },
     { key: 'meta-ads', label: 'Meta Ads' },
-    { key: 'tiktok', label: 'TikTok' },
-    { key: 'twitter-x', label: 'Tweet / X' },
-    { key: 'youtube', label: 'YouTube' },
     { key: 'landing-pages', label: 'Landing Pages' },
+    { key: 'ecom', label: 'Ecom Pages' },
+    { key: 'dropshipping', label: 'Dropshipping Pages' },
+    { key: 'twitter-x', label: 'X Pages' },
+    { key: 'fb-pages', label: 'FB Pages' },
+    { key: 'slideshow', label: 'Slideshow' },
+    { key: 'tiktok', label: 'TikTok' },
+    { key: 'youtube', label: 'YouTube' },
     { key: 'email', label: 'Email' },
     { key: 'copywriting', label: 'Copywriting' }
   ];
+
+  const handleCategorySelect = (key: Category) => {
+    setActiveCategory(key);
+    if (typeof window !== 'undefined') {
+      const newUrl = key === 'all' ? window.location.pathname : `?category=${key}`;
+      try { window.history.replaceState(null, '', newUrl); } catch {}
+    }
+  };
 
   return (
     <section style={{
@@ -63,21 +169,21 @@ export const HeroClaim: React.FC = () => {
           textTransform: 'uppercase',
           letterSpacing: '0.04em'
         }}>
-          <span>🚀 The #1 Marketing & SaaS Directory</span>
+          <span>{currentData.overline}</span>
         </div>
 
         {/* Main Headline */}
         <h1 style={{
           fontFamily: 'var(--font-display)',
-          fontSize: 'clamp(1.5rem, 3.2vw, 2.35rem)',
+          fontSize: 'clamp(1.4rem, 3vw, 2.25rem)',
           fontWeight: 900,
           lineHeight: 1.25,
           letterSpacing: '-0.02em',
           color: 'var(--text-primary)',
-          maxWidth: '920px',
+          maxWidth: '940px',
           margin: '0 auto 0.85rem'
         }}>
-          The Live Internet Directory Where The Best Marketing & SaaS Tools Rank #1.
+          {currentData.h1}
         </h1>
 
         {/* Subheadline */}
@@ -86,17 +192,17 @@ export const HeroClaim: React.FC = () => {
           flexDirection: 'column',
           gap: '0.35rem',
           marginBottom: '1.5rem',
-          maxWidth: '720px',
+          maxWidth: '740px',
           margin: '0 auto 1.5rem'
         }}>
           <p style={{
             color: 'var(--text-secondary)',
-            fontSize: '1.05rem',
+            fontSize: '1.025rem',
             lineHeight: 1.6,
             textAlign: 'center',
             margin: 0
           }}>
-            Submit your SaaS, landing page, or marketing campaign for free. Get a permanent <strong>Dofollow backlink</strong>, index on Google, and battle for the daily community crown.
+            {currentData.subheading}
           </p>
         </div>
 
@@ -112,7 +218,7 @@ export const HeroClaim: React.FC = () => {
             <div style={{ flex: '1', minWidth: '160px' }}>
               <input
                 type="text"
-                placeholder="Enter your website or campaign URL (e.g. getseoo.com)"
+                placeholder={currentData.placeholder}
                 value={campaignInput}
                 onChange={(e) => setCampaignInput(e.target.value)}
                 style={{
@@ -140,7 +246,7 @@ export const HeroClaim: React.FC = () => {
               flexShrink: 0
             }}
           >
-            <span>Submit to Directory — Free</span>
+            <span>Promote for Free</span>
             <ArrowRight size={15} />
           </button>
         </form>
@@ -168,8 +274,8 @@ export const HeroClaim: React.FC = () => {
         <div 
           className="category-scroll-bar"
           style={{
-            maxWidth: '960px',
-            margin: '1rem auto 0'
+            maxWidth: '1080px',
+            margin: '1.25rem auto 0'
           }}
         >
           {categories.map((cat) => {
@@ -177,21 +283,8 @@ export const HeroClaim: React.FC = () => {
             return (
               <button
                 key={cat.key}
-                onClick={() => setActiveCategory(cat.key)}
-                style={{
-                  padding: '0.3rem 0.75rem',
-                  borderRadius: 'var(--radius-full)',
-                  fontSize: '0.8rem',
-                  fontWeight: isActive ? 700 : 500,
-                  cursor: 'pointer',
-                  border: isActive ? '1px solid var(--accent-primary)' : '1px solid var(--border-subtle)',
-                  background: isActive ? 'var(--bg-card)' : 'transparent',
-                  color: isActive ? 'var(--accent-primary)' : 'var(--text-secondary)',
-                  transition: 'all 0.15s ease',
-                  whiteSpace: 'nowrap',
-                  boxShadow: isActive ? '0 2px 8px rgba(201, 142, 214, 0.2)' : 'none',
-                  flexShrink: 0
-                }}
+                onClick={() => handleCategorySelect(cat.key)}
+                className={`category-pill ${isActive ? 'active' : ''}`}
               >
                 {cat.label}
               </button>

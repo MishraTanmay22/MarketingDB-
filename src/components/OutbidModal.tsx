@@ -246,12 +246,15 @@ export const OutbidModal: React.FC = () => {
                   cursor: 'pointer'
                 }}
               >
-                <option value="slideshow">Slideshow</option>
                 <option value="meta-ads">Meta Ads</option>
-                <option value="tiktok">TikTok</option>
-                <option value="twitter-x">Tweet / X</option>
-                <option value="youtube">YouTube</option>
                 <option value="landing-pages">Landing Pages</option>
+                <option value="ecom">Ecom Pages</option>
+                <option value="dropshipping">Dropshipping Pages</option>
+                <option value="twitter-x">X Pages</option>
+                <option value="fb-pages">FB Pages</option>
+                <option value="slideshow">Slideshow</option>
+                <option value="tiktok">TikTok</option>
+                <option value="youtube">YouTube</option>
                 <option value="email">Email</option>
                 <option value="copywriting">Copywriting</option>
               </select>
