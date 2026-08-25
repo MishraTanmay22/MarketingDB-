@@ -10,8 +10,10 @@
     <title>MarketingDB — The Best Marketing Work & Creative Tactics on the Internet</title>
     <meta name="title" content="MarketingDB — The Best Marketing Work & Creative Tactics on the Internet" />
     <meta name="description" content="Discover, upload, and rank the internet's best marketing campaigns, ad creatives, slideshows, landing pages, and growth playbooks on a live community leaderboard." />
-    <meta name="keywords" content="marketing database, best marketing campaigns, SaaS marketing examples, viral marketing tactics, ad creative leaderboard, meta ads library, tiktok ad examples, marketing playbooks, top marketing strategies, indie hacker marketing" />
+    <meta name="keywords" content="marketing database, best marketing campaigns, SaaS marketing examples, viral marketing tactics, ad creative leaderboard, meta ads library, tiktok ad examples, marketing playbooks, top marketing strategies, indie hacker marketing, marketing inspiration" />
     <meta name="author" content="@tanm_io" />
+    <meta name="creator" content="@tanm_io" />
+    <meta name="publisher" content="MarketingDB" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <link rel="canonical" href="https://marketingdb.lol/" />
     <meta name="theme-color" content="#ffffff" />
@@ -23,9 +25,12 @@
     <meta property="og:title" content="MarketingDB — The Best Marketing Work & Creative Tactics on the Internet" />
     <meta property="og:description" content="Discover, upload, and rank the internet's best marketing campaigns, ad creatives, slideshows, landing pages, and growth playbooks on a live community leaderboard." />
     <meta property="og:image" content="https://marketingdb.lol/logo.png" />
-    <meta property="og:image:alt" content="MarketingDB Leaderboard Logo" />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:image:alt" content="MarketingDB Leaderboard Platform" />
+    <meta property="og:locale" content="en_US" />
 
-    <!-- Twitter / X -->
+    <!-- Twitter / X Cards -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@tanm_io" />
     <meta name="twitter:creator" content="@tanm_io" />
@@ -34,7 +39,7 @@
     <meta name="twitter:description" content="Discover, upload, and rank the internet's best marketing campaigns, ad creatives, slideshows, landing pages, and growth playbooks on a live community leaderboard." />
     <meta name="twitter:image" content="https://marketingdb.lol/logo.png" />
 
-    <!-- JSON-LD Structured Data Schema -->
+    <!-- Enhanced JSON-LD Structured Data Schema (E-E-A-T, WebApp, FAQ, ItemList) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -68,9 +73,81 @@
           "url": "https://marketingdb.lol/",
           "founder": {
             "@type": "Person",
+            "@id": "https://marketingdb.lol/#founder",
             "name": "@tanm_io",
-            "url": "https://x.com/tanm_io"
+            "url": "https://x.com/tanm_io",
+            "sameAs": [
+              "https://x.com/tanm_io",
+              "https://github.com/MishraTanmay22"
+            ]
           }
+        },
+        {
+          "@type": "WebApplication",
+          "@id": "https://marketingdb.lol/#webapp",
+          "name": "MarketingDB",
+          "url": "https://marketingdb.lol/",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "All",
+          "description": "Live community leaderboard and repository showcasing top-performing marketing campaigns, ad hooks, and customer acquisition playbooks.",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@type": "ItemList",
+          "@id": "https://marketingdb.lol/#categories",
+          "name": "Marketing Creative Formats",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Slideshows & Carousels" },
+            { "@type": "ListItem", "position": 2, "name": "Meta Ads & Facebook Video Creatives" },
+            { "@type": "ListItem", "position": 3, "name": "TikTok & Short-Form Video Hooks" },
+            { "@type": "ListItem", "position": 4, "name": "X & Twitter Viral Marketing Threads" },
+            { "@type": "ListItem", "position": 5, "name": "YouTube Breakdowns & Teardowns" },
+            { "@type": "ListItem", "position": 6, "name": "High-Converting Landing Pages" },
+            { "@type": "ListItem", "position": 7, "name": "Email Funnels & Newsletters" },
+            { "@type": "ListItem", "position": 8, "name": "Direct Response Copywriting" }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://marketingdb.lol/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is MarketingDB?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "MarketingDB is a curated platform and live community leaderboard showcasing the internet's best marketing campaigns, ad creatives, viral threads, and high-converting landing pages."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I submit my marketing campaign?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Paste your campaign URL or website directly into the submission box on MarketingDB. You can upload visual assets (images, videos, threads, or links) for free and claim your spot on the live leaderboard."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does the community leaderboard ranking work?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Rankings are powered by live community votes and engagement metrics. Each visitor can vote once every 24 hours per campaign with verified IP rate limiting."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is it free to upload marketing work?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, standard submissions and community ranking on MarketingDB are 100% free."
+              }
+            }
+          ]
         }
       ]
     }

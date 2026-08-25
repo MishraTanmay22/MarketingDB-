@@ -131,6 +131,7 @@ export const Navbar: React.FC = () => {
             <button
               onClick={() => setViewMode('list')}
               title="List Leaderboard View"
+              aria-label="Switch to List Leaderboard View"
               style={{
                 background: viewMode === 'list' ? 'rgba(201, 142, 214, 0.2)' : 'transparent',
                 color: viewMode === 'list' ? 'var(--accent-primary)' : 'var(--text-muted)',
@@ -147,6 +148,7 @@ export const Navbar: React.FC = () => {
             <button
               onClick={() => setViewMode('grid')}
               title="Grid View"
+              aria-label="Switch to Grid View"
               style={{
                 background: viewMode === 'grid' ? 'rgba(201, 142, 214, 0.2)' : 'transparent',
                 color: viewMode === 'grid' ? 'var(--accent-primary)' : 'var(--text-muted)',
@@ -167,6 +169,7 @@ export const Navbar: React.FC = () => {
             onClick={toggleTheme}
             className="btn btn-secondary"
             style={{ padding: '0.55rem', borderRadius: '50%' }}
+            aria-label={theme === 'dark' ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
             title={theme === 'dark' ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
           >
             {theme === 'dark' ? (
