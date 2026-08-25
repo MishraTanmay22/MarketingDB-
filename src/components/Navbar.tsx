@@ -82,6 +82,42 @@ export const Navbar: React.FC = () => {
           </div>
         </a>
 
+        {/* Nav Links */}
+        <nav style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <button
+            onClick={() => { navigateTo('case-studies'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              color: 'var(--text-secondary)',
+              fontSize: '0.875rem',
+              fontWeight: 700,
+              padding: '0.45rem 0.85rem',
+              borderRadius: 'var(--radius-full)',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.35rem',
+              transition: 'all 0.15s ease'
+            }}
+            onMouseEnter={e => { e.currentTarget.style.color = 'var(--accent-primary)'; e.currentTarget.style.background = 'rgba(201, 142, 214, 0.1)'; }}
+            onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-secondary)'; e.currentTarget.style.background = 'transparent'; }}
+          >
+            <span>Case Studies</span>
+            <span style={{
+              fontSize: '0.65rem',
+              fontWeight: 800,
+              padding: '0.1rem 0.4rem',
+              borderRadius: 'var(--radius-full)',
+              background: 'rgba(201, 142, 214, 0.2)',
+              color: 'var(--accent-primary)',
+              textTransform: 'uppercase'
+            }}>
+              Pro
+            </span>
+          </button>
+        </nav>
+
         {/* Actions */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           {/* View mode toggle */}

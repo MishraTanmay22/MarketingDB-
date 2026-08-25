@@ -9,6 +9,7 @@ import { SubmissionPage } from './components/SubmissionPage';
 import { SuccessPage } from './components/SuccessPage';
 import { AdvertisePage } from './components/AdvertisePage';
 import { AdminPage } from './components/AdminPage';
+import { CaseStudiesPage } from './components/CaseStudiesPage';
 import { MarketingProofSection } from './components/MarketingProofSection';
 import { AdvertiseSection } from './components/AdvertiseSection';
 import { ProductPreviewModal } from './components/ProductPreviewModal';
@@ -20,6 +21,18 @@ const MainContent: React.FC = () => {
 
   if (currentRoute === 'admin') {
     return <AdminPage />;
+  }
+
+  if (currentRoute === 'case-studies') {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+        <Navbar />
+        <main style={{ flex: 1 }}>
+          <CaseStudiesPage />
+        </main>
+        <Footer />
+      </div>
+    );
   }
 
   if (currentRoute === 'submit') {

@@ -123,6 +123,17 @@ export const Footer: React.FC = () => {
                 <li>
                   <a
                     href="#"
+                    onClick={(e) => { e.preventDefault(); navigateTo('case-studies'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    style={{ color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.15s' }}
+                    onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-primary)'}
+                    onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}
+                  >
+                    Case Studies & Teardowns
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
                     onClick={(e) => { e.preventDefault(); navigateTo('submit'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                     style={{ color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.15s' }}
                     onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-primary)'}
@@ -238,7 +249,7 @@ export const Footer: React.FC = () => {
                 </a>
 
                 <a
-                  href="mailto:tanmio0xx@proton.me"
+                  href="mailto:tanmio0xx@proton.me?subject=Work%20Together%20/%20Hire%20Inquiry&body=Hi%20Tanmay,%0A%0AI%20saw%20MarketingDB%20and%20would%20like%20to%20discuss%20working%20together%20on%20a%20project.%0A%0A-%20Project%20Name:%20%0A-%20Scope%20/%20Role:%20%0A-%20Budget%20/%20Timeline:%20"
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -251,7 +262,7 @@ export const Footer: React.FC = () => {
                   onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}
                 >
                   <Mail size={14} color="var(--accent-primary)" />
-                  <span>tanmio0xx@proton.me</span>
+                  <span>tanmio0xx@proton.me (Hire / Inquiries)</span>
                 </a>
 
                 <a

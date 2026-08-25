@@ -90,7 +90,26 @@ export async function initTursoDatabases() {
       )
     `);
 
-    // Init DB 1 (Campaigns, Activities & Votes & Sponsors)
+    await tursoDb2.execute(`
+      CREATE TABLE IF NOT EXISTS articles (
+        id TEXT PRIMARY KEY,
+        slug TEXT UNIQUE NOT NULL,
+        title TEXT NOT NULL,
+        subtitle TEXT,
+        category TEXT,
+        brandName TEXT,
+        brandLogo TEXT,
+        brandUrl TEXT,
+        coverImage TEXT,
+        readTime TEXT,
+        content TEXT NOT NULL,
+        publishedStatus TEXT DEFAULT 'published',
+        createdAt INTEGER NOT NULL,
+        updatedAt INTEGER NOT NULL
+      )
+    `);
+
+    // Init DB 1 (Campaigns, Activities & Votes & Sponsors & Articles)
     await tursoDb1.execute(`
       CREATE TABLE IF NOT EXISTS campaign_votes (
         campaignId TEXT NOT NULL,
@@ -110,6 +129,25 @@ export async function initTursoDatabases() {
         email TEXT,
         paidStatus TEXT DEFAULT 'pending',
         createdAt INTEGER NOT NULL
+      )
+    `);
+
+    await tursoDb1.execute(`
+      CREATE TABLE IF NOT EXISTS articles (
+        id TEXT PRIMARY KEY,
+        slug TEXT UNIQUE NOT NULL,
+        title TEXT NOT NULL,
+        subtitle TEXT,
+        category TEXT,
+        brandName TEXT,
+        brandLogo TEXT,
+        brandUrl TEXT,
+        coverImage TEXT,
+        readTime TEXT,
+        content TEXT NOT NULL,
+        publishedStatus TEXT DEFAULT 'published',
+        createdAt INTEGER NOT NULL,
+        updatedAt INTEGER NOT NULL
       )
     `);
 
@@ -578,4 +616,112 @@ export async function deleteCampaignFromTurso(id: string): Promise<boolean> {
     return false;
   }
 }
+
+// Articles / Case Studies CMS
+export async function fetchPublishedArticlesFromTurso(): Promise<any[]> {
+  try {
+    try {
+      const res2 = await tursoDb2.execute(`SELECT * FROM articles WHERE publishedStatus = 'published' ORDER BY createdAt DESC`);
+      if (res2 && res2.rows) return res2.rows;
+    } catch {}
+
+    const res1 = await tursoDb1.execute(`SELECT * FROM articles WHERE publishedStatus = 'published' ORDER BY createdAt DESC`);
+    return res1.rows || [];
+  } catch (err) {
+    console.warn('Error fetching published articles:', err);
+    return [];
+  }
+}
+
+export async function fetchAllArticlesForAdmin(): Promise<any[]> {
+  try {
+    try {
+      const res2 = await tursoDb2.execute(`SELECT * FROM articles ORDER BY createdAt DESC`);
+      if (res2 && res2.rows) return res2.rows;
+    } catch {}
+
+    const res1 = await tursoDb1.execute(`SELECT * FROM articles ORDER BY createdAt DESC`);
+    return res1.rows || [];
+  } catch (err) {
+    console.warn('Error fetching admin articles:', err);
+    return [];
+  }
+}
+
+export async function saveArticleToTurso(article: {
+  id?: string;
+  slug: string;
+  title: string;
+  subtitle?: string;
+  category?: string;
+  brandName?: string;
+  brandLogo?: string;
+  brandUrl?: string;
+  coverImage?: string;
+  readTime?: string;
+  content: string;
+  publishedStatus?: 'published' | 'draft';
+}): Promise<{ success: boolean; id: string }> {
+  try {
+    const id = article.id || 'art-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6);
+    const now = Date.now();
+    const status = article.publishedStatus || 'published';
+    const readTime = article.readTime || `${Math.max(1, Math.ceil(article.content.split(/\s+/).length / 180))} min read`;
+
+    const sql = `
+      INSERT INTO articles (id, slug, title, subtitle, category, brandName, brandLogo, brandUrl, coverImage, readTime, content, publishedStatus, createdAt, updatedAt)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      ON CONFLICT(id) DO UPDATE SET
+        slug = excluded.slug,
+        title = excluded.title,
+        subtitle = excluded.subtitle,
+        category = excluded.category,
+        brandName = excluded.brandName,
+        brandLogo = excluded.brandLogo,
+        brandUrl = excluded.brandUrl,
+        coverImage = excluded.coverImage,
+        readTime = excluded.readTime,
+        content = excluded.content,
+        publishedStatus = excluded.publishedStatus,
+        updatedAt = excluded.updatedAt
+    `;
+
+    const args = [
+      id,
+      article.slug,
+      article.title,
+      article.subtitle || '',
+      article.category || 'General Growth',
+      article.brandName || '',
+      article.brandLogo || '',
+      article.brandUrl || '',
+      article.coverImage || '',
+      readTime,
+      article.content,
+      status,
+      now,
+      now
+    ];
+
+    try { await tursoDb2.execute({ sql, args }); } catch (e) { console.warn('DB 2 article write warning:', e); }
+    try { await tursoDb1.execute({ sql, args }); } catch (e) { console.warn('DB 1 article write warning:', e); }
+
+    return { success: true, id };
+  } catch (err) {
+    console.warn('Error saving article to Turso:', err);
+    return { success: false, id: '' };
+  }
+}
+
+export async function deleteArticleFromTurso(id: string): Promise<boolean> {
+  try {
+    try { await tursoDb2.execute({ sql: `DELETE FROM articles WHERE id = ?`, args: [id] }); } catch {}
+    try { await tursoDb1.execute({ sql: `DELETE FROM articles WHERE id = ?`, args: [id] }); } catch {}
+    return true;
+  } catch (err) {
+    console.warn('Error deleting article:', err);
+    return false;
+  }
+}
+
 

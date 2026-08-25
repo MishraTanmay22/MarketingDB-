@@ -187,6 +187,7 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
       const path = window.location.pathname.toLowerCase();
       const hash = window.location.hash.toLowerCase();
       if (path.includes('/admin') || hash === '#admin') return 'admin';
+      if (path.includes('/case-studies') || hash === '#case-studies') return 'case-studies';
       if (path.includes('/submit') || hash === '#submit') return 'submit';
       if (path.includes('/advertise') || hash === '#advertise') return 'advertise';
       if (path.includes('/success') || hash === '#success') return 'success';
@@ -200,6 +201,7 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
       const path = window.location.pathname.toLowerCase();
       const hash = window.location.hash.toLowerCase();
       if (path.includes('/admin') || hash === '#admin') setCurrentRoute('admin');
+      else if (path.includes('/case-studies') || hash === '#case-studies') setCurrentRoute('case-studies');
       else if (path.includes('/submit') || hash === '#submit') setCurrentRoute('submit');
       else if (path.includes('/advertise') || hash === '#advertise') setCurrentRoute('advertise');
       else if (path.includes('/success') || hash === '#success') setCurrentRoute('success');
