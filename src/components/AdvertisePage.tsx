@@ -614,6 +614,18 @@ export const AdvertisePage: React.FC = () => {
                       outline: 'none'
                     }}
                   />
+                  <div style={{
+                    marginTop: '0.45rem',
+                    fontSize: '0.74rem',
+                    color: 'var(--accent-primary)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.35rem',
+                    fontWeight: 600
+                  }}>
+                    <span>💬</span>
+                    <span>Please mention your brand name <strong>"{saasName || 'Your Brand'}"</strong> in the Buy Me a Coffee note.</span>
+                  </div>
                 </div>
 
                 {isPaidSuccess ? (
@@ -632,7 +644,7 @@ export const AdvertisePage: React.FC = () => {
                     lineHeight: 1.45
                   }}>
                     <CheckCircle2 size={18} style={{ flexShrink: 0, marginTop: '2px' }} />
-                    <span>Sponsor details recorded! Complete support on Buy Me a Coffee — our team reviews & activates your spot live within 4 hours (to avoid abusive or obscene content).</span>
+                    <span>Sponsor details recorded! On Buy Me a Coffee, remember to mention <strong>"{saasName || 'Your Brand'}"</strong> in your message — our team will review & activate your spot live within 4 hours.</span>
                   </div>
                 ) : null}
 
