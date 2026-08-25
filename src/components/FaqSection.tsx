@@ -31,7 +31,7 @@ const FAQ_ITEMS: FaqItem[] = [
   },
   {
     question: 'How can I advertise or sponsor a spot on MarketingDB?',
-    answer: 'You can book high-visibility sticky sponsor spots on our directory leaderboard. Sponsoring gives you prominent spotlight placement, custom taglines, and direct dofollow backlinks reaching 50,000+ monthly marketers, founders, and creators.'
+    answer: 'You can book high-visibility sticky sponsor spots on our directory leaderboard. Sponsoring gives you prominent spotlight placement, custom taglines, and direct dofollow backlinks for your SaaS, product, or agency.'
   }
 ];
 

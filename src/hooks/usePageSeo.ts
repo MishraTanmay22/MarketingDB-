@@ -84,7 +84,7 @@ const ROUTE_SEO_MAP: Record<PageRoute, SeoConfig> = {
   },
   advertise: {
     title: 'Promote & Sponsor on MarketingDB — Premium Dofollow Sponsor Spots',
-    description: 'Put your SaaS, marketing tool, or agency in front of 50,000+ monthly founders, marketers, and growth creators on MarketingDB with direct Dofollow backlinks.',
+    description: 'Put your SaaS, marketing tool, or agency in the spotlight on MarketingDB with permanent Dofollow backlinks and community visibility.',
     canonical: 'https://marketingdb.lol/advertise'
   },
   success: {
