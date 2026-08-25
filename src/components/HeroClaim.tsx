@@ -77,7 +77,7 @@ export const HeroClaim: React.FC = () => {
             textAlign: 'center',
             margin: 0
           }}>
-            Upload your best marketing work — ads, reels, threads, landing pages — and rank on a live community leaderboard.
+            Upload your best marketing work — X tweets, images, videos, ads, landing pages, website links — and rank on a live community leaderboard.
           </p>
         </div>
 
