@@ -63,7 +63,7 @@ export const CaseStudiesPage: React.FC = () => {
             }}
           >
             <ArrowLeft size={16} />
-            <span>Back to All Case Studies</span>
+            <span>Back to All Articles</span>
           </button>
 
           {/* Category & Read Time */}
@@ -77,7 +77,7 @@ export const CaseStudiesPage: React.FC = () => {
               background: 'rgba(201, 142, 214, 0.18)',
               color: 'var(--accent-primary)'
             }}>
-              {selectedArticle.category || 'Case Study'}
+              {selectedArticle.category || 'Article'}
             </span>
 
             <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
@@ -215,7 +215,7 @@ export const CaseStudiesPage: React.FC = () => {
               Want Your Product Featured in a Teardown?
             </h3>
             <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
-              We craft deep-dive case studies for our featured partners and spotlight sponsors.
+              We craft deep-dive articles for our featured partners and spotlight sponsors.
             </p>
             <button
               onClick={() => { navigateTo('advertise'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
@@ -259,7 +259,7 @@ export const CaseStudiesPage: React.FC = () => {
         {/* Live Articles / Empty State */}
         {isLoading ? (
           <div style={{ padding: '4rem', textAlign: 'center', color: 'var(--text-muted)' }}>
-            Loading case studies...
+            Loading articles...
           </div>
         ) : articles.length === 0 ? (
           <div className="glass-panel" style={{
@@ -270,10 +270,10 @@ export const CaseStudiesPage: React.FC = () => {
           }}>
             <BookOpen size={42} color="var(--accent-primary)" style={{ margin: '0 auto 1rem' }} />
             <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', fontWeight: 800, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
-              Get Custom Case Studies
+              Get Custom Articles
             </h3>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', maxWidth: '520px', margin: '0 auto', lineHeight: 1.6 }}>
-              Get custom teardowns and deep-dive marketing case studies breakdown for your brand and campaigns.
+              Get custom teardowns and deep-dive marketing articles breakdown for your brand and campaigns.
             </p>
           </div>
         ) : (
@@ -305,7 +305,7 @@ export const CaseStudiesPage: React.FC = () => {
                       />
                     ) : null}
                     <span style={{ fontWeight: 800, fontSize: '0.9rem', color: 'var(--text-primary)' }}>
-                      {article.brandName || 'Case Study'}
+                      {article.brandName || 'Article'}
                     </span>
                   </div>
 
@@ -345,7 +345,7 @@ export const CaseStudiesPage: React.FC = () => {
                 )}
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: 'var(--accent-primary)', fontSize: '0.85rem', fontWeight: 700 }}>
-                  <span>Read Full Case Study</span>
+                  <span>Read Full Article</span>
                   <ArrowRight size={14} />
                 </div>
               </div>
