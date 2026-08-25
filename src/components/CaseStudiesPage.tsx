@@ -9,7 +9,8 @@ import {
   Calendar, 
   ArrowRight,
   Share2,
-  Check
+  Check,
+  Mail
 } from 'lucide-react';
 
 export const CaseStudiesPage: React.FC = () => {
@@ -272,9 +273,29 @@ export const CaseStudiesPage: React.FC = () => {
             <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', fontWeight: 800, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
               Get Custom Articles
             </h3>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', maxWidth: '520px', margin: '0 auto', lineHeight: 1.6 }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', maxWidth: '520px', margin: '0 auto 1.5rem', lineHeight: 1.6 }}>
               Get custom teardowns and deep-dive marketing articles breakdown for your brand and campaigns.
             </p>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+              <a
+                href="mailto:tanmio0xx@proton.me?subject=Custom%20Article%20/%20Case%20Study%20Inquiry&body=Hi%20Tanmay,%0A%0AI'm%20interested%20in%20a%20custom%20marketing%20article%20breakdown%20for%20my%20product/brand:%0A%0A-%20Product%20URL:%20%0A-%20Key%20Growth%20Goals:%20"
+                className="btn btn-primary"
+                style={{
+                  padding: '0.65rem 1.45rem',
+                  borderRadius: 'var(--radius-full)',
+                  fontSize: '0.9rem',
+                  fontWeight: 800,
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.5rem'
+                }}
+              >
+                <Mail size={16} />
+                <span>Mail Us</span>
+                <ArrowRight size={14} />
+              </a>
+            </div>
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', marginBottom: '4rem' }}>
