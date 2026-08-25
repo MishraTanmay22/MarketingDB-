@@ -47,7 +47,6 @@ export const LiveStatsBar: React.FC = () => {
   return (
     <div style={{
       background: 'var(--bg-nav)',
-      borderBottom: '1px solid var(--border-subtle)',
       padding: '0.45rem 0',
       transition: 'background-color 0.25s ease'
     }}>

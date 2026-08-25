@@ -1,11 +1,9 @@
 import React from 'react';
-import { Sparkles } from 'lucide-react';
 
 export const MarketingProofSection: React.FC = () => {
   return (
     <section style={{
       padding: '5rem 0 8rem',
-      borderTop: '1px solid var(--border-subtle)',
       position: 'relative',
       overflow: 'hidden'
     }}>
@@ -16,17 +14,7 @@ export const MarketingProofSection: React.FC = () => {
 
       <div className="app-container" style={{ maxWidth: '1120px', position: 'relative', zIndex: 1 }}>
         {/* Section Header */}
-        <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
-          <div style={{
-            display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
-            padding: '0.35rem 0.95rem', borderRadius: 'var(--radius-full)',
-            background: 'rgba(201, 142, 214, 0.15)', border: '1px solid rgba(201, 142, 214, 0.25)',
-            color: 'var(--accent-primary)', fontSize: '0.85rem', fontWeight: 800,
-            marginBottom: '0.85rem', boxShadow: '0 2px 14px rgba(201, 142, 214, 0.18)'
-          }}>
-            <Sparkles size={14} />
-            <span>Every Format. One Permanent Home.</span>
-          </div>
+        <div style={{ textAlign: 'center', marginBottom: '4.5rem' }}>
 
           <h2 style={{
             fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 4.5vw, 3rem)',

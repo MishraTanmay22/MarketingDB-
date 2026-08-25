@@ -5,7 +5,6 @@ export const HireCreatorSection: React.FC = () => {
   return (
     <section style={{
       padding: '4rem 0 5.5rem',
-      borderTop: '1px solid var(--border-subtle)',
       position: 'relative'
     }}>
       <div className="app-container" style={{ maxWidth: '820px' }}>
