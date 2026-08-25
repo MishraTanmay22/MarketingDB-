@@ -5,7 +5,6 @@ import {
   ArrowLeft, 
   BookOpen, 
   ExternalLink, 
-  Rocket, 
   Clock, 
   Calendar, 
   ArrowRight,
@@ -268,34 +267,34 @@ export const CaseStudiesPage: React.FC = () => {
             background: 'rgba(201, 142, 214, 0.15)',
             border: '1px solid rgba(201, 142, 214, 0.3)',
             color: 'var(--accent-primary)',
-            fontSize: '0.85rem',
+            fontSize: '0.825rem',
             fontWeight: 800,
-            marginBottom: '1rem'
+            marginBottom: '1.25rem'
           }}>
             <BookOpen size={14} />
-            <span>Growth Case Studies & Teardowns</span>
+            <span>Forensic Growth Vault</span>
           </div>
 
           <h1 style={{
             fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(2rem, 4vw, 2.85rem)',
+            fontSize: 'clamp(2.2rem, 4.5vw, 3.2rem)',
             fontWeight: 900,
-            letterSpacing: '-0.025em',
+            letterSpacing: '-0.03em',
             color: 'var(--text-primary)',
-            marginBottom: '0.75rem',
-            lineHeight: 1.2
+            marginBottom: '1rem',
+            lineHeight: 1.15
           }}>
-            Real Campaigns. Real Numbers. Zero Fluff.
+            Inside High-Growth Marketing Playbooks.
           </h1>
 
           <p style={{
             color: 'var(--text-secondary)',
-            fontSize: '1.05rem',
-            maxWidth: '680px',
+            fontSize: '1.1rem',
+            maxWidth: '640px',
             margin: '0 auto',
             lineHeight: 1.6
           }}>
-            In-depth marketing teardowns, customer acquisition funnels, and creative breakdowns of high-growth SaaS products.
+            Forensic teardowns, real customer acquisition funnels, and creative strategies behind top-performing SaaS products.
           </p>
         </div>
 
@@ -318,14 +317,19 @@ export const CaseStudiesPage: React.FC = () => {
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.925rem', maxWidth: '520px', margin: '0 auto 1.5rem', lineHeight: 1.5 }}>
               We are finalizing forensic acquisition teardowns for our featured partners. Case studies published from the admin panel will appear here.
             </p>
-            <button
-              onClick={() => navigateTo('advertise')}
-              className="btn btn-secondary"
-              style={{ borderRadius: 'var(--radius-full)', fontWeight: 700, fontSize: '0.85rem' }}
-            >
-              <span>Get Your SaaS Featured First</span>
-              <ArrowRight size={14} />
-            </button>
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.4rem',
+              padding: '0.4rem 1.1rem',
+              borderRadius: 'var(--radius-full)',
+              background: 'rgba(201, 142, 214, 0.15)',
+              color: 'var(--accent-primary)',
+              fontWeight: 800,
+              fontSize: '0.85rem'
+            }}>
+              <span>Coming Soon 🚀</span>
+            </div>
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', marginBottom: '4rem' }}>
@@ -403,60 +407,6 @@ export const CaseStudiesPage: React.FC = () => {
             ))}
           </div>
         )}
-
-        {/* Feature Your Product CTA Banner */}
-        <div className="glass-panel" style={{
-          padding: '2.5rem',
-          borderRadius: 'var(--radius-2xl)',
-          background: 'linear-gradient(135deg, rgba(201, 142, 214, 0.15) 0%, rgba(168, 85, 247, 0.08) 100%)',
-          border: '2px solid rgba(201, 142, 214, 0.45)',
-          boxShadow: 'var(--shadow-lg)',
-          textAlign: 'center'
-        }}>
-          <div style={{
-            width: '48px',
-            height: '48px',
-            borderRadius: '16px',
-            background: 'var(--gradient-fire)',
-            color: '#ffffff',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            margin: '0 auto 1.25rem'
-          }}>
-            <Rocket size={24} />
-          </div>
-
-          <h3 style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: '1.6rem',
-            fontWeight: 900,
-            color: 'var(--text-primary)',
-            marginBottom: '0.5rem'
-          }}>
-            Want Your SaaS Featured in a Case Study?
-          </h3>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', maxWidth: '580px', margin: '0 auto 1.75rem', lineHeight: 1.5 }}>
-            Sponsors and featured products get dedicated teardowns distributed to thousands of founders, marketers, and growth creators.
-          </p>
-
-          <button
-            onClick={() => { navigateTo('advertise'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-            className="btn btn-primary"
-            style={{
-              padding: '0.85rem 1.75rem',
-              fontSize: '0.95rem',
-              fontWeight: 800,
-              borderRadius: 'var(--radius-full)',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem'
-            }}
-          >
-            <span>Book Sponsor Spotlight & Case Study</span>
-            <ArrowRight size={16} />
-          </button>
-        </div>
       </div>
     </div>
   );

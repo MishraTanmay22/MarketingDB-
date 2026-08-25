@@ -11,6 +11,7 @@ import { AdvertisePage } from './components/AdvertisePage';
 import { AdminPage } from './components/AdminPage';
 import { CaseStudiesPage } from './components/CaseStudiesPage';
 import { MarketingProofSection } from './components/MarketingProofSection';
+import { HireCreatorSection } from './components/HireCreatorSection';
 import { AdvertiseSection } from './components/AdvertiseSection';
 import { ProductPreviewModal } from './components/ProductPreviewModal';
 import { HowItWorksModal } from './components/HowItWorksModal';
@@ -92,6 +93,9 @@ const MainContent: React.FC = () => {
 
         {/* Social Proof Wall: From the people who took #1 */}
         <MarketingProofSection />
+
+        {/* Hire Creator / Work Together Section */}
+        <HireCreatorSection />
       </main>
 
       <Footer />

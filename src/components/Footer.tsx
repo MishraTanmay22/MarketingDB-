@@ -249,7 +249,7 @@ export const Footer: React.FC = () => {
                 </a>
 
                 <a
-                  href="mailto:tanmio0xx@proton.me?subject=Work%20Together%20/%20Hire%20Inquiry&body=Hi%20Tanmay,%0A%0AI%20saw%20MarketingDB%20and%20would%20like%20to%20discuss%20working%20together%20on%20a%20project.%0A%0A-%20Project%20Name:%20%0A-%20Scope%20/%20Role:%20%0A-%20Budget%20/%20Timeline:%20"
+                  href="mailto:tanmio0xx@proton.me"
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -262,7 +262,7 @@ export const Footer: React.FC = () => {
                   onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}
                 >
                   <Mail size={14} color="var(--accent-primary)" />
-                  <span>tanmio0xx@proton.me (Hire / Inquiries)</span>
+                  <span>tanmio0xx@proton.me</span>
                 </a>
 
                 <a
@@ -317,7 +317,7 @@ export const Footer: React.FC = () => {
               >
                 @whataleast
               </a>
-              <span>and</span>
+              <span>/</span>
               <a
                 href="https://x.com/tanm_io"
                 target="_blank"
