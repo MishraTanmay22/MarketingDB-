@@ -298,7 +298,7 @@ export const Footer: React.FC = () => {
                 </a>
 
                 <a
-                  href="https://buymeacoffee.com/whataleast"
+                  href="https://buymeacoffee.com/tanm_io"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
