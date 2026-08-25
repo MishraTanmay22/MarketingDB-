@@ -273,7 +273,7 @@ export const CaseStudiesPage: React.FC = () => {
               Case Studies Coming Soon
             </h3>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.925rem', maxWidth: '520px', margin: '0 auto 1.5rem', lineHeight: 1.5 }}>
-              We are finalizing forensic acquisition teardowns for our featured partners. Case studies published from the admin panel will appear here.
+              We are finalizing forensic acquisition teardowns and deep-dive marketing breakdowns for our featured campaigns. They will appear here soon.
             </p>
             <div style={{
               display: 'inline-flex',

@@ -453,7 +453,7 @@ body {
   gap: 0.65rem;
 }
 
-.nav-pro-btn {
+.nav-link-btn {
   background: transparent;
   border: none;
   color: var(--text-secondary);
@@ -467,19 +467,9 @@ body {
   gap: 0.35rem;
   transition: all 0.15s ease;
 }
-.nav-pro-btn:hover {
+.nav-link-btn:hover {
   color: var(--accent-primary);
   background: rgba(201, 142, 214, 0.1);
-}
-
-.nav-pro-badge {
-  font-size: 0.65rem;
-  font-weight: 800;
-  padding: 0.1rem 0.4rem;
-  border-radius: var(--radius-full);
-  background: rgba(201, 142, 214, 0.2);
-  color: var(--accent-primary);
-  text-transform: uppercase;
 }
 
 .nav-view-mode-toggle {
@@ -513,7 +503,7 @@ body {
   .nav-logo-text {
     font-size: 1.2rem;
   }
-  .nav-pro-btn {
+  .nav-link-btn {
     padding: 0.35rem 0.55rem;
     font-size: 0.8rem;
   }
@@ -529,11 +519,9 @@ body {
   .nav-logo-text {
     font-size: 1.05rem;
   }
-  .nav-pro-btn span:first-child {
-    display: none;
-  }
-  .nav-pro-btn {
+  .nav-link-btn {
     padding: 0.35rem 0.45rem;
+    font-size: 0.775rem;
   }
 }
 

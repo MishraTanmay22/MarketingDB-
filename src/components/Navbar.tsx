@@ -54,12 +54,9 @@ export const Navbar: React.FC = () => {
           {/* Nav Links */}
           <button
             onClick={() => { navigateTo('case-studies'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-            className="nav-pro-btn"
+            className="nav-link-btn"
           >
             <span>Case Studies</span>
-            <span className="nav-pro-badge">
-              Pro
-            </span>
           </button>
 
           {/* View mode toggle */}
