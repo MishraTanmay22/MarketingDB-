@@ -1,0 +1,8 @@
+# Allow search engine crawlers
+User-agent: *
+Allow: /
+Disallow: /#tanm-control
+Disallow: /#admin-tanm-22
+
+# Sitemaps
+Sitemap: https://marketingdb.lol/sitemap.xml
