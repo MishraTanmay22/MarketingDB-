@@ -1,17 +1,13 @@
 export type Category = 
   | 'all' 
   | 'slideshow'
-  | 'ugc'
   | 'meta-ads' 
   | 'tiktok' 
   | 'twitter-x' 
   | 'youtube' 
   | 'landing-pages' 
   | 'email' 
-  | 'copywriting' 
-  | 'branding' 
-  | 'creative' 
-  | 'organic';
+  | 'copywriting';
 
 export interface Creator {
   name: string;

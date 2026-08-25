@@ -24,7 +24,7 @@ export const OutbidModal: React.FC = () => {
   const [description, setDescription] = useState('');
   const [creatorName, setCreatorName] = useState('');
   const [creatorHandle, setCreatorHandle] = useState('');
-  const [category, setCategory] = useState<Category>('ugc');
+  const [category, setCategory] = useState<Category>('slideshow');
   const [mediaData, setMediaData] = useState<string | undefined>(undefined);
   const [mediaType, setMediaType] = useState<'url' | 'image' | 'video'>('url');
   const [isProcessing, setIsProcessing] = useState(false);
@@ -37,7 +37,7 @@ export const OutbidModal: React.FC = () => {
       setDescription(selectedProductForOutbid.description || '');
       setCreatorName(selectedProductForOutbid.creator?.name || '');
       setCreatorHandle(selectedProductForOutbid.creator?.handle || '');
-      setCategory(selectedProductForOutbid.category || 'ugc');
+      setCategory(selectedProductForOutbid.category || 'slideshow');
       setMediaData(selectedProductForOutbid.mediaData);
       setMediaType(selectedProductForOutbid.mediaType || 'url');
     }
@@ -246,7 +246,7 @@ export const OutbidModal: React.FC = () => {
                   cursor: 'pointer'
                 }}
               >
-                <option value="ugc">UGC</option>
+                <option value="slideshow">Slideshow</option>
                 <option value="meta-ads">Meta Ads</option>
                 <option value="tiktok">TikTok</option>
                 <option value="twitter-x">Tweet / X</option>
@@ -254,9 +254,6 @@ export const OutbidModal: React.FC = () => {
                 <option value="landing-pages">Landing Pages</option>
                 <option value="email">Email</option>
                 <option value="copywriting">Copywriting</option>
-                <option value="branding">Branding</option>
-                <option value="creative">Creative</option>
-                <option value="organic">Organic</option>
               </select>
             </div>
           </div>

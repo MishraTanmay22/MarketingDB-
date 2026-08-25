@@ -91,7 +91,7 @@ export const LeaderboardList: React.FC = () => {
           if (target) window.open(target, '_blank', 'noopener,noreferrer');
         };
 
-        const isVideoAsset = product.mediaType === 'video' || product.category === 'tiktok' || product.category === 'ugc' || product.category === 'youtube';
+        const isVideoAsset = product.mediaType === 'video' || product.category === 'tiktok' || product.category === 'youtube';
         const isVoted = hasVotedToday(product.id);
 
         return (

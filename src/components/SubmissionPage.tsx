@@ -90,17 +90,13 @@ export const SubmissionPage: React.FC = () => {
 
   const availableCategories: { key: Category; label: string; icon: string }[] = [
     { key: 'slideshow', label: 'Slideshow', icon: '🖼️' },
-    { key: 'ugc', label: 'UGC', icon: '🎬' },
     { key: 'meta-ads', label: 'Meta Ads', icon: '📢' },
     { key: 'tiktok', label: 'TikTok', icon: '📱' },
     { key: 'twitter-x', label: 'Tweet / X', icon: '𝕏' },
     { key: 'youtube', label: 'YouTube', icon: '▶️' },
     { key: 'landing-pages', label: 'Landing Pages', icon: '🌐' },
     { key: 'email', label: 'Email', icon: '💌' },
-    { key: 'copywriting', label: 'Copywriting', icon: '✍️' },
-    { key: 'branding', label: 'Branding', icon: '🎨' },
-    { key: 'creative', label: 'Creative', icon: '✨' },
-    { key: 'organic', label: 'Organic', icon: '🌱' }
+    { key: 'copywriting', label: 'Copywriting', icon: '✍️' }
   ];
 
   const toggleCategory = (catKey: Category) => {
@@ -115,7 +111,7 @@ export const SubmissionPage: React.FC = () => {
     e.preventDefault();
     if (!websiteUrl || !brandName) return;
 
-    const finalCategories: Category[] = selectedCategories.length > 0 ? selectedCategories : ['ugc'];
+    const finalCategories: Category[] = selectedCategories.length > 0 ? selectedCategories : ['slideshow'];
 
     setIsProcessing(true);
     setTimeout(() => {

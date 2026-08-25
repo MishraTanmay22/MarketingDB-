@@ -31,17 +31,13 @@ export const HeroClaim: React.FC = () => {
   const categories: { key: Category; label: string }[] = [
     { key: 'all', label: 'All' },
     { key: 'slideshow', label: 'Slideshow' },
-    { key: 'ugc', label: 'UGC' },
     { key: 'meta-ads', label: 'Meta Ads' },
     { key: 'tiktok', label: 'TikTok' },
     { key: 'twitter-x', label: 'Tweet / X' },
     { key: 'youtube', label: 'YouTube' },
     { key: 'landing-pages', label: 'Landing Pages' },
     { key: 'email', label: 'Email' },
-    { key: 'copywriting', label: 'Copywriting' },
-    { key: 'branding', label: 'Branding' },
-    { key: 'creative', label: 'Creative' },
-    { key: 'organic', label: 'Organic' }
+    { key: 'copywriting', label: 'Copywriting' }
   ];
 
   return (

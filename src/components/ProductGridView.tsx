@@ -45,7 +45,7 @@ export const ProductGridView: React.FC = () => {
       {sortedProducts.map((product, index) => {
         const rank = index + 1;
         const isRank1 = rank === 1;
-        const isVideoAsset = product.mediaType === 'video' || product.category === 'tiktok' || product.category === 'ugc';
+        const isVideoAsset = product.mediaType === 'video' || product.category === 'tiktok' || product.category === 'youtube';
         const isVoted = hasVotedToday(product.id);
 
         const handleWebsiteClick = (e: React.MouseEvent) => {

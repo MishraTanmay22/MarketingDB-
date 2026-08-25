@@ -106,22 +106,22 @@ export async function fetchLiveWebsiteMetadata(inputUrl: string): Promise<Domain
         // Categorize based on real title & description keywords
         const combinedText = `${liveHeadline} ${liveDescription} ${parsed.displayUrl}`.toLowerCase();
         let cat: Category = fallback.suggestedCategory;
-        if (combinedText.includes('seo') || combinedText.includes('search') || combinedText.includes('organic')) {
-          cat = 'organic';
-        } else if (combinedText.includes('ugc') || combinedText.includes('creator') || combinedText.includes('video')) {
-          cat = 'ugc';
-        } else if (combinedText.includes('ad') || combinedText.includes('meta') || combinedText.includes('facebook')) {
+        if (combinedText.includes('ad') || combinedText.includes('meta') || combinedText.includes('facebook')) {
           cat = 'meta-ads';
-        } else if (combinedText.includes('tiktok')) {
+        } else if (combinedText.includes('tiktok') || combinedText.includes('reel') || combinedText.includes('video')) {
           cat = 'tiktok';
+        } else if (combinedText.includes('youtube')) {
+          cat = 'youtube';
         } else if (combinedText.includes('email') || combinedText.includes('newsletter') || combinedText.includes('mail')) {
           cat = 'email';
-        } else if (combinedText.includes('copywriting') || combinedText.includes('content')) {
+        } else if (combinedText.includes('copywriting') || combinedText.includes('content') || combinedText.includes('seo')) {
           cat = 'copywriting';
         } else if (combinedText.includes('landing') || combinedText.includes('page') || combinedText.includes('website')) {
           cat = 'landing-pages';
         } else if (combinedText.includes('twitter') || combinedText.includes('tweet') || combinedText.includes(' x ')) {
           cat = 'twitter-x';
+        } else {
+          cat = 'slideshow';
         }
 
         const result: DomainMetadata = {
@@ -152,28 +152,24 @@ export function autoFetchDomainMetadata(inputUrl: string): DomainMetadata {
 
   let headline = `High-converting ${name} growth & marketing breakdown`;
   let description = `${name} is competing on marketingdb.lol to showcase creative marketing and capture high-intent users.`;
-  let suggestedCategory: Category = 'ugc';
+  let suggestedCategory: Category = 'slideshow';
 
   if (domain.includes('focus') || domain.includes('insta') || domain.includes('social')) {
     headline = 'Turn Instagram Post Comments into Buyers with Automated DMs';
     description = `Create better content, turn comments into buyers, and deliver lead magnets on Instagram—all on autopilot.`;
     suggestedCategory = 'tiktok';
-  } else if (domain.includes('seo') || domain.includes('rank') || domain.includes('organic')) {
-    headline = 'AI-driven SEO & automated directory distribution system';
-    description = `Scale organic search traffic, backlink authority, and AI search visibility with automated indexing and growth workflows.`;
-    suggestedCategory = 'organic';
   } else if (domain.includes('ad') || domain.includes('meta') || domain.includes('roas')) {
     headline = '4.2x ROAS Meta direct-response ad creative & scaling funnel';
-    description = `A comprehensive breakdown of top-performing video hooks, UGC angles, and retargeting workflows driving profitable customer acquisition.`;
+    description = `A comprehensive breakdown of top-performing video hooks and retargeting workflows driving profitable customer acquisition.`;
     suggestedCategory = 'meta-ads';
   } else if (domain.includes('lead') || domain.includes('mail') || domain.includes('cold') || domain.includes('email')) {
     headline = 'Cold email & inbound lead gen campaign engine';
     description = `High-response email sequences and automated lead enrichment workflows generating qualified pipeline on autopilot.`;
     suggestedCategory = 'email';
-  } else if (domain.includes('ugc') || domain.includes('video') || domain.includes('creator') || domain.includes('reel')) {
-    headline = 'Viral direct-response UGC creator framework';
-    description = `Authentic creator content framework engineered to stop scrolling, build instant trust, and maximize conversion rates.`;
-    suggestedCategory = 'ugc';
+  } else if (domain.includes('youtube') || domain.includes('video')) {
+    headline = 'YouTube high-converting organic video marketing framework';
+    description = `Engaging video breakdowns engineered to build instant trust and drive long-term organic traffic.`;
+    suggestedCategory = 'youtube';
   } else if (domain.includes('page') || domain.includes('site') || domain.includes('funnel') || domain.includes('landing')) {
     headline = 'High-converting landing page & checkout UX redesign';
     description = `Optimized value propositions, social proof hierarchy, and frictionless CTA placement engineered for maximum conversion velocity.`;
@@ -185,7 +181,7 @@ export function autoFetchDomainMetadata(inputUrl: string): DomainMetadata {
   } else {
     headline = `Scale customer acquisition with ${name}`;
     description = `Explore the high-converting marketing strategy, creative hooks, and customer conversion funnels powering ${name}.`;
-    suggestedCategory = 'creative';
+    suggestedCategory = 'slideshow';
   }
 
   return {

@@ -13,10 +13,6 @@ const CATEGORY_LABELS: Record<string, string> = {
   'landing-pages': '🌐 Landing Pages',
   'email': '📧 Email',
   'copywriting': '✍️ Copywriting',
-  'branding': '💎 Branding',
-  'creative': '🎨 Creative',
-  'organic': '🌱 Organic',
-  'ugc': '📸 UGC',
 };
 
 export const SuccessPage: React.FC = () => {
