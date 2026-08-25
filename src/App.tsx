@@ -15,6 +15,7 @@ import { MarketingProofSection } from './components/MarketingProofSection';
 import { FaqSection } from './components/FaqSection';
 import { HireCreatorSection } from './components/HireCreatorSection';
 import { AdvertiseSection } from './components/AdvertiseSection';
+import { CategorySidebar } from './components/CategorySidebar';
 import { ProductPreviewModal } from './components/ProductPreviewModal';
 import { HowItWorksModal } from './components/HowItWorksModal';
 import { Footer } from './components/Footer';
@@ -84,6 +85,11 @@ const MainContent: React.FC = () => {
       {/* Floating Outer Left Sponsor Card (Visible on Desktop) */}
       <div className="desktop-left-sponsor">
         <AdvertiseSection />
+      </div>
+
+      {/* Floating Outer Right Categories Navigation (Visible on Desktop, non-sticky) */}
+      <div className="desktop-right-categories">
+        <CategorySidebar />
       </div>
 
       <main style={{ flex: 1 }}>

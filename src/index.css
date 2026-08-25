@@ -644,8 +644,35 @@ body {
   z-index: 10;
 }
 
+/* Non-pinned Right Category Navigation (Scrolls with page) */
+.desktop-right-categories {
+  position: absolute;
+  right: 1.5rem;
+  top: 150px;
+  width: 220px;
+  z-index: 10;
+}
+
 @media (max-width: 1440px) {
-  .desktop-left-sponsor {
+  .desktop-left-sponsor,
+  .desktop-right-categories {
+    display: none;
+  }
+}
+
+.hero-category-pills {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  max-width: 1080px;
+  margin: 1.35rem auto 0;
+  padding: 0 0.5rem;
+}
+
+@media (min-width: 1441px) {
+  .hero-category-pills {
     display: none;
   }
 }

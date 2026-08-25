@@ -271,18 +271,7 @@ export const HeroClaim: React.FC = () => {
         </div>
 
         {/* Category Pills Filter */}
-        <div 
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexWrap: 'wrap',
-            gap: '0.45rem',
-            maxWidth: '1080px',
-            margin: '1.35rem auto 0',
-            padding: '0 0.5rem'
-          }}
-        >
+        <div className="hero-category-pills">
           {categories.map((cat) => {
             const isActive = activeCategory === cat.key;
             return (
