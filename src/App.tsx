@@ -96,7 +96,7 @@ const MainContent: React.FC = () => {
         <HeroClaim />
 
         {/* Clean Centered Leaderboard */}
-        <div className="app-container" style={{ maxWidth: '980px' }}>
+        <div id="leaderboard-section" className="app-container" style={{ maxWidth: '980px' }}>
           {viewMode === 'list' ? <LeaderboardList /> : <ProductGridView />}
         </div>
 
@@ -111,6 +111,7 @@ const MainContent: React.FC = () => {
       </main>
 
       <Footer />
+
 
       {/* Modals */}
       <ProductPreviewModal />

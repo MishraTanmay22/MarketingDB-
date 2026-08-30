@@ -52,6 +52,18 @@ export type Timeframe = 'top' | 'trending' | 'newest';
 export type ViewMode = 'grid' | 'list';
 export type PageRoute = 'home' | 'submit' | 'success' | 'advertise' | 'admin' | 'case-studies';
 
+export type SearchIntent = 'transactional' | 'informational' | 'commercial' | 'navigational';
+
+export interface LongTailKeyword {
+  id: string;
+  keyword: string;
+  intent: SearchIntent;
+  category: Category;
+  searchVolume: string;
+  difficulty: 'Easy' | 'Medium' | 'Low';
+  slug: string;
+}
+
 export interface ActivityLog {
   id: string;
   type: 'bid' | 'claim' | 'vote' | 'new_entry';
@@ -62,3 +74,4 @@ export interface ActivityLog {
   amount?: number;
   rank?: number;
 }
+

@@ -11,85 +11,85 @@ const CATEGORY_DIRECTORY_DATA: Record<Category, {
   badge: string;
 }> = {
   'all': {
-    overline: '🚀 The #1 Marketing & SaaS Directory',
-    h1: 'Promote & Rank Your Marketing Campaigns & SaaS Tools (100% Free Directory)',
-    subheading: 'Promote your website, SaaS tool, or creative campaigns for free. Earn a permanent high-authority Dofollow backlink, drive organic referral traffic, and compete for the daily #1 crown.',
-    placeholder: 'Enter your website or campaign URL (e.g. yourproduct.com)',
+    overline: '🚀 #1 Free SaaS Directory & Marketing Campaign Database',
+    h1: 'Submit & Promote Your SaaS Tool, Website & Ad Campaigns for Free Dofollow Backlinks',
+    subheading: 'Join the internet\'s top-rated SaaS directory and marketing swipe file. Index your product on Google, claim permanent high-authority Dofollow SEO backlinks, and rank winning Meta ad creatives, TikTok UGC hooks, and high-converting landing pages.',
+    placeholder: 'Enter your website or SaaS product URL (e.g. yourproduct.com)',
     badge: 'All'
   },
   'meta-ads': {
-    overline: '📣 Promote Meta & Instagram Ad Campaigns',
-    h1: 'Promote & Discover Top-Performing Meta & Instagram Ad Creatives',
-    subheading: 'Promote your best-performing Meta ad creatives and swipe high-ROAS video hooks, carousel designs, and UGC ad frameworks ranked daily by media buyers.',
-    placeholder: 'Enter your Meta ad link or campaign URL',
+    overline: '📢 Meta & Facebook Ad Creative Swipe File',
+    h1: 'Submit Meta Ads & Discover High-ROAS Facebook Video Hooks & Ad Creatives',
+    subheading: 'Promote your Meta ad creatives and swipe top-performing Facebook video hooks, UGC ad scripts, and carousel designs ranked daily by media buyers.',
+    placeholder: 'Enter your Meta ad link or Facebook video URL',
     badge: 'Meta Ads'
   },
   'landing-pages': {
-    overline: '🌐 Promote SaaS Landing Pages & CRO',
-    h1: 'Promote Your Landing Pages & Discover High-Converting SaaS Homepages',
-    subheading: 'Promote your landing page to thousands of founders and marketers. Get a direct Dofollow backlink while exploring top-converting CRO layouts, hero hooks, and pricing matrices.',
+    overline: '🌐 SaaS Landing Page Directory & CRO Teardowns',
+    h1: 'Submit SaaS Landing Pages & Discover High-Converting Homepage CRO Layouts',
+    subheading: 'Promote your landing page for direct Dofollow backlinks while swiping proven B2B SaaS hero hooks, pricing matrices, and conversion rate optimization teardowns.',
     placeholder: 'Enter your landing page URL (e.g. yourbrand.com/landing)',
     badge: 'Landing Pages'
   },
   'ecom': {
-    overline: '🛍️ Promote E-Commerce & Shopify Stores',
-    h1: 'Promote Your E-Commerce Store & High-Converting Product Pages',
-    subheading: 'Promote your Shopify store, DTC brand campaigns, and e-commerce product pages. Gain instant SEO backlinks, buyer traffic, and rank your store against top brands.',
+    overline: '🛍️ E-Commerce & Shopify Brand Directory',
+    h1: 'Promote E-Commerce & Shopify Stores for Free Dofollow Backlinks & Traffic',
+    subheading: 'List your Shopify store, DTC brand campaigns, and e-commerce product pages on our high-authority directory to rank on search engines.',
     placeholder: 'Enter your Shopify store or product page URL',
     badge: 'Ecom Pages'
   },
   'dropshipping': {
-    overline: '📦 Promote Dropshipping Winning Products',
-    h1: 'Promote Your Dropshipping Store & Winning Product Creatives',
-    subheading: 'Promote your dropshipping winning products, single-item landing pages, and viral video ads. Get permanent backlink power and showcase your highest-converting funnels.',
+    overline: '📦 Dropshipping Winning Product Directory',
+    h1: 'Promote Dropshipping Stores & Discover Winning Product Video Ads',
+    subheading: 'Index your single-item product pages, dropshipping video ads, and high-converting sales funnels with permanent Dofollow SEO backlinks.',
     placeholder: 'Enter your dropshipping product or store URL',
     badge: 'Dropshipping Pages'
   },
   'twitter-x': {
-    overline: '𝕏 Promote X Posts & Growth Playbooks',
-    h1: 'Promote Your X Posts, Viral Launch Threads & Build-in-Public Tactics',
-    subheading: 'Promote your Twitter/X launch threads, viral breakdown tweets, and build-in-public milestones. Drive organic impressions, followers, and permanent backlinks to your profile.',
+    overline: '𝕏 Viral Twitter & X Growth Playbooks',
+    h1: 'Promote X Launch Threads & Build-in-Public Marketing Tactics',
+    subheading: 'Promote your Twitter/X launch threads and SaaS growth teardowns to gain organic impressions, followers, and permanent profile backlinks.',
     placeholder: 'Enter your X tweet or thread URL (e.g. x.com/user/status/...)',
     badge: 'X Pages'
   },
   'fb-pages': {
-    overline: '📘 Promote Facebook Pages & Posts',
-    h1: 'Promote Your Facebook Pages, Viral Posts & Brand Campaigns',
-    subheading: 'Promote your Facebook business pages, viral post creatives, and community campaigns. Index your brand on our live directory with direct Dofollow backlinks.',
+    overline: '📘 Facebook Business & Ad Campaign Index',
+    h1: 'Promote Facebook Pages, Viral Video Posts & Ad Creatives for SEO',
+    subheading: 'Index your Facebook business pages, viral post creatives, and community campaigns with direct Dofollow backlinks and community votes.',
     placeholder: 'Enter your Facebook page or video post URL',
     badge: 'FB Pages'
   },
   'slideshow': {
-    overline: '🖼️ Promote Marketing Slideshows & Decks',
-    h1: 'Promote & Swipe Viral Marketing Slideshows & Carousel Decks',
+    overline: '🖼️ PDF Slideshows & Carousel Deck Swipe File',
+    h1: 'Promote PDF Slide Decks & Swipe LinkedIn Carousel Marketing Tactics',
     subheading: 'Promote your PDF slide decks, LinkedIn carousels, and visual breakdowns ranked by community saves and shares with a permanent backlink.',
     placeholder: 'Enter your slideshow or carousel deck URL',
     badge: 'Slideshow'
   },
   'tiktok': {
-    overline: '📱 Promote TikTok Ads & Viral UGC',
-    h1: 'Promote Viral TikTok Ads & UGC Creative Playbooks',
+    overline: '📱 TikTok Ad Creative & UGC Video Directory',
+    h1: 'Promote Viral TikTok Ads & Swipe UGC Creative Hook Scripts',
     subheading: 'Promote your organic-looking TikTok ad creatives, sound frameworks, and high-retention UGC ads that drove millions in views and sales.',
     placeholder: 'Enter your TikTok video or ad creative URL',
     badge: 'TikTok'
   },
   'youtube': {
-    overline: '▶️ Promote YouTube Marketing & Video Teardowns',
-    h1: 'Promote & Discover Top YouTube Video Marketing & Creative Teardowns',
+    overline: '▶️ YouTube Marketing & Video Teardown Directory',
+    h1: 'Promote YouTube Marketing Videos & Long-Form VSL Teardowns',
     subheading: 'Promote your long-form YouTube video breakdowns, sponsor integrations, and video sales letter (VSL) playbooks to thousands of marketers.',
     placeholder: 'Enter your YouTube video or channel URL',
     badge: 'YouTube'
   },
   'email': {
-    overline: '💌 Promote Email Sequences & Newsletters',
-    h1: 'Promote & Swipe High-Converting Email Marketing Sequences',
+    overline: '💌 SaaS Email Funnels & Newsletter Directory',
+    h1: 'Promote Email Marketing Funnels & Swipe SaaS Onboarding Sequences',
     subheading: 'Promote your SaaS welcome flows, retention newsletters, and cold email templates. Earn high-authority backlinks and subscriber traffic.',
     placeholder: 'Enter your email campaign or newsletter URL',
     badge: 'Email'
   },
   'copywriting': {
-    overline: '✍️ Promote Copywriting & Value Propositions',
-    h1: 'Promote & Swipe High-Converting Copywriting & Headline Hooks',
+    overline: '✍️ Headline Hooks & Copywriting Swipe Archive',
+    h1: 'Promote Copywriting Assets & Swipe Magnetic Headline Hooks',
     subheading: 'Promote your magnetic headline hooks, benefit-driven value propositions, and objection-handling copy to growth copywriters worldwide.',
     placeholder: 'Enter your copywriting asset or sales page URL',
     badge: 'Copywriting'

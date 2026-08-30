@@ -263,16 +263,21 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [lastSubmittedProduct, setLastSubmittedProduct] = useState<ProductItem | null>(null);
   const [lastSubmittedRank, setLastSubmittedRank] = useState<number>(1);
 
-  // Auto-detect and open direct campaign permalinks from ?item= URL parameter
+  // Auto-detect and open direct campaign permalinks or keyword search from URL parameters
   useEffect(() => {
-    if (typeof window !== 'undefined' && products.length > 0) {
+    if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
       const itemId = params.get('item');
-      if (itemId) {
+      if (itemId && products.length > 0) {
         const found = products.find(p => p.id === itemId || p.name.toLowerCase().replace(/\s+/g, '-') === itemId.toLowerCase());
         if (found) {
           setActivePreviewProduct(found);
         }
+      }
+      const kwSlug = params.get('kw');
+      if (kwSlug) {
+        const cleanKw = kwSlug.replace(/-/g, ' ');
+        setSearchQuery(cleanKw);
       }
     }
   }, [products]);

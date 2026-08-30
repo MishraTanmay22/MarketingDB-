@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import type { PageRoute, Category } from '../types';
+import { getKeywordBySlug } from '../data/longTailKeywords';
 
 interface SeoConfig {
   title: string;
@@ -102,7 +103,20 @@ const ROUTE_SEO_MAP: Record<PageRoute, SeoConfig> = {
 export const usePageSeo = (currentRoute: PageRoute, activeCategory: Category = 'all') => {
   useEffect(() => {
     let config = ROUTE_SEO_MAP[currentRoute] || ROUTE_SEO_MAP.home;
-    if (currentRoute === 'home' && activeCategory) {
+    
+    // Check for dynamic keyword URL parameter (?kw=slug)
+    const urlParams = new URLSearchParams(window.location.search);
+    const kwParam = urlParams.get('kw');
+    const matchedKw = kwParam ? getKeywordBySlug(kwParam) : undefined;
+
+    if (matchedKw) {
+      const formattedKw = matchedKw.keyword.charAt(0).toUpperCase() + matchedKw.keyword.slice(1);
+      config = {
+        title: `${formattedKw} — MarketingDB Directory`,
+        description: `Explore top-rated campaigns, marketing playbooks, and dofollow backlinks for "${matchedKw.keyword}". Ranked live by community votes on MarketingDB.`,
+        canonical: `https://marketingdb.lol/?kw=${matchedKw.slug}`
+      };
+    } else if (currentRoute === 'home' && activeCategory) {
       config = CATEGORY_SEO_MAP[activeCategory] || CATEGORY_SEO_MAP.all;
     }
 
@@ -189,5 +203,32 @@ export const usePageSeo = (currentRoute: PageRoute, activeCategory: Category = '
       document.head.appendChild(breadcrumbScript);
     }
     breadcrumbScript.textContent = JSON.stringify(breadcrumbSchema);
+
+    // Inject Search Intent DefinedTermSet JSON-LD Schema
+    const keywordsSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'DefinedTermSet',
+      '@id': 'https://marketingdb.lol/#keywords',
+      'name': '1,000 MarketingDB Long-Tail Search Intent Keyword Clusters',
+      'description': 'Search intent-mapped long-tail keyword database covering transactional, informational, commercial, and navigational queries for SaaS, Meta Ads, TikTok UGC, and landing pages.',
+      'hasDefinedTerm': [
+        { '@type': 'DefinedTerm', 'name': 'free dofollow backlink submission for B2B SaaS startup' },
+        { '@type': 'DefinedTerm', 'name': 'where to submit micro saas tool for instant buyer traffic' },
+        { '@type': 'DefinedTerm', 'name': 'how to write high converting facebook meta ad video hooks' },
+        { '@type': 'DefinedTerm', 'name': 'best landing page hero section CRO layouts above fold' },
+        { '@type': 'DefinedTerm', 'name': 'top rated marketing database swipe files for growth marketers' },
+        { '@type': 'DefinedTerm', 'name': 'marketingdb live leaderboard for meta video ad creative examples' }
+      ]
+    };
+
+    let keywordsScript = document.getElementById('keywords-schema-jsonld') as HTMLScriptElement | null;
+    if (!keywordsScript) {
+      keywordsScript = document.createElement('script');
+      keywordsScript.id = 'keywords-schema-jsonld';
+      keywordsScript.type = 'application/ld+json';
+      document.head.appendChild(keywordsScript);
+    }
+    keywordsScript.textContent = JSON.stringify(keywordsSchema);
   }, [currentRoute, activeCategory]);
 };
+
