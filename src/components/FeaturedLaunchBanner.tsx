@@ -24,88 +24,101 @@ export const FeaturedLaunchBanner: React.FC = () => {
   };
 
   return (
-    <div style={{
-      background: 'linear-gradient(90deg, rgba(201, 142, 214, 0.22) 0%, rgba(99, 102, 241, 0.22) 50%, rgba(16, 185, 129, 0.22) 100%)',
-      borderBottom: '1px solid rgba(201, 142, 214, 0.35)',
-      padding: '0.6rem 1rem',
-      position: 'relative',
-      zIndex: 40
-    }}>
-      <div className="app-container" style={{
-        maxWidth: '1140px',
-        margin: '0 auto',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
-        gap: '0.75rem'
-      }}>
-        {/* Left Side: Flame Pill & Message */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
-          <span style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.35rem',
-            padding: '0.2rem 0.65rem',
-            borderRadius: '9999px',
-            background: 'rgba(239, 68, 68, 0.2)',
-            border: '1px solid rgba(239, 68, 68, 0.4)',
-            color: '#f87171',
-            fontSize: '0.75rem',
-            fontWeight: 800,
-            textTransform: 'uppercase',
-            letterSpacing: '0.04em'
-          }}>
-            <Flame size={13} color="#f87171" />
-            <span>Launch Special</span>
+    <aside
+      aria-label="Launch Promo Banner"
+      style={{
+        background: 'var(--bg-card)',
+        borderBottom: '1px solid var(--border-subtle)',
+        padding: '0.45rem 1rem',
+        fontSize: '0.825rem',
+        position: 'relative',
+        zIndex: 40,
+        boxShadow: 'var(--shadow-sm)'
+      }}
+    >
+      <div
+        className="app-container"
+        style={{
+          maxWidth: '1140px',
+          margin: '0 auto',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '0.75rem',
+          textAlign: 'center',
+          flexWrap: 'wrap'
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+          <span
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.3rem',
+              padding: '0.15rem 0.55rem',
+              borderRadius: '9999px',
+              background: 'rgba(239, 68, 68, 0.12)',
+              border: '1px solid rgba(239, 68, 68, 0.3)',
+              color: '#ef4444',
+              fontSize: '0.725rem',
+              fontWeight: 800,
+              textTransform: 'uppercase',
+              letterSpacing: '0.04em',
+              flexShrink: 0
+            }}
+          >
+            <Flame size={12} color="#ef4444" />
+            <span>Launch Offer</span>
           </span>
 
-          <span style={{ fontSize: '0.875rem', color: 'var(--text-primary)', fontWeight: 600 }}>
-            🎉 <strong>First 5 sites submitted</strong> will be permanently featured in our official marketing examples &amp; swipe file!
+          <span style={{ color: 'var(--text-primary)', fontWeight: 600, fontSize: '0.85rem' }}>
+            🎉 <strong>First 5 sites submitted</strong> get permanently featured in our official marketing examples list!
           </span>
         </div>
 
-        {/* Right Side: CTA Button & Dismiss */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
           <button
             onClick={handleBannerClick}
-            className="btn btn-primary"
             style={{
-              padding: '0.35rem 0.95rem',
+              background: 'var(--accent-primary)',
+              color: '#ffffff',
+              border: 'none',
+              padding: '0.28rem 0.8rem',
               borderRadius: '9999px',
-              fontSize: '0.825rem',
+              fontSize: '0.775rem',
               fontWeight: 800,
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '0.4rem',
-              cursor: 'pointer'
+              gap: '0.3rem',
+              cursor: 'pointer',
+              boxShadow: '0 2px 8px rgba(201, 142, 214, 0.25)',
+              transition: 'transform 0.15s ease'
             }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.03)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
           >
-            <Sparkles size={13} />
-            <span>Submit to Claim Spot #1-5</span>
-            <ArrowRight size={13} />
+            <Sparkles size={12} />
+            <span>Claim Spot #1–5</span>
+            <ArrowRight size={12} />
           </button>
 
           <button
             onClick={() => setIsVisible(false)}
-            aria-label="Close Launch Banner"
+            aria-label="Dismiss banner"
             style={{
               background: 'transparent',
               border: 'none',
               color: 'var(--text-muted)',
               cursor: 'pointer',
-              display: 'flex',
+              display: 'inline-flex',
               alignItems: 'center',
-              padding: '0.2rem',
-              borderRadius: '4px'
+              padding: '0.2rem'
             }}
-            onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
-            onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
           >
-            <X size={16} />
+            <X size={14} />
           </button>
         </div>
       </div>
-    </div>
+    </aside>
   );
 };
