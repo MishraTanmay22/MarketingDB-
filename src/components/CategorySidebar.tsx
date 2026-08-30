@@ -7,18 +7,18 @@ export const CategorySidebar: React.FC = () => {
   const { activeCategory, setActiveCategory, products } = useProduct();
 
   const categories: { key: Category; label: string; icon: string }[] = [
-    { key: 'all', label: 'All Work', icon: '🚀' },
-    { key: 'meta-ads', label: 'Meta Ads', icon: '📢' },
-    { key: 'landing-pages', label: 'Landing Pages', icon: '🌐' },
-    { key: 'ecom', label: 'Ecom Pages', icon: '🛍️' },
-    { key: 'dropshipping', label: 'Dropshipping', icon: '📦' },
-    { key: 'twitter-x', label: 'X Pages', icon: '𝕏' },
-    { key: 'fb-pages', label: 'FB Pages', icon: '📘' },
-    { key: 'slideshow', label: 'Slideshow', icon: '🖼️' },
-    { key: 'tiktok', label: 'TikTok UGC', icon: '📱' },
-    { key: 'youtube', label: 'YouTube', icon: '▶️' },
-    { key: 'email', label: 'Email', icon: '💌' },
-    { key: 'copywriting', label: 'Copywriting', icon: '✍️' }
+    { key: 'all', label: 'All Sites & Tools', icon: '🚀' },
+    { key: 'ecom', label: 'Shopify & Ecom', icon: '🛍️' },
+    { key: 'dropshipping', label: 'WooCommerce & Dropship', icon: '📦' },
+    { key: 'landing-pages', label: 'SaaS Landing Pages', icon: '🌐' },
+    { key: 'meta-ads', label: 'Meta & Facebook Ads', icon: '📢' },
+    { key: 'twitter-x', label: 'X & Twitter Pages', icon: '𝕏' },
+    { key: 'tiktok', label: 'TikTok UGC Ads', icon: '📱' },
+    { key: 'fb-pages', label: 'Facebook Pages', icon: '📘' },
+    { key: 'slideshow', label: 'PDF Slideshows', icon: '🖼️' },
+    { key: 'youtube', label: 'YouTube Marketing', icon: '▶️' },
+    { key: 'email', label: 'Email Funnels', icon: '💌' },
+    { key: 'copywriting', label: 'Copywriting Hooks', icon: '✍️' }
   ];
 
   const handleCategorySelect = (key: Category) => {

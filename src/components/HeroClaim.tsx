@@ -11,10 +11,10 @@ const CATEGORY_DIRECTORY_DATA: Record<Category, {
   badge: string;
 }> = {
   'all': {
-    overline: '🚀 #1 Free SaaS Directory & Marketing Campaign Database',
-    h1: 'Submit & Promote Your SaaS Tool, Website & Ad Campaigns for Free Dofollow Backlinks',
-    subheading: 'Join the internet\'s top-rated SaaS directory and marketing swipe file. Index your product on Google, claim permanent high-authority Dofollow SEO backlinks, and rank winning Meta ad creatives, TikTok UGC hooks, and high-converting landing pages.',
-    placeholder: 'Enter your website or SaaS product URL (e.g. yourproduct.com)',
+    overline: '🚀 #1 Directory for Shopify, Ecom, WooCommerce & SaaS Brands',
+    h1: 'Submit & Promote Your Shopify Store, E-Commerce Site, WooCommerce Brand & X Pages for Free Dofollow Backlinks',
+    subheading: 'Index your Shopify store, WooCommerce brand, X pages & SaaS tools on Google. Claim high-authority Dofollow SEO backlinks & drive organic buyer traffic.',
+    placeholder: 'Enter your Shopify store, WooCommerce site, X page, or SaaS URL...',
     badge: 'All'
   },
   'meta-ads': {
@@ -124,18 +124,18 @@ export const HeroClaim: React.FC = () => {
   };
 
   const categories: { key: Category; label: string; icon: string }[] = [
-    { key: 'all', label: 'All', icon: '🚀' },
-    { key: 'meta-ads', label: 'Meta Ads', icon: '📢' },
-    { key: 'landing-pages', label: 'Landing Pages', icon: '🌐' },
-    { key: 'ecom', label: 'Ecom Pages', icon: '🛍️' },
-    { key: 'dropshipping', label: 'Dropshipping Pages', icon: '📦' },
-    { key: 'twitter-x', label: 'X Pages', icon: '𝕏' },
-    { key: 'fb-pages', label: 'FB Pages', icon: '📘' },
-    { key: 'slideshow', label: 'Slideshow', icon: '🖼️' },
-    { key: 'tiktok', label: 'TikTok', icon: '📱' },
-    { key: 'youtube', label: 'YouTube', icon: '▶️' },
-    { key: 'email', label: 'Email', icon: '💌' },
-    { key: 'copywriting', label: 'Copywriting', icon: '✍️' }
+    { key: 'all', label: 'All Sites & Tools', icon: '🚀' },
+    { key: 'ecom', label: 'Shopify & Ecom', icon: '🛍️' },
+    { key: 'dropshipping', label: 'WooCommerce & Dropship', icon: '📦' },
+    { key: 'landing-pages', label: 'SaaS Landing Pages', icon: '🌐' },
+    { key: 'meta-ads', label: 'Meta & Facebook Ads', icon: '📢' },
+    { key: 'twitter-x', label: 'X & Twitter Pages', icon: '𝕏' },
+    { key: 'tiktok', label: 'TikTok UGC Ads', icon: '📱' },
+    { key: 'fb-pages', label: 'Facebook Pages', icon: '📘' },
+    { key: 'slideshow', label: 'PDF Slideshows', icon: '🖼️' },
+    { key: 'youtube', label: 'YouTube Marketing', icon: '▶️' },
+    { key: 'email', label: 'Email Funnels', icon: '💌' },
+    { key: 'copywriting', label: 'Copywriting Hooks', icon: '✍️' }
   ];
 
   const handleCategorySelect = (key: Category) => {

@@ -10,8 +10,8 @@ interface SeoConfig {
 
 const CATEGORY_SEO_MAP: Record<Category, SeoConfig> = {
   all: {
-    title: 'Promote & Rank Your Marketing Campaigns & SaaS Tools — MarketingDB Directory',
-    description: 'Promote your website, SaaS tool, or creative campaigns for free. Earn a permanent high-authority Dofollow backlink, drive organic referral traffic, and compete for the daily #1 crown.',
+    title: 'Promote Shopify Stores, WooCommerce Brands, Ecom & SaaS Tools — MarketingDB',
+    description: 'Promote your Shopify store, WooCommerce brand, DTC e-commerce site, X pages, or SaaS tools for free. Earn high-authority Dofollow SEO backlinks and drive buyer traffic.',
     canonical: 'https://marketingdb.lol/'
   },
   'meta-ads': {
