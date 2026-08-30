@@ -204,22 +204,74 @@ export const usePageSeo = (currentRoute: PageRoute, activeCategory: Category = '
     }
     breadcrumbScript.textContent = JSON.stringify(breadcrumbSchema);
 
-    // Inject Search Intent DefinedTermSet JSON-LD Schema
-    const keywordsSchema = {
-      '@context': 'https://schema.org',
-      '@type': 'DefinedTermSet',
-      '@id': 'https://marketingdb.lol/#keywords',
-      'name': '1,000 MarketingDB Long-Tail Search Intent Keyword Clusters',
-      'description': 'Search intent-mapped long-tail keyword database covering transactional, informational, commercial, and navigational queries for SaaS, Meta Ads, TikTok UGC, and landing pages.',
-      'hasDefinedTerm': [
-        { '@type': 'DefinedTerm', 'name': 'free dofollow backlink submission for B2B SaaS startup' },
-        { '@type': 'DefinedTerm', 'name': 'where to submit micro saas tool for instant buyer traffic' },
-        { '@type': 'DefinedTerm', 'name': 'how to write high converting facebook meta ad video hooks' },
-        { '@type': 'DefinedTerm', 'name': 'best landing page hero section CRO layouts above fold' },
-        { '@type': 'DefinedTerm', 'name': 'top rated marketing database swipe files for growth marketers' },
-        { '@type': 'DefinedTerm', 'name': 'marketingdb live leaderboard for meta video ad creative examples' }
-      ]
-    };
+    // Inject Search Intent & E-E-A-T Schema JSON-LD
+    let pageSchema: Record<string, any>;
+    if (matchedKw) {
+      const formattedKw = matchedKw.keyword.charAt(0).toUpperCase() + matchedKw.keyword.slice(1);
+      pageSchema = {
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'TechArticle',
+            '@id': `https://marketingdb.lol/?kw=${matchedKw.slug}#article`,
+            'headline': `${formattedKw} — Marketing Strategy & Backlink Guide`,
+            'description': `Comprehensive guide and marketing directory breakdown for "${matchedKw.keyword}". Gain permanent Dofollow backlinks and community votes.`,
+            'inLanguage': 'en-US',
+            'mainEntityOfPage': `https://marketingdb.lol/?kw=${matchedKw.slug}`,
+            'datePublished': '2026-08-30T00:00:00+00:00',
+            'dateModified': '2026-08-30T00:00:00+00:00',
+            'author': {
+              '@type': 'Person',
+              'name': 'Tanmay Mishra',
+              'url': 'https://x.com/whataleast'
+            },
+            'publisher': {
+              '@type': 'Organization',
+              'name': 'MarketingDB',
+              'url': 'https://marketingdb.lol/'
+            }
+          },
+          {
+            '@type': 'FAQPage',
+            '@id': `https://marketingdb.lol/?kw=${matchedKw.slug}#faq`,
+            'mainEntity': [
+              {
+                '@type': 'Question',
+                'name': `How does submitting for "${matchedKw.keyword}" improve my Google SEO ranking?`,
+                'acceptedAnswer': {
+                  '@type': 'Answer',
+                  'text': `Submitting your website or campaign to MarketingDB creates a permanent, high-authority Dofollow backlink under "${matchedKw.keyword}", boosting domain authority and organic rankings.`
+                }
+              },
+              {
+                '@type': 'Question',
+                'name': `Is it free to list my SaaS tool or marketing campaign under "${matchedKw.keyword}"?`,
+                'acceptedAnswer': {
+                  '@type': 'Answer',
+                  'text': `Yes, standard submissions and community leaderboard ranking on MarketingDB are 100% free forever.`
+                }
+              }
+            ]
+          }
+        ]
+      };
+    } else {
+      pageSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'DefinedTermSet',
+        '@id': 'https://marketingdb.lol/#keywords',
+        'name': '1,000 MarketingDB Long-Tail Search Intent Keyword Clusters',
+        'description': 'Search intent-mapped long-tail keyword database covering transactional, informational, commercial, and navigational queries for SaaS, Meta Ads, TikTok UGC, and landing pages.',
+        'hasDefinedTerm': [
+          { '@type': 'DefinedTerm', 'name': 'free dofollow backlink submission for B2B SaaS startup' },
+          { '@type': 'DefinedTerm', 'name': 'where to submit micro saas tool for instant buyer traffic' },
+          { '@type': 'DefinedTerm', 'name': 'how to write high converting facebook meta ad video hooks' },
+          { '@type': 'DefinedTerm', 'name': 'best landing page hero section CRO layouts above fold' },
+          { '@type': 'DefinedTerm', 'name': 'top rated marketing database swipe files for growth marketers' },
+          { '@type': 'DefinedTerm', 'name': 'marketingdb live leaderboard for meta video ad creative examples' }
+        ]
+      };
+    }
 
     let keywordsScript = document.getElementById('keywords-schema-jsonld') as HTMLScriptElement | null;
     if (!keywordsScript) {
@@ -228,7 +280,7 @@ export const usePageSeo = (currentRoute: PageRoute, activeCategory: Category = '
       keywordsScript.type = 'application/ld+json';
       document.head.appendChild(keywordsScript);
     }
-    keywordsScript.textContent = JSON.stringify(keywordsSchema);
+    keywordsScript.textContent = JSON.stringify(pageSchema);
   }, [currentRoute, activeCategory]);
 };
 

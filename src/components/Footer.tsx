@@ -399,6 +399,49 @@ export const Footer: React.FC = () => {
                 </a>
               ))}
             </div>
+
+            {/* Popular Search Intent pSEO Links */}
+            <div style={{ marginTop: '1.2rem', paddingTop: '1rem', borderTop: '1px border-subtle' }}>
+              <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', marginBottom: '0.6rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                Popular Search Intent Guides &amp; Directory Searches
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem 0.6rem', fontSize: '0.75rem' }}>
+                {[
+                  { label: 'Free Dofollow SaaS Directory', slug: 'where-to-submit-b2b-saas-startup-for-dofollow-seo-backlinks-2026' },
+                  { label: 'Submit Micro SaaS Tool', slug: 'where-to-submit-micro-saas-tool-to-get-instant-buyer-traffic' },
+                  { label: 'Meta Ad Video Hooks Guide', slug: 'how-to-write-facebook-meta-ad-video-hooks-first-3-seconds-retention' },
+                  { label: 'SaaS Hero Section CRO', slug: 'how-to-design-high-converting-saas-hero-sections-above-the-fold-conversion-rate' },
+                  { label: 'TikTok UGC Video Scripts', slug: 'how-to-write-tiktok-ugc-video-scripts-first-3-seconds-retention' },
+                  { label: 'Twitter Launch Thread Tactics', slug: 'how-to-write-viral-twitter-x-build-in-public-threads-for-b2b-software-marketing' },
+                  { label: 'Best Marketing Swipe Files', slug: 'top-rated-marketing-database-swipe-files-for-growth-marketers-2026' },
+                  { label: 'Ecommerce Product Video Ads', slug: 'winning-examples-of-ecommerce-product-video-ads-for-dtc-store-owners' }
+                ].map((item, idx) => (
+                  <a
+                    key={idx}
+                    href={`/?kw=${item.slug}`}
+                    style={{
+                      color: 'var(--text-muted)',
+                      textDecoration: 'none',
+                      padding: '0.15rem 0.45rem',
+                      borderRadius: 'var(--radius-sm)',
+                      background: 'rgba(255, 255, 255, 0.02)',
+                      border: '1px solid var(--border-subtle)',
+                      transition: 'all 0.15s ease'
+                    }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.color = 'var(--accent-primary)';
+                      e.currentTarget.style.borderColor = 'rgba(201, 142, 214, 0.3)';
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.color = 'var(--text-muted)';
+                      e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                    }}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Bottom copyright & Creator Attribution */}
