@@ -15,6 +15,7 @@ import { MarketingProofSection } from './components/MarketingProofSection';
 import { FaqSection } from './components/FaqSection';
 import { HireCreatorSection } from './components/HireCreatorSection';
 import { PSeoKeywordPage } from './components/PSeoKeywordPage';
+import { FeaturedLaunchBanner } from './components/FeaturedLaunchBanner';
 import { getKeywordBySlug } from './data/longTailKeywords';
 import { AdvertiseSection } from './components/AdvertiseSection';
 import { CategorySidebar } from './components/CategorySidebar';
@@ -38,6 +39,7 @@ const MainContent: React.FC = () => {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
         <Navbar />
+        <FeaturedLaunchBanner />
         <main style={{ flex: 1 }}>
           <CaseStudiesPage />
         </main>
@@ -50,6 +52,7 @@ const MainContent: React.FC = () => {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
         <Navbar />
+        <FeaturedLaunchBanner />
         <main style={{ flex: 1 }}>
           <SubmissionPage />
         </main>
@@ -63,6 +66,7 @@ const MainContent: React.FC = () => {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
         <Navbar />
+        <FeaturedLaunchBanner />
         <main style={{ flex: 1 }}>
           <AdvertisePage />
         </main>
@@ -75,6 +79,7 @@ const MainContent: React.FC = () => {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
         <Navbar />
+        <FeaturedLaunchBanner />
         <main style={{ flex: 1 }}>
           <SuccessPage />
         </main>
@@ -86,6 +91,7 @@ const MainContent: React.FC = () => {
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative' }}>
       <Navbar />
+      <FeaturedLaunchBanner />
       <LiveStatsBar />
 
       {/* Floating Outer Left Sponsor Card (Visible on Desktop) */}
