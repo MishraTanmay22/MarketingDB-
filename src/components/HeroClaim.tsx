@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useProduct } from '../context/ProductContext';
-import { ArrowRight, Globe } from 'lucide-react';
 import type { Category } from '../types';
 
 const CATEGORY_DIRECTORY_DATA: Record<Category, {
@@ -98,30 +97,11 @@ const CATEGORY_DIRECTORY_DATA: Record<Category, {
 
 export const HeroClaim: React.FC = () => {
   const { 
-    openSubmitModal, 
     activeCategory, 
     setActiveCategory 
   } = useProduct();
 
-  const [campaignInput, setCampaignInput] = useState('');
-
   const currentData = CATEGORY_DIRECTORY_DATA[activeCategory] || CATEGORY_DIRECTORY_DATA['all'];
-
-  const handleQuickSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    openSubmitModal({
-      id: '',
-      name: '',
-      tagline: '',
-      description: '',
-      url: campaignInput,
-      displayUrl: campaignInput,
-      logo: '',
-      mediaType: 'url',
-      creator: { name: '', handle: '', avatar: '' },
-      submittedAt: ''
-    });
-  };
 
   const categories: { key: Category; label: string; icon: string }[] = [
     { key: 'all', label: 'All Sites & Tools', icon: '🚀' },
@@ -153,25 +133,6 @@ export const HeroClaim: React.FC = () => {
       position: 'relative'
     }}>
       <div className="app-container" style={{ maxWidth: '1240px' }}>
-        {/* Directory Overline Pill */}
-        <div style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '0.45rem',
-          padding: '0.35rem 0.95rem',
-          borderRadius: 'var(--radius-full)',
-          background: 'rgba(201, 142, 214, 0.12)',
-          border: '1px solid rgba(201, 142, 214, 0.3)',
-          color: 'var(--accent-primary)',
-          fontSize: '0.8rem',
-          fontWeight: 800,
-          marginBottom: '1rem',
-          textTransform: 'uppercase',
-          letterSpacing: '0.04em'
-        }}>
-          <span>{currentData.overline}</span>
-        </div>
-
         {/* Main Headline */}
         <h1 style={{
           fontFamily: 'var(--font-display)',
@@ -204,70 +165,6 @@ export const HeroClaim: React.FC = () => {
           }}>
             {currentData.subheading}
           </p>
-        </div>
-
-        {/* Clean Input Bar Form */}
-        <form
-          onSubmit={handleQuickSubmit}
-          className="quick-submit-form"
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flex: 1, width: '100%' }}>
-            <Globe size={18} color="var(--accent-primary)" style={{ flexShrink: 0 }} />
-
-            {/* Text/URL Input */}
-            <div style={{ flex: '1', minWidth: '160px' }}>
-              <input
-                type="text"
-                placeholder={currentData.placeholder}
-                value={campaignInput}
-                onChange={(e) => setCampaignInput(e.target.value)}
-                style={{
-                  width: '100%',
-                  background: 'transparent',
-                  border: 'none',
-                  color: 'var(--text-primary)',
-                  fontSize: '0.95rem',
-                  outline: 'none',
-                  fontFamily: 'var(--font-sans)'
-                }}
-              />
-            </div>
-          </div>
-
-          {/* Submit Action Button */}
-          <button
-            type="submit"
-            className="btn btn-primary"
-            style={{
-              padding: '0.65rem 1.4rem',
-              borderRadius: 'var(--radius-full)',
-              fontWeight: 800,
-              fontSize: '0.9rem',
-              flexShrink: 0
-            }}
-          >
-            <span>Promote for Free</span>
-            <ArrowRight size={15} />
-          </button>
-        </form>
-
-        {/* Free Dofollow Perk Badge */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '0.5rem',
-          fontSize: '0.825rem',
-          color: 'var(--text-muted)',
-          marginTop: '0.85rem',
-          fontWeight: 600,
-          flexWrap: 'wrap'
-        }}>
-          <span>✨ 100% Free forever</span>
-          <span>•</span>
-          <span style={{ color: 'var(--accent-primary)', fontWeight: 700 }}>Direct Dofollow Backlink Included</span>
-          <span>•</span>
-          <span>Live Community Push Ups</span>
         </div>
 
         {/* Category Pills Filter */}

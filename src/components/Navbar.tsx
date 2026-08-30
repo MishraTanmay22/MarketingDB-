@@ -13,8 +13,24 @@ export const Navbar: React.FC = () => {
     setViewMode, 
     theme, 
     toggleTheme, 
-    navigateTo 
+    navigateTo,
+    openSubmitModal
   } = useProduct();
+
+  const handleOpenSubmit = () => {
+    openSubmitModal({
+      id: '',
+      name: '',
+      tagline: '',
+      description: '',
+      url: '',
+      displayUrl: '',
+      logo: '',
+      mediaType: 'url',
+      creator: { name: '', handle: '', avatar: '' },
+      submittedAt: ''
+    });
+  };
 
   return (
     <header className="site-header" style={{
@@ -49,7 +65,7 @@ export const Navbar: React.FC = () => {
           </div>
         </a>
 
-        {/* Right Controls: Pro link + View Mode + Theme Toggle */}
+        {/* Right Controls: Articles + Submit for Free + View Mode + Theme Toggle */}
         <div className="nav-actions">
           {/* Nav Links */}
           <button
@@ -57,6 +73,24 @@ export const Navbar: React.FC = () => {
             className="nav-link-btn"
           >
             <span>Articles</span>
+          </button>
+
+          {/* Top Right 'Submit for Free' Button */}
+          <button
+            onClick={handleOpenSubmit}
+            className="btn btn-primary"
+            style={{
+              padding: '0.45rem 1.05rem',
+              borderRadius: 'var(--radius-full)',
+              fontSize: '0.85rem',
+              fontWeight: 800,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.35rem',
+              boxShadow: '0 2px 10px rgba(201, 142, 214, 0.3)'
+            }}
+          >
+            <span>+ Submit for Free</span>
           </button>
 
           {/* View mode toggle */}
